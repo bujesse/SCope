@@ -22,6 +22,8 @@ import About from './pages/About';
 import Popup from 'react-popup';
 import 'react-popup/style.css'
 
+const { UUIDRequest, RemainingUUIDTimeRequest } = require('../../bin/s_pb.js');
+
 const pako = require('pako');
 const publicIp = require('public-ip');
 const timer = 60 * 1000;
@@ -224,46 +226,56 @@ class App extends Component {
 	}
 
 	obtainNewUUID(ip, onSuccess) {
-		BackendAPI.getConnection().then((gbc) => {
-			let query = {
-				ip: ip
+		const req = new UUIDRequest();
+		req.setIp(ip);
+
+		if (DEBUG) console.log('getUUID', req);
+		
+		BackendAPI.getConnection().getUUID(req, {}, (err, response) => {
+			if(err != null) {
+				this.setState({error: true});
 			}
-			if (DEBUG) console.log('getUUID', query);
-			gbc.services.scope.Main.getUUID(query, (err, response) => {
-				if (DEBUG) console.log('getUUID', response);
-				if (response != null)
-					onSuccess(response.UUID);
-			})
-		}, () => {
-			this.setState({error: true});
-		})
+
+			if (DEBUG) console.log('getUUID', response);
+			if (response != null) {
+				onSuccess(response.getUuid());
+			}
+		});
 	}
 
 
 	checkUUID(ip, uuid, ping) {
 		const { cookies, history, match } = this.props;
 		if (!uuid) return;
-		BackendAPI.getConnection().then((gbc, ws) => {
-			let query = {
-				ip: ip,
-				UUID: uuid,
-				mouseEvents: this.mouseClicks,
-			}
-			gbc.ws.onclose = (err) => {
-				ReactGA.event({
-					category: 'errors',
-					action: 'socket closed',
-				});
-				this.setState({error: true});
-			}
-			if (DEBUG) console.log('getRemainingUUIDTime', query);
-			gbc.services.scope.Main.getRemainingUUIDTime(query, (err, response) => {
+
+		var req = new RemainingUUIDTimeRequest();
+		req.setIp(ip);
+		req.setUuid(uuid)
+		req.setMouseEvents(this.mouseClicks)
+
+		if (DEBUG) console.log('getRemainingUUIDTime', req);
+		
+		BackendAPI.getConnection().getRemainingUUIDTime(req, {}, (err, response) => {
+			if(err != null) this.setState({error: true});
+
+			if (DEBUG) console.log('getUUID', response);
+
+			if (response != null) {
+
+			// TODO
+			// gbc.ws.onclose = (err) => {
+			// 	ReactGA.event({
+			// 		category: 'errors',
+			// 		action: 'socket closed',
+			// 	});
+			// 	this.setState({error: true});
+			// }
 				this.mouseClicks = 0;
 				if (DEBUG) console.log('getRemainingUUIDTime', response);
-				if (response.sessionsLimitReached) {
+				if (response.getSessionsLimitReached()) {
 					this.setState({loading: false, sessionsLimitReached: true});
 				} else {
-					this.timeout = response ? parseInt(response.timeRemaining * 1000) : 0;
+					this.timeout = response ? parseInt(response.getTimeRemaining() * 1000) : 0;
 					cookies.set(cookieName, uuid, { path: '/', maxAge: this.timeout });
 					if (!ping) {
 						this.setState({loading: false, uuid: uuid});
@@ -293,9 +305,7 @@ class App extends Component {
 						history.replace('/' + [uuid, encodeURIComponent(loom), encodeURIComponent(page)].join('/'));
 					}
 				}
-			});
-		}, () => {
-			this.setState({error: true});
+			};
 		})
 	}
 

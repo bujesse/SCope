@@ -8,6 +8,10 @@ import ReactGA from 'react-ga';
 import zlib from 'zlib';
 import Popup from 'react-popup'
 
+const { TranslateLassoSelectionRequest
+	  , CoordinatesRequest
+	  , CellColorByFeaturesRequest } = require('../../../bin/s_pb.js');
+
 const DEFAULT_POINT_COLOR = 'A6A6A6';
 const VIEWER_MARGIN = 5;
 
@@ -563,22 +567,26 @@ export default class Viewer extends Component {
 					} else {
 						if (s.loomFilePath != this.props.loomFile) {							
 							ns.selected = false;
-							let query = {
-									srcLoomFilePath: s.loomFilePath,
-									destLoomFilePath: this.props.loomFile,
-									cellIndices: s.points,
-								};
-							if (DEBUG) console.log(this.props.name, 'translateLassoSelection', query);
-							BackendAPI.getConnection().then((gbc) => {
-								gbc.services.scope.Main.translateLassoSelection(query, (err, response) => {
-									if (DEBUG) console.log(this.props.name, 'translateLassoSelection', response);
-									ns.points = response.cellIndices;
+
+							const req = new TranslateLassoSelectionRequest();
+							req.setSrcLoomFilePath(s.loomFilePath);
+							req.setDestLoomFilePath(this.props.loomFile)
+							req.setCellIndices(s.points)
+								
+							if (DEBUG) console.log('translateLassoSelection', req);
+										
+							BackendAPI.getConnection().translateLassoSelection(req, {}, (err, response) => {
+								if(err != null) {
+									BackendAPI.showError();
+								}
+								if (DEBUG) console.log('translateLassoSelection', response);
+							
+								if (response !== null) {
+									ns.points = response.getCellIndicesList();
 									s.translations[this.props.name] = ns.points.slice(0);
 									ns.selected = true;
 									this.repaintLassoSelections(currentSelections);
-								})
-							}, () => {
-								BackendAPI.showError();	
+								}
 							})
 						} else {
 							s.translations[this.props.name] = ns.points.slice(0);
@@ -626,25 +634,30 @@ export default class Viewer extends Component {
 			});
 		}
 
-		let query = {
-			loomFilePath: loomFile,
-			coordinatesID: parseInt(coordinates),
-			annotation: queryAnnotations,
-			logic: superposition,
-		};
+		const req = new CoordinatesRequest();
+		req.setLoomFilePath(loomFile);
+		req.setCoordinatesId(parseInt(coordinates));
+		req.setAnnotationList(queryAnnotations)
+		req.setLogic(superposition)
 
 		this.startBenchmark("getCoordinates")
-		if (DEBUG) console.log(this.props.name, 'getCoordinates', query);
-		BackendAPI.getConnection().then((gbc) => {
-			gbc.services.scope.Main.getCoordinates(query, (err, response) => {
+		if (DEBUG) console.log(this.props.name, 'getCoordinates', req);
+				
+		BackendAPI.getConnection().getCoordinates(req, {}, (err, response) => {
+			if(err != null) {
+				BackendAPI.showError();	
+			}
+			if (DEBUG) console.log('getCoordinates', response);
+
+			if (response !== null) {
 				// Update the coordinates and remove all previous data points
 				if (DEBUG) console.log(this.props.name, 'getCoordinates', response);
 				this.mainLayer.removeChildren();
 				if (response) {
 					let coord = {
-						idx: response.cellIndices,
-						x: response.x,
-						y: response.y
+						idx: response.getCellIndicesList(),
+						x: response.getXList(),
+						y: response.getYList()
 					}
 					// If current coordinates has a trajectory set it 
 					let trajectory =  BackendAPI.getActiveCoordinatesTrajectory()
@@ -654,9 +667,9 @@ export default class Viewer extends Component {
 							console.log(trajectory)
 						}
 						let t = {
-							nodes: trajectory.nodes,
-							edges: trajectory.edges,
-							coordinates: trajectory.coordinates
+							nodes: trajectory.getNodesList(),
+							edges: trajectory.getEdgesList(),
+							coordinates: trajectory.getCoordinatesList()
 						}
 						this.setState({ coord: coord, trajectory: t })
 					} else {
@@ -671,10 +684,8 @@ export default class Viewer extends Component {
 				this.initializeDataPoints(callback ? true : false);
 				this.drawTrajectory()
 				callback();
-			});
-		}, () => {
-			BackendAPI.showError();	
-		});
+			}
+		})
 	}
 
 	setScalingFactor() {
@@ -771,53 +782,50 @@ export default class Viewer extends Component {
 			});
 		}
 
-		let query = {
-			loomFilePath: loomFile,
-			featureType: features.map((f) => {return this.props.genes ? 'gene' : f.featureType}),
-			feature: features.map((f) => {return this.props.genes ? f.feature.split('_')[0] : f.feature}),
-			hasLogTransform: settings.hasLogTransform,
-			hasCpmTransform: settings.hasCpmNormalization,
-			threshold: thresholds ? features.map((f) => {return f.threshold}) : [0, 0, 0],
-			scaleThresholded: this.props.scale,
-			annotation: queryAnnotations,
-			vmax: [0, 0, 0],
-			logic: superposition
-		};
-		if (this.props.customScale && scale)  {
-			query['vmax'] = scale;
-		}
-		if (DEBUG) console.log(this.props.name, 'getFeatureColors', query, scale);
-		BackendAPI.getConnection().then((gbc) => {
-			gbc.services.scope.Main.getCellColorByFeatures(query, (err, response) => {
-				if(response.error !== null) {
-					Popup.alert(response.error.message, response.error.type);
-				} else {
-					if (DEBUG) console.log(this.props.name, 'getFeatureColors', response);
-					// Convert object to ArrayBuffer
-					let responseBuffered = new Buffer(response.compressedColor.toArrayBuffer())
-					// Uncompress
-					if(response.hasAddCompressionLayer) {
-						zlib.inflate(responseBuffered, (err, uncompressedMessage) => {
-							if(err) console.log(err)
-							else {
-								this.endBenchmark("getFeatureColors")
-								let colors = this.chunkString(uncompressedMessage.toString(), 6)
-								this.updateColors(response, colors)
-							}
-						});
-					} else {
-						this.endBenchmark("getFeatureColors")
-						this.updateColors(response, response.color)
-					}
+		const req = new CellColorByFeaturesRequest();
+		req.setLoomFilePath(loomFile);
+		req.setFeatureTypeList(features.map((f) => {return this.props.genes ? 'gene' : f.featureType}))
+		req.setFeatureList(features.map((f) => {return this.props.genes ? f.feature.split('_')[0] : f.feature}))
+		req.setHasLogTransform(settings.hasLogTransform)
+		req.setHasCpmTransform(settings.hasCpmNormalization)
+		req.setThresholdList(thresholds ? features.map((f) => {return f.threshold}) : [0, 0, 0])
+		req.setScaleThresholded(this.props.scale)
+		req.setAnnotationList(queryAnnotations)
+		req.setVmaxList(this.props.customScale && scale ? scale : [0, 0, 0])
+		req.setLogic(superposition)
 
-					if(this.props.onActiveLegendChange != null) {
-						this.props.onActiveLegendChange(response.legend)
-					}
+		if (DEBUG) console.log(this.props.name, 'getFeatureColors', req, scale);
+				
+		BackendAPI.getConnection().getCellColorByFeatures(req, {}, (err, response) => {
+			if(err != null) {
+				BackendAPI.showError();	
+			}
+			if (DEBUG) console.log('getCellColorByFeatures', response);
+
+			if(response.getError() !== undefined) {
+				Popup.alert(response.getError().getMessage(), response.getError().getType());
+			} else {
+				if (DEBUG) console.log(this.props.name, 'getFeatureColors', response);
+				// Uncompress
+				if(response.getHasAddCompressionLayer()) {
+					zlib.inflate(response.getCompressedColor(), (err, uncompressedMessage) => {
+						if(err) console.log(err)
+						else {
+							this.endBenchmark("getFeatureColors")
+							let colors = this.chunkString(uncompressedMessage.toString(), 6)
+							this.updateColors(response, colors)
+						}
+					});
+				} else {
+					this.endBenchmark("getFeatureColors")
+					this.updateColors(response, response.getColorList())
 				}
-			});
-		}, () => {
-			BackendAPI.showError();	
-		});
+
+				if(this.props.onActiveLegendChange != null) {
+					this.props.onActiveLegendChange(response.getLegend())
+				}
+			}
+		})
 	}
 	
 	hexToRgb(hex) {

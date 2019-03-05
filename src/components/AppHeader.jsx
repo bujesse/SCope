@@ -167,7 +167,7 @@ class AppHeader extends Component {
 				icon: false
 			},
 			{
-				display: metadata && metadata.fileMetaData.hasRegulonsAUC ? true : false,
+				display: metadata && metadata.getFileMetaData().getHasRegulonsAuc() ? true : false,
 				path: 'regulon',
 				title: 'Regulon',
 				icon: false

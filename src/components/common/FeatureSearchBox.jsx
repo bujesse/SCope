@@ -4,6 +4,8 @@ import FeatureSearchInput from './FeatureSearchInput';
 import { BackendAPI } from './API'
 import ReactGA from 'react-ga';
 
+const { FeatureRequest } = require('../../../bin/s_pb.js');
+
 export default class FeatureSearch extends React.Component {
 
 	constructor(props) {
@@ -113,92 +115,95 @@ export default class FeatureSearch extends React.Component {
 		if (this.call != null) this.call.end();
 		this.setState({ isLoading: true, value })
 		if (this.state.value.length < 1) return this.resetComponent();
-		let query = {
-			loomFilePath: BackendAPI.getActiveLoom(),
-			query: this.state.value
-		};
-		if (DEBUG) console.log("getFeatures", query);
-		BackendAPI.getConnection().then((gbc) => {
-			this.call = gbc.services.scope.Main.getFeatures(query, (err, response) => {
-				if (DEBUG) console.log("getFeatures", response);
-				if (response != null) {
-					let res = [], genes = [], regulons = [], clusters = {}, annotations = [], metrics = [];
-					let type = this.state.type;
 
-					for (var i = 0; i < response.feature.length; i++) {
-						let f = response.feature[i];
-						let ft = response.featureType[i];
-						let d = response.featureDescription[i];
-						// Gene
-						if (ft == 'gene') {
-							genes.push({ "title": f, "type": ft, "description": d });
-						// Regulons
-						} else if (ft == 'regulon') {
-							regulons.push({ "title": f, "type": ft, "description": d });
-						// Annotations
-						} else if (ft == 'annotation') {
-							annotations.push({ "title": f, "type": ft, "description": d });
-						// Metric
-						} else if (ft == 'metric') {
-							metrics.push({ "title": f, "type": ft, "description": d });
-						// Clustering
-						} else if (ft.indexOf('Clustering:') == 0) {
-							if (!clusters[ft]) clusters[ft] = [];
-							clusters[ft].push({ "title": f, "type": ft, "description": d });
-						} else if (ft.indexOf('cluster#') == 0) {
-							let cid = ft.split('#')[1], name = '';
-							activeMetadata.cellMetaData.clusterings.map((c, i) => {
-								if (c.id == cid) {
-									name = c.name;
-								}
-							})
-							if (!clusters[ft]) clusters[ft] = {name: name, results: []};
-							clusters[ft].push({ "title": f, "type": ft, "description": d });
-						}
-					};
+		const req = new FeatureRequest();
+		req.setLoomFilePath(BackendAPI.getActiveLoom());
+		req.setQuery(this.state.value)
 
-					// Limit to maximum 10 results
-					genes = {"name": "gene", "results": genes.slice(0, 10)}
-					regulons = {"name": "regulon", "results": regulons.slice(0, 10)}
-					annotations = {"name": "annotation", "results": annotations.slice(0, 10)}
-					metrics = {"name": "metric", "results": metrics.slice(0, 10)}
+		if (DEBUG) console.log('getFeatures', req);
+				
+		BackendAPI.getConnection().getFeatures(req, {}, (err, response) => {
+			if(err != null) {
+				BackendAPI.showError();
+			}
+			if (DEBUG) console.log('getFeatures', response);
 
-					// Only show results for the selected result type (gene | regulon | cluster | annotation)
-					if (genes['results'].length && (type == 'all' || type == 'gene')) {
-						res.push(genes);
+			if (response !== null) {
+				let res = [], genes = [], regulons = [], clusters = {}, annotations = [], metrics = [];
+				let type = this.state.type;
+
+				for (var i = 0; i < response.getFeatureList().length; i++) {
+					let f = response.getFeatureList()[i];
+					let ft = response.getFeatureTypeList()[i];
+					let d = response.getFeatureDescriptionList()[i];
+					// Gene
+					if (ft == 'gene') {
+						genes.push({ "title": f, "type": ft, "description": d });
+					// Regulons
+					} else if (ft == 'regulon') {
+						regulons.push({ "title": f, "type": ft, "description": d });
+					// Annotations
+					} else if (ft == 'annotation') {
+						annotations.push({ "title": f, "type": ft, "description": d });
+					// Metric
+					} else if (ft == 'metric') {
+						metrics.push({ "title": f, "type": ft, "description": d });
+					// Clustering
+					} else if (ft.indexOf('Clustering:') == 0) {
+						if (!clusters[ft]) clusters[ft] = [];
+						clusters[ft].push({ "title": f, "type": ft, "description": d });
+					} else if (ft.indexOf('cluster#') == 0) {
+						let cid = ft.split('#')[1], name = '';
+						activeMetadata.getCellMetaData().getClusteringsList().map((c, i) => {
+							if (c.id == cid) {
+								name = c.name;
+							}
+						})
+						if (!clusters[ft]) clusters[ft] = {name: name, results: []};
+						clusters[ft].push({ "title": f, "type": ft, "description": d });
 					}
-					if (regulons['results'].length && (type == 'all' || type == 'regulon')) {
-						res.push(regulons);
-					}
-					if (annotations['results'].length && (type == 'all') || type == 'annotation') {
-						res.push(annotations)
-					}
-					if (metrics['results'].length && (type == 'all') || type == 'metric') {
-						res.push(metrics)
-					}
-					if (type == 'all' || type == 'cluster') {
-						Object.keys(clusters).map((ft) => {
-							res.push({"name": ft, "results": clusters[ft].slice(0, 10)})
-						});
-					}
+				};
 
-					this.setState({
-						isLoading: false,
-						results: res,
-					})
+				// Limit to maximum 10 results
+				genes = {"name": "gene", "results": genes.slice(0, 10)}
+				regulons = {"name": "regulon", "results": regulons.slice(0, 10)}
+				annotations = {"name": "annotation", "results": annotations.slice(0, 10)}
+				metrics = {"name": "metric", "results": metrics.slice(0, 10)}
 
-				} else {
-
-					this.setState({
-						isLoading: false,
-						results: [],
-					})
-
+				// Only show results for the selected result type (gene | regulon | cluster | annotation)
+				if (genes['results'].length && (type == 'all' || type == 'gene')) {
+					res.push(genes);
 				}
-			});
-		}, () => {
-			BackendAPI.showError();	
-		});
+				if (regulons['results'].length && (type == 'all' || type == 'regulon')) {
+					res.push(regulons);
+				}
+				if (annotations['results'].length && (type == 'all') || type == 'annotation') {
+					res.push(annotations)
+				}
+				if (metrics['results'].length && (type == 'all') || type == 'metric') {
+					res.push(metrics)
+				}
+				if (type == 'all' || type == 'cluster') {
+					Object.keys(clusters).map((ft) => {
+						res.push({"name": ft, "results": clusters[ft].slice(0, 10)})
+					});
+				}
+
+				this.setState({
+					isLoading: false,
+					results: res,
+				})
+
+			} else {
+
+				this.setState({
+					isLoading: false,
+					results: [],
+				})
+
+			}
+		})
+
 		ReactGA.event({
 			category: 'action',
 			action: 'feature search',

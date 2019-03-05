@@ -12,6 +12,8 @@ import FileDownloader from '../../js/http'
 
 import { delimiter } from 'path';
 
+const { FeatureRequest, DownloadSubLoomRequest } = require('../../../bin/s_pb.js');
+
 class ViewerSidebar extends Component {
 
 	constructor() {
@@ -127,14 +129,25 @@ class ViewerSidebar extends Component {
 										this.setState({currentPage: 'gene'});
 										BackendAPI.setActivePage('gene');
 										history.push('/' + [match.params.uuid, match.params.loom ? match.params.loom : '*', 'gene' ].join('/'));
-									}											
-									BackendAPI.getConnection().then((gbc) => {
-										gbc.services.scope.Main.getFeatures(query, (err, response) => {
-										BackendAPI.setActiveFeature(i, activeFeatures[i].type, "gene", props.value, 0, {description: response.featureDescription[0]});
-									});
-									}, () => {
-										BackendAPI.showError();	
+									}
+									
+									const req = new FeatureRequest();
+									req.setLoomFilePath(BackendAPI.getActiveLoom());
+									req.setQuery(props.value)
+
+									if (DEBUG) console.log('getFeatures', req);
+											
+									BackendAPI.getConnection().getFeatures(req, {}, (err, response) => {
+										if(err != null) {
+											BackendAPI.showError();	
+										}
+										if (DEBUG) console.log('getFeatures', response);
+
+										if (response !== null) {
+											BackendAPI.setActiveFeature(i, activeFeatures[i].type, "gene", props.value, 0, {description: response.getFeatureDescriptionList()[0]});
+										}
 									})
+									
 									ReactGA.event({
 										category: 'action',
 										action: 'gene clicked',
@@ -259,47 +272,51 @@ class ViewerSidebar extends Component {
 						if(this.state.downloadSubLoomPercentage == null && this.state.processSubLoomPercentage ==null)
 							return (
 								<Button color="green" onClick={() => {
-									let query = {
-										loomFilePath: BackendAPI.getActiveLoom(),
-										featureType: "clusterings",
-										featureName: activeFeatures[i].featureType.replace(/Clustering: /g, ""),
-										featureValue: activeFeatures[i].feature, 
-										operator: "=="
-									};											
-									BackendAPI.getConnection().then((gbc) => {
-										if (DEBUG) console.log("Download subset of active .loom")
-										var call = gbc.services.scope.Main.downloadSubLoom(query);
-										call.on('data', (dsl) => {
-											if (DEBUG) console.log('downloadSubLoom data');
-											if(dsl == null) {
+									
+									const req = new DownloadSubLoomRequest();
+									req.setLoomFilePath(BackendAPI.getActiveLoom());
+									req.setFeatureType("clusterings")
+									req.setFeatureName(activeFeatures[i].featureType.replace(/Clustering: /g, ""))
+									req.setFeatureValue(activeFeatures[i].feature)
+									req.setOperator("==")
+
+									if (DEBUG) console.log('downloadSubLoom', req);
+									let call = BackendAPI.getConnection().downloadSubLoom(req);
+									call.on('data', (dsl) => {
+										if (DEBUG) console.log('downloadSubLoom data');
+										if(dsl == null) {
+											this.setState({ loomDownloading: null, downloadSubLoomPercentage: null });
+											return
+										}
+										if (!dsl.getIsDone()) {
+											this.setState({ processSubLoomPercentage: Math.round(dsl.getProgress().getValue()*100) });
+										} else {
+											// Start downloading the subsetted loom file
+											let fd = new FileDownloader(dsl.getLoomFilePath(), match.params.uuid, dsl.getLoomFileSize())
+											fd.on('started', (isStarted) => {
+												this.setState({ processSubLoomPercentage: null, loomDownloading: encodeURIComponent(dsl.getLoomFilePath()) });
+											})
+											fd.on('progress', (progress) => {
+												this.setState({ downloadSubLoomPercentage: progress })
+											})
+											fd.on('finished', (finished) => {
 												this.setState({ loomDownloading: null, downloadSubLoomPercentage: null });
-												return
-											}
-											if (!dsl.isDone) {
-												this.setState({ processSubLoomPercentage: Math.round(dsl.progress.value*100) });
-											} else {
-												// Start downloading the subsetted loom file
-												let fd = new FileDownloader(dsl.loomFilePath, match.params.uuid, dsl.loomFileSize)
-												fd.on('started', (isStarted) => {
-													this.setState({ processSubLoomPercentage: null, loomDownloading: encodeURIComponent(dsl.loomFilePath) });
-												})
-												fd.on('progress', (progress) => {
-													this.setState({ downloadSubLoomPercentage: progress })
-												})
-												fd.on('finished', (finished) => {
-													this.setState({ loomDownloading: null, downloadSubLoomPercentage: null });
-												})
-												fd.start()
-											}
-										});
-										call.on('end', () => {
-											console.log()
-											if (DEBUG) console.log('downloadSubLoom end');
-										});
-									}, () => {
-										this.setState({ loomDownloading: null, downloadSubLoomPercentage: null, processSubLoomPercentage: null });
-										BackendAPI.showError();	
-									})
+											})
+											fd.start()
+										}
+									});
+									call.on('end', () => {
+										console.log()
+										if (DEBUG) console.log('downloadSubLoom end');
+									});
+									call.on('error', function(err) {
+										console.log('downloadSubLoom error: ' + err.message);
+										if(err != null) {
+											this.setState({ loomDownloading: null, downloadSubLoomPercentage: null, processSubLoomPercentage: null });
+											BackendAPI.showError();	
+										}
+									});
+
 								}} style={{marginTop: "10px", width: "100%"}}>
 								{"Download "+ activeFeatures[i].feature +" .loom file"}
 								</Button>

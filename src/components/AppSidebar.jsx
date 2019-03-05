@@ -7,6 +7,8 @@ import Slider, { Range } from 'rc-slider';
 import ReactGA from 'react-ga';
 import FileDownloader from '../js/http'
 
+const { RemainingUUIDTimeRequest } = require('../../bin/s_pb.js');
+
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const TooltipSlider = createSliderWithTooltip(Slider);
 
@@ -36,8 +38,8 @@ class AppSidebar extends Component {
 		let metadata = BackendAPI.getActiveLoomMetadata(), coordinates = [];
 		Object.keys(loomFiles).forEach(key => {
 			let loom = loomFiles[key];
-			if (loom.loomFilePath == decodeURIComponent(match.params.loom)) {
-				coordinates = loom.cellMetaData.embeddings.map(coords => {
+			if (loom.getLoomFilePath() == decodeURIComponent(match.params.loom)) {
+				coordinates = loom.getCellMetaData().getEmbeddingsList().map(coords => {
 					return {
 						text: coords.name,
 						value: coords.id
@@ -46,20 +48,20 @@ class AppSidebar extends Component {
 			}
 		})
 		let showTransforms = metadata && (['welcome', 'dataset', 'tutorial', 'about'].indexOf(match.params.page) == -1) ? true : false;
-		let showCoordinatesSelection = showTransforms && metadata.fileMetaData && metadata.fileMetaData.hasExtraEmbeddings ? true : false;
+		let showCoordinatesSelection = showTransforms && metadata.getFileMetaData() && metadata.getFileMetaData().getHasExtraEmbeddings() ? true : false;
 		let renderLevel = (t, l, name, canRemove) => {
 			if (!t) return;
 			let nodes = t.nodes.map((file, i) => {
-				let loomUri = encodeURIComponent(file.loomFilePath);
+				let loomUri = encodeURIComponent(file.getLoomFilePath());
 				let active = (match.params.loom == loomUri) || (encodeURIComponent(match.params.loom) == loomUri);
 				return (
 					<Link key={l + '-node- ' + i} to={'/' + [match.params.uuid, loomUri, match.params.page == 'welcome' ? 'gene' : match.params.page].join('/')} onClick={() => {
 						this.setState({ activeCoordinates: -1 });
 						this.props.onMetadataChange(file);
 					}}  >
-						<Menu.Item className={'level' + l} active={active} key={file.loomFilePath} >
+						<Menu.Item className={'level' + l} active={active} key={file.getLoomFilePath()} >
 							{canRemove &&
-								<Icon name='trash' title='delete this loom file' style={{ display: 'inline' }} onClick={(e, d) => this.deleteLoomFile(file.loomFilePath, file.loomDisplayName)} className="pointer" />
+								<Icon name='trash' title='delete this loom file' style={{ display: 'inline' }} onClick={(e, d) => this.deleteLoomFile(file.getLoomFilePath(), file.getLoomDisplayName())} className="pointer" />
 							}
 							{this.state.downloadPercentage >= 0 && this.state.loomDownloading == loomUri &&
 								<Progress percent={this.state.downloadPercentage} indicating progress disabled></Progress>
@@ -69,9 +71,9 @@ class AppSidebar extends Component {
 									name={this.state.downloading && this.state.loomDownloading == loomUri ? 'circle notched' : 'save'}
 									loading={this.state.downloading && this.state.loomDownloading == loomUri ? true : false}
 									title='download this loom file' style={{ display: 'inline' }}
-									onClick={(e, d) => this.downloadLoomFile(file.loomFilePath, file.loomSize)} className="pointer" />
+									onClick={(e, d) => this.downloadLoomFile(file.getLoomFilePath(), file.loomSize)} className="pointer" />
 							}
-							{file.loomDisplayName}
+							{file.getLoomDisplayName()}
 						</Menu.Item>
 					</Link>
 				)
@@ -235,7 +237,7 @@ class AppSidebar extends Component {
 		BackendAPI.queryLoomFiles(match.params.uuid, (files) => {
 			let userFiles = [], generalFiles = [];
 			files.forEach((file) => {
-				if (file.loomFilePath.match(/[\\\/]/)) {
+				if (file.getLoomFilePath().match(/[\\\/]/)) {
 					userFiles.push(file);
 				} else {
 					generalFiles.push(file);
@@ -244,9 +246,9 @@ class AppSidebar extends Component {
 			let userLoomTree = this.getEmptyNode();
 			let generalLoomTree = this.getEmptyNode();
 			let addChildren = (t, l, f) => {
-				if (f.loomHeierarchy['L' + l]) {
-					t.children[f.loomHeierarchy['L' + l]] = t.children[f.loomHeierarchy['L' + l]] || this.getEmptyNode();
-					addChildren(t.children[f.loomHeierarchy['L' + l]], l + 1, f);
+				if (f.getLoomHierarchy()['L' + l]) {
+					t.children[f.getLoomHierarchy()['L' + l]] = t.children[f.getLoomHierarchy()['L' + l]] || this.getEmptyNode();
+					addChildren(t.children[f.getLoomHierarchy()['L' + l]], l + 1, f);
 				} else {
 					t.nodes.push(f);
 				}
@@ -294,21 +296,23 @@ class AppSidebar extends Component {
 		});
 		let execute = confirm("Are you sure that you want to remove the file: " + loomDisplayName + " ?");
 		if (execute) {
-			let query = {
-				UUID: match.params.uuid,
-				filePath: loomFilePath,
-				fileType: 'Loom'
-			};
-			BackendAPI.getConnection().then((gbc) => {
-				if (DEBUG) console.log("deleteUserFile", query);
-				gbc.services.scope.Main.deleteUserFile(query, (error, response) => {
-					if (DEBUG) console.log("deleteUserFile", response);
-					if ((response !== null) && (response.deletedSuccessfully)) {
-						BackendAPI.forceUpdate();
-						this.getLoomFiles();
-					}
-				});
-			});
+
+			const req = new DeleteUserFileRequest();
+			req.setUuid(match.params.uuid);
+			req.setFilePath(loomFilePath)
+			req.setFileType('Loom')
+
+			if (DEBUG) console.log("deleteUserFile", query);
+					
+			BackendAPI.getConnection().deleteUserFile(req, {}, (err, response) => {
+				if(err != null) this.setState({error: true});
+
+				if (DEBUG) console.log("deleteUserFile", response);
+				if ((response !== null) && (response.getDeletedSuccessfully())) {
+					BackendAPI.forceUpdate();
+					this.getLoomFiles();
+				}
+			})
 		}
 	}
 

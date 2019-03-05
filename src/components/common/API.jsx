@@ -1,6 +1,13 @@
+const { MainClient } = require('../../../bin/s_grpc_web_pb.js');
+const { MyLoomsRequest
+	  , RemainingUUIDTimeRequest
+	  , MarkerGenesRequest
+	  , RegulonMetaDataRequest
+	  , VmaxRequest } = require('../../../bin/s_pb.js');
+
 class API {
 	constructor() {
-		this.GBC = require("grpc-bus-websocket-client");
+
 		try {
 			this.WSport = document.head.querySelector("[name=scope-wsport]").getAttribute('port')
 			console.log('Using meta WSport')
@@ -18,11 +25,12 @@ class API {
 		console.log(this.WSport, this.RPCport)
 
 		try {
-			if(REVERSEPROXYON) {
-				this.GBCConnection = new this.GBC(FRONTEND.wsProtocol + "://" + FRONTEND.host + "/protobuf/", 'src/proto/s.proto', { scope: { Main: BACKEND.host + ":" + this.RPCport } }).connect();
-			} else {
-				this.GBCConnection = new this.GBC(BACKEND.wsProtocol + "://" + BACKEND.host + ":" + this.WSport + "/", 'src/proto/s.proto', { scope: { Main: BACKEND.host + ":" + this.RPCport } }).connect();
-			}
+			// if(REVERSEPROXYON) {
+			// 	this.GBCConnection = new this.GBC(FRONTEND.wsProtocol + "://" + FRONTEND.host + "/protobuf/", 'src/proto/s.proto', { scope: { Main: BACKEND.host + ":" + this.RPCport } }).connect();
+			// } else {
+			// 	this.GBCConnection = new this.GBC(BACKEND.wsProtocol + "://" + BACKEND.host + ":" + this.WSport + "/", 'src/proto/s.proto', { scope: { Main: BACKEND.host + ":" + this.RPCport } }).connect();
+			// }
+			this.GBCConnection = new MainClient('http://localhost:8080');
 			console.log(this.GBCConnection)
 			this.connected = true;
 		} catch (ex) {
@@ -179,16 +187,17 @@ class API {
 	}
 
 	obtainNewUUID(ip, onSuccess) {
-		BackendAPI.getConnection().then((gbc) => {
-			let query = {
-				ip: ip
-			}
-			if (DEBUG) console.log('getUUIDAPI', query);
-			gbc.services.scope.Main.getUUID(query, (err, response) => {
-				if (DEBUG) console.log('getUUIDAPI', response);
-				if (response != null)
-					onSuccess(response.UUID, response.timeout);
-			})
+
+		const req = new RemainingUUIDTimeRequest();
+		req.setIp(ip);
+
+		if (DEBUG) console.log('getRemainingUUIDTime', req);
+				
+		BackendAPI.getConnection().getRemainingUUIDTime(req, {}, (err, response) => {
+			if(err != null) this.setState({error: true});
+			if (DEBUG) console.log('getUUIDAPI', response);
+			if (response != null)
+				onSuccess(response.getUuid(), response.getTimeout());
 		})
 	}
 	getActiveLoom() {
@@ -245,7 +254,10 @@ class API {
 	}
 
 	getActiveLoomMetadataEmbeddings() {
-		return this.loomFiles[this.activeLooms[0]].cellMetaData.embeddings;
+		console.log("hi")
+		console.log(this.loomFiles)
+		console.log(this.activeLooms[0])
+		return this.loomFiles[this.activeLooms[0]].getCellMetaData().getEmbeddingsList();
 	}
 
 	getActiveLoomMetaDataEmbedding() {
@@ -272,34 +284,37 @@ class API {
 			return false
 		if(!("trajectory" in this.getActiveLoomMetaDataEmbedding()))
 			return false
-		return this.getActiveLoomMetaDataEmbedding().trajectory != null
+		return this.getActiveLoomMetaDataEmbedding().getTrajectory() != null
 	}
 
 	getActiveCoordinatesTrajectory() {
 		if(!this.hasActiveCoordinatesTrajectory())
 			return null
-		return this.getActiveLoomMetaDataEmbedding().trajectory
+		return this.getActiveLoomMetaDataEmbedding().getTrajectory()
 	}
 
 	queryLoomFiles(uuid, callback) {
-		let query = {
-			UUID: uuid
-		};
-		this.getConnection().then((gbc) => {
-			if (DEBUG) console.log("getMyLooms", query);
-			gbc.services.scope.Main.getMyLooms(query, (error, response) => {
-				if (response !== null) {
-					if (DEBUG) console.log("getMyLooms", response);
-					BackendAPI.setLoomFiles(response.myLooms);
-					callback(response.myLooms);
-				} else {
-					console.log("No loom files detected");
-					callback([]);
-				}
-			});
-		}, () => {
-			this.showError();
-		});
+		const req = new MyLoomsRequest();
+		req.setUuid(uuid);
+
+		if (DEBUG) console.log("getMyLooms", req);
+		
+		BackendAPI.getConnection().getMyLooms(req, {}, (err, response) => {
+			if(err != null) {
+				this.showError();
+			}
+			if (DEBUG) console.log('getMyLooms', response);
+
+			if (response !== null) {
+				console.log(response)
+				if (DEBUG) console.log("getMyLooms", response);
+				BackendAPI.setLoomFiles(response.getMyLoomsList());
+				callback(response.getMyLoomsList());
+			} else {
+				console.log("No loom files detected");
+				callback([]);
+			}
+		})
 	}
 
 	getLoomFiles() {
@@ -310,7 +325,7 @@ class API {
 		this.loomFiles = {};
 		Object.keys(files).map((i) => {
 			let file = files[i];
-			this.loomFiles[file.loomFilePath] = file;
+			this.loomFiles[file.getLoomFilePath()] = file;
 		});
 		this.activeLoomChangeListeners.forEach((listener) => {
 			listener(this.activeLooms[0], this.loomFiles[this.activeLooms[0]], this.activeCoordinates);
@@ -336,36 +351,41 @@ class API {
 
 	updateFeature(field, type, feature, featureType, featureDescription, page) {
 		if (featureType == 'regulon') {
-			let regulonQuery = {
-				loomFilePath: this.getActiveLoom(),
-				regulon: feature
-			}
-			this.getConnection().then((gbc) => {
-				if (DEBUG) console.log('getRegulonMetaData', regulonQuery);
-				gbc.services.scope.Main.getRegulonMetaData(regulonQuery, (regulonErr, regulonResponse) => {
-					if (DEBUG) console.log('getRegulonMetaData', regulonResponse);
-					let metadata = regulonResponse ? regulonResponse.regulonMeta : {};
+
+			const req = new RegulonMetaDataRequest();
+			req.setLoomFilePath(this.getActiveLoom());
+			req.setRegulon(feature)
+			
+			if (DEBUG) console.log('getRegulonMetaData', req);
+					
+			BackendAPI.getConnection().getRegulonMetaData(req, {}, (err, response) => {
+				if(err != null) {
+					this.showError();
+				}
+				if (DEBUG) console.log('getRegulonMetaData', response);
+			
+				if (response !== null) {
+					if (DEBUG) console.log('getRegulonMetaData', response);
+					let metadata = response ? response.getRegulonMeta() : {};
 					let threshold = 0;
-					if (metadata.autoThresholds) {
-						metadata.autoThresholds.map((t) => {
-							if (t.name == metadata.defaultThreshold) threshold = t.threshold;
+					if (metadata.getAutoThresholdsList()) {
+						metadata.getAutoThresholdsList().map((t) => {
+							if (t.getName() == metadata.getDefaultThreshold()) threshold = t.getThreshold();
 						})
 					}
-					metadata.description = featureDescription;
+					metadata.setDescription(featureDescription);
 					this.setActiveFeature(field, type, featureType, feature, threshold, metadata, page);
-				});
-			}, () => {
-				this.showError();
-			});
+				}
+			})
 		} else if (featureType.indexOf('Clustering:') == 0) {
 			let loomMetadata = this.getActiveLoomMetadata();
 			let clusteringID, clusterID;
-			loomMetadata.cellMetaData.clusterings.map(clustering => {
-				if (featureType.indexOf(clustering.name) != -1) {
-					clusteringID = clustering.id
-					clustering.clusters.map(c => {
-						if (c.description == feature) {
-							clusterID = c.id;
+			loomMetadata.getCellMetaData().getClusteringsList().map(clustering => {
+				if (featureType.indexOf(clustering.getName()) != -1) {
+					clusteringID = clustering.getId()
+					clustering.getClustersList().map(c => {
+						if (c.getDescription() == feature) {
+							clusterID = c.getId();
 						}
 					})
 				}
@@ -376,17 +396,24 @@ class API {
 					clusterID: clusterID,
 					clusteringID: clusteringID,
 				}
-				this.getConnection().then((gbc) => {
-					if (DEBUG) console.log('getMarkerGenes', markerQuery);
-					gbc.services.scope.Main.getMarkerGenes(markerQuery, (markerErr, markerResponse) => {
-						if (DEBUG) console.log('getMarkerGenes', markerResponse);
-						if (!markerResponse) markerResponse = {};
-						markerResponse.description = featureDescription
-						this.setActiveFeature(field, type, featureType, feature, 0, markerResponse, page);
-					});
-				}, () => {
-					this.showError();
-				});
+
+				const req = new MarkerGenesRequest();
+				req.setLoomFilePath(this.getActiveLoom());
+				req.setClusterID(clusterID)
+				req.setClusteringID(clusteringID)
+
+				if (DEBUG) console.log('getMarkerGenes', req);
+						
+				BackendAPI.getConnection().getMarkerGenes(req, {}, (err, response) => {
+					if(err != null) {
+						this.showError();
+					}
+					if (DEBUG) console.log('getMarkerGenes', response);
+					
+					if (!response) response = {};
+					response.setDescription(featureDescription)
+					this.setActiveFeature(field, type, featureType, feature, 0, response, page);
+				})
 			} else {
 				this.setActiveFeature(field, type, featureType, feature, 0, {description: featureDescription}, page);
 			}
@@ -411,28 +438,33 @@ class API {
 		let selectedFeatures = this.features[page];
 		if (!selectedFeatures) return;
 		if (DEBUG) console.log('getMaxScale', id, page);
-		let query = {
-			loomFilePath: this.getActiveLooms(),
-			feature: selectedFeatures.map(f => {return page == 'regulon' ? f.feature.split('_')[0] : f.feature}),
-			featureType: selectedFeatures.map(f=> {return page == 'regulon' ? 'gene' : f.featureType}),
-			hasLogTransform: settings.hasLogTransform,
-			hasCpmTransform: settings.hasCpmNormalization,
-		}
-		if (DEBUG) console.log('getVmax', query);
-		BackendAPI.getConnection().then((gbc) => {
-			gbc.services.scope.Main.getVmax(query, (err, response) => {
+
+		const req = new VmaxRequest();
+		req.setLoomFilePathList(this.getActiveLooms());
+		req.setFeatureList(selectedFeatures.map(f => {return page == 'regulon' ? f.feature.split('_')[0] : f.feature}))
+		req.setFeatureTypeList(selectedFeatures.map(f=> {return page == 'regulon' ? 'gene' : f.featureType}))
+		req.setHasLogTransform(settings.hasLogTransform)
+		req.setHasCpmTransform(settings.hasCpmNormalization)
+
+		if (DEBUG) console.log('getVmax', req);
+				
+		BackendAPI.getConnection().getVmax(req, {}, (err, response) => {
+			if(err != null) {
+				BackendAPI.showError();
+			}
+			if (DEBUG) console.log('getVmax', response);
+
+			if (response !== null) {
 				if (DEBUG) console.log('getVmax', response);
-				if (id != null) this.customValues[page][id] = response.vmax[id];
-				else this.customValues[page] = response.vmax;
-				this.maxValues[page] = response.maxVmax;
+				if (id != null) this.customValues[page][id] = response.getVmaxList()[id];
+				else this.customValues[page] = response.getVmaxList();
+				this.maxValues[page] = response.getMaxVmaxList();
 				this.maxValuesChangeListeners.forEach(listener => {
 					listener(this.maxValues[page]);
 				})
 				callback(this.customValues[page], this.maxValues[page]);
-			})
-		}, () => {
-			BackendAPI.showError();
-		});
+			}
+		})
 	}
 
 	onFeatureScaleChange(listener) {

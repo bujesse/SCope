@@ -43,13 +43,13 @@ message ErrorReply {
 }
 
 message CellColorByFeaturesRequest {
-  string loomFilePath=1;
+  string loom_file_path=1;
   repeated string feature=2;
-  repeated string featureType=3;
-  bool hasLogTransform=4;
-  bool hasCpmTransform=5;
+  repeated string feature_type=3;
+  bool has_log_transform=4;
+  bool has_cpm_transform=5;
   repeated float threshold=6;
-  bool scaleThresholded=7;
+  bool scale_thresholded=7;
   repeated Annotation annotation=8;
   repeated float vmax=9;
   string logic=10;
@@ -61,20 +61,20 @@ message ColorLegend {
 }
 
 message CellColorByFeaturesReply {
-  bool hasAddCompressionLayer=1;
-  bytes compressedColor=2;
+  bool has_add_compression_layer=1;
+  bytes compressed_color=2;
   repeated string color=3;
   repeated float vmax=4;
-  repeated float maxVmax=5;
-  repeated int32 cellIndices=6;
+  repeated float max_vmax=5;
+  repeated int32 cell_indices=6;
   ColorLegend legend=7;
   ErrorReply error=8;
 }
 
 message CellAUCValuesByFeaturesRequest {
-  string loomFilePath=1;
+  string loom_file_path=1;
   repeated string feature=2;
-  repeated string featureType=3;
+  repeated string feature_type=3;
 }
 
 message CellAUCValuesByFeaturesReply{
@@ -82,17 +82,17 @@ message CellAUCValuesByFeaturesReply{
 }
 
 message FeatureRequest {
-  string loomFilePath=1;
+  string loom_file_path=1;
   string query=2;
 }
 
 message CellMetaDataRequest {
-  string loomFilePath=1;
-  repeated int32 cellIndices=2; // List of cell indices to return, empty list = all cells
-  repeated string selectedGenes=3; // List of genes to return epxression values for
-  bool hasLogTransform=4;
-  bool hasCpmTransform=5;
-  repeated string selectedRegulons=6; // As above, for regulons and AUC values
+  string loom_file_path=1;
+  repeated int32 cell_indices=2; // List of cell indices to return, empty list = all cells
+  repeated string selected_genes=3; // List of genes to return epxression values for
+  bool has_log_transform=4;
+  bool has_cpm_transform=5;
+  repeated string selected_regulons=6; // As above, for regulons and AUC values
   repeated int32 clusterings=7; // IDs of clustering values to return per cell
   repeated string annotations=8; // String name of annotations to return (from global metadata)
 
@@ -100,13 +100,13 @@ message CellMetaDataRequest {
 
 message FeatureReply {
   repeated string feature=1;
-  repeated string featureType=2;
-  repeated string featureDescription=3;
+  repeated string feature_type=2;
+  repeated string feature_description=3;
 }
 
 message CoordinatesRequest {
-  string loomFilePath=1;
-  int32 coordinatesID=2;
+  string loom_file_path=1;
+  int32 coordinates_id=2;
   repeated Annotation annotation=3;
   string logic=4;
 }
@@ -115,7 +115,7 @@ message CoordinatesRequest {
 message CoordinatesReply {
   repeated float x=1;
   repeated float y=2;
-  repeated int32 cellIndices=3;
+  repeated int32 cell_indices=3;
 }
 
 message Annotation {
@@ -160,7 +160,7 @@ message Clustering {
   int32 id=1;
   string group=2;
   string name=3;
-  repeated ClusterMarkerMetric clusterMarkerMetrics=4;
+  repeated ClusterMarkerMetric cluster_marker_metrics=4;
   repeated ClusterAnnotation clusters=5;
 }
 
@@ -177,17 +177,17 @@ message AUCThreshold {
 
 message Regulon {
   repeated string genes=1;
-  repeated AUCThreshold autoThresholds=2;
-  string defaultThreshold=3;
-  string motifName=4;
+  repeated AUCThreshold auto_thresholds=2;
+  string default_threshold=3;
+  string motif_name=4;
 }
 
 message FileMetaData {
-  bool hasRegulonsAUC=1;
-  bool hasGeneSets=2;
-  bool hasClusterings=3;
-  bool hasExtraEmbeddings=4;
-  bool hasGlobalMeta=5;
+  bool has_regulons_auc=1;
+  bool has_gene_sets=2;
+  bool has_clusterings=3;
+  bool has_extra_embeddings=4;
+  bool has_global_meta=5;
 }
 
 message FeatureValues {
@@ -203,25 +203,25 @@ message CellClusters {
 }
 
 message CellMetaDataReply {
-  repeated CellClusters clusterIDs=1;
-  repeated FeatureValues geneExpression=2;
-  repeated FeatureValues aucValues=3;
+  repeated CellClusters cluster_ids=1;
+  repeated FeatureValues gene_expression=2;
+  repeated FeatureValues auc_values=3;
   repeated CellAnnotations annotations=4;
 }
 
 message RegulonMetaDataRequest {
-  string loomFilePath=1;
+  string loom_file_path=1;
   string regulon=2;
 }
 
 message RegulonMetaDataReply {
-  Regulon regulonMeta=1;
+  Regulon regulon_meta=1;
 }
 
 message MarkerGenesRequest {
-  string loomFilePath=1;
-  int32 clusteringID=2;
-  int32 clusterID=3;
+  string loom_file_path=1;
+  int32 clustering_id=2;
+  int32 cluster_id=3;
 }
 
 message MarkerGenesMetric {
@@ -237,52 +237,52 @@ message MarkerGenesReply {
 }
 
 message MyLoomsRequest {
-  string UUID=1;
+  string uuid=1;
 }
 
 message LoomHeierarchy {
-  string L1=1;
-  string L2=2;
-  string L3=3;
+  string l1=1;
+  string l2=2;
+  string l3=3;
 
 }
 
 message MyLoom {
-  string loomFilePath=1;
-  string loomDisplayName=2;
-  int64 loomSize=3;
-  CellMetaData cellMetaData=4;
-  FileMetaData fileMetaData=5;
-  LoomHeierarchy loomHeierarchy=6;
+  string loom_file_path=1;
+  string loom_display_name=2;
+  int64 loom_size=3;
+  CellMetaData cell_meta_data=4;
+  FileMetaData file_meta_data=5;
+  LoomHeierarchy loom_hierarchy=6;
 
 }
 
 message MyLoomsReply {
-  repeated MyLoom myLooms=1;
+  repeated MyLoom my_looms=1;
 }
 
 message TranslateLassoSelectionRequest {
-  string srcLoomFilePath=1;
-  string destLoomFilePath=2;
-  repeated int32 cellIndices=3;
+  string src_loom_file_path=1;
+  string dest_loom_file_path=2;
+  repeated int32 cell_indices=3;
 }
 
 message TranslateLassoSelectionReply {
-  repeated int32 cellIndices=1;
+  repeated int32 cell_indices=1;
 }
 
 message CellIDsRequest {
-  string loomFilePath=1;
-  repeated int32 cellIndices=2;
+  string loom_file_path=1;
+  repeated int32 cell_indices=2;
 }
 
 message CellIDsReply {
-  repeated string cellIds=1;
+  repeated string cell_ids=1;
 }
 
 message GeneSetEnrichmentRequest {
-  string loomFilePath=1;
-  string geneSetFilePath=2;
+  string loom_file_path=1;
+  string gene_set_file_path=2;
   string method=3;
 }
 
@@ -293,21 +293,21 @@ message Progress {
 
 message GeneSetEnrichmentReply {
   Progress progress=1;
-  bool isDone=2;
-  CellColorByFeaturesReply cellValues=3;
+  bool is_done=2;
+  CellColorByFeaturesReply cell_values=3;
 }
 
 message VmaxRequest {
-  repeated string loomFilePath=1;
+  repeated string loom_file_path=1;
   repeated string feature=2;
-  repeated string featureType=3;
-  bool hasLogTransform=4;
-  bool hasCpmTransform=5;
+  repeated string feature_type=3;
+  bool has_log_transform=4;
+  bool has_cpm_transform=5;
 }
 
 message VmaxReply {
   repeated float vmax=1;
-  repeated float maxVmax=2;
+  repeated float max_vmax=2;
 }
 
 message UUIDRequest {
@@ -320,51 +320,51 @@ message UUIDReply {
 
 message RemainingUUIDTimeRequest {
   string ip=1;
-  string UUID=2;
-  int64 mouseEvents=3;
+  string uuid=2;
+  int64 mouse_events=3;
 }
 
 message RemainingUUIDTimeReply {
   string UUID=1;
-  int64 timeRemaining=2;
-  bool sessionsLimitReached=3;
+  int64 time_remaining=2;
+  bool sessions_limit_Reached=3;
 }
 
 message LoomUploadedRequest {
-  string UUID=1;
+  string uuid=1;
   string filename=2;
 }
 
 message LoomUploadedReply {}
 
 message MyGeneSet {
-  string geneSetFilePath=1;
-  string geneSetDisplayName=2;
+  string gene_set_file_path=1;
+  string gene_set_display_name=2;
 }
 
 message MyGeneSetsRequest {
-  string UUID=1;
+  string uuid=1;
 }
 
 message MyGeneSetsReply {
-  repeated MyGeneSet myGeneSets=1;
+  repeated MyGeneSet my_gene_sets=1;
 }
 
 message DeleteUserFileRequest {
-  string UUID=1;
-  string filePath=2;
-  string fileType=3;
+  string uuid=1;
+  string file_path=2;
+  string file_type=3;
 }
 
 message DeleteUserFileReply {
-  bool deletedSuccessfully=1;
+  bool deleted_successfully=1;
 }
 
 message DownloadSubLoomRequest {
-  string loomFilePath=1;
-  string featureType=2;
-  string featureName=3;
-  string featureValue=4;
+  string loom_file_path=1;
+  string feature_type=2;
+  string feature_name=3;
+  string feature_value=4;
   // enum Operator {
   //   EQ = "==";
   // }
@@ -373,9 +373,9 @@ message DownloadSubLoomRequest {
 }
 
 message DownloadSubLoomReply {
-  string loomFilePath=1;
-  int64 loomFileSize=2;
+  string loom_file_path=1;
+  int64 loom_file_size=2;
   Progress progress=3;
-  bool isDone=4;
+  bool is_done=4;
   ErrorReply error=5;
 }

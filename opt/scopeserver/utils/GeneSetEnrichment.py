@@ -47,8 +47,8 @@ class GeneSetEnrichment:
         print("Status: " + state.get_status_message())
         if state.get_values() is None:
             return s_pb2.GeneSetEnrichmentReply(progress=s_pb2.Progress(value=state.get_step(), status=state.get_status_message()),
-                                                isDone=False,
-                                                cellValues=s_pb2.CellColorByFeaturesReply(color=[], vmax=[], maxVmax=[], cellIndices=[]))
+                                                is_done=False,
+                                                cell_values=s_pb2.CellColorByFeaturesReply(color=[], vmax=[], maxVmax=[], cell_indices=[]))
         else:
             vmax = np.zeros(3)
             max_vmax = np.zeros(3)
@@ -66,11 +66,11 @@ class GeneSetEnrichment:
             else:
                 cell_indices = list(range(self.loom.get_nb_cells()))
             return s_pb2.GeneSetEnrichmentReply(progress=s_pb2.Progress(value=state.get_step(), status=state.get_status_message()),
-                                                isDone=True,
-                                                cellValues=s_pb2.CellColorByFeaturesReply(color=hex_vec,
+                                                is_done=True,
+                                                cell_values=s_pb2.CellColorByFeaturesReply(color=hex_vec,
                                                                                           vmax=vmax,
-                                                                                          maxVmax=max_vmax,
-                                                                                          cellIndices=cell_indices))
+                                                                                          max_vmax=max_vmax,
+                                                                                          cell_indices=cell_indices))
 
     def get_method(self):
             return self.method

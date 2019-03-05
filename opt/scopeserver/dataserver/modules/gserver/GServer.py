@@ -198,7 +198,7 @@ class SCope(s_pb2_grpc.MainServicer):
                     f_max_v_max = l_max_v_max
             v_max[n] = f_v_max
             max_v_max[n] = f_max_v_max
-        return s_pb2.VmaxReply(vmax=v_max, maxVmax=max_v_max)
+        return s_pb2.VmaxReply(vmax=v_max, max_vmax=max_v_max)
 
     def getCellColorByFeatures(self, request, context):
         start_time = time.time()
@@ -225,14 +225,13 @@ class SCope(s_pb2_grpc.MainServicer):
                     return cell_color_by_features.getReply()
             else:
                 cell_color_by_features.addEmptyFeature()
-
         print("Debug: %s seconds elapsed ---" % (time.time() - start_time))
         return s_pb2.CellColorByFeaturesReply(color=None,
-                                              compressedColor=cell_color_by_features.get_compressed_hex_vec(),
-                                              hasAddCompressionLayer=True,
+                                              compressed_color=cell_color_by_features.get_compressed_hex_vec(),
+                                              has_add_compression_layer=True,
                                               vmax=cell_color_by_features.get_v_max(),
-                                              maxVmax=cell_color_by_features.get_max_v_max(),
-                                              cellIndices=cell_color_by_features.get_cell_indices())
+                                              max_vmax=cell_color_by_features.get_max_v_max(),
+                                              cell_indices=cell_color_by_features.get_cell_indices())
 
     def getCellAUCValuesByFeatures(self, request, context):
         loom = self.lfh.get_loom(loom_file_path=request.loomFilePath)
@@ -266,15 +265,15 @@ class SCope(s_pb2_grpc.MainServicer):
             if anno != '':
                 annotations.append(loom.get_ca_attr_by_name(name=anno)[cell_indices].astype(str))
 
-        return s_pb2.CellMetaDataReply(clusterIDs=[s_pb2.CellClusters(clusters=x) for x in cell_clusters],
-                                       geneExpression=[s_pb2.FeatureValues(features=x) for x in gene_exp],
-                                       aucValues=[s_pb2.FeatureValues(features=x) for x in gene_exp],
+        return s_pb2.CellMetaDataReply(cluster_ids=[s_pb2.CellClusters(clusters=x) for x in cell_clusters],
+                                       gene_expression=[s_pb2.FeatureValues(features=x) for x in gene_exp],
+                                       auc_values=[s_pb2.FeatureValues(features=x) for x in gene_exp],
                                        annotations=[s_pb2.CellAnnotations(annotations=x) for x in annotations])
 
     def getFeatures(self, request, context):
         loom = self.lfh.get_loom(loom_file_path=request.loomFilePath)
         f = self.get_features(loom=loom, query=request.query)
-        return s_pb2.FeatureReply(feature=f['feature'], featureType=f['featureType'], featureDescription=f['featureDescription'])
+        return s_pb2.FeatureReply(feature=f['feature'], feature_type=f['featureType'], feature_description=f['featureDescription'])
 
     def getCoordinates(self, request, context):
         # request content
@@ -282,7 +281,7 @@ class SCope(s_pb2_grpc.MainServicer):
         c = loom.get_coordinates(coordinatesID=request.coordinatesID,
                                  annotation=request.annotation,
                                  logic=request.logic)
-        return s_pb2.CoordinatesReply(x=c["x"], y=c["y"], cellIndices=c["cellIndices"])
+        return s_pb2.CoordinatesReply(x=c["x"], y=c["y"], cell_indices=c["cellIndices"])
 
     def getRegulonMetaData(self, request, context):
         loom = self.lfh.get_loom(loom_file_path=request.loomFilePath)
@@ -307,7 +306,7 @@ class SCope(s_pb2_grpc.MainServicer):
                    "motifName": motifName
                    }
 
-        return s_pb2.RegulonMetaDataReply(regulonMeta=regulon)
+        return s_pb2.RegulonMetaDataReply(regulon_meta=regulon)
 
     def getMarkerGenes(self, request, context):
         loom = self.lfh.get_loom(loom_file_path=request.loomFilePath)
@@ -341,10 +340,11 @@ class SCope(s_pb2_grpc.MainServicer):
                 os.mkdir(os.path.join(self.dfh.get_data_dirs()[i]['path'], request.UUID))
 
         geneSetsToProcess = sorted(self.dfh.get_gobal_sets()) + sorted([os.path.join(request.UUID, x) for x in os.listdir(userDir)])
-        gene_sets = [s_pb2.MyGeneSet(geneSetFilePath=f, geneSetDisplayName=os.path.splitext(os.path.basename(f))[0]) for f in geneSetsToProcess]
-        return s_pb2.MyGeneSetsReply(myGeneSets=gene_sets)
+        gene_sets = [s_pb2.MyGeneSet(gene_set_file_path=f, gene_set_display_name=os.path.splitext(os.path.basename(f))[0]) for f in geneSetsToProcess]
+        return s_pb2.MyGeneSetsReply(my_gene_sets=gene_sets)
 
     def getMyLooms(self, request, context):
+        print("getMyLooms")
         my_looms = []
         userDir = dfh.DataFileHandler.get_data_dir_path_by_file_type('Loom', UUID=request.UUID)
         if not os.path.isdir(userDir):
@@ -376,21 +376,21 @@ class SCope(s_pb2_grpc.MainServicer):
                 except AttributeError:
                     L1 = 'Uncategorized'
                     L2 = L3 = ''
-                my_looms.append(s_pb2.MyLoom(loomFilePath=f,
-                                             loomDisplayName=os.path.splitext(os.path.basename(f))[0],
-                                             loomSize=loomSize,
-                                             cellMetaData=s_pb2.CellMetaData(annotations=loom.get_meta_data_by_key(key="annotations"),
+                my_looms.append(s_pb2.MyLoom(loom_file_path=f,
+                                             loom_display_name=os.path.splitext(os.path.basename(f))[0],
+                                             loom_size=loomSize,
+                                             cell_meta_data=s_pb2.CellMetaData(annotations=loom.get_meta_data_by_key(key="annotations"),
                                                                              embeddings=loom.get_meta_data_by_key(key="embeddings"),
                                                                              clusterings=loom.get_meta_data_by_key(key="clusterings")),
-                                             fileMetaData=file_meta,
-                                             loomHeierarchy=s_pb2.LoomHeierarchy(L1=L1,
-                                                                                 L2=L2,
-                                                                                 L3=L3)
+                                             file_meta_data=file_meta,
+                                             loom_hierarchy=s_pb2.LoomHeierarchy(l1=L1,
+                                                                                 l2=L2,
+                                                                                 l3=L3)
                                              )
                                 )
         self.dfh.update_UUID_db()
 
-        return s_pb2.MyLoomsReply(myLooms=my_looms)
+        return s_pb2.MyLoomsReply(my_looms=my_looms)
 
     def getUUID(self, request, context):
         if SCope.app_mode:
@@ -402,7 +402,7 @@ class SCope(s_pb2_grpc.MainServicer):
             self.dfh.get_uuid_log().write("{0} :: {1} :: New UUID ({2}) assigned.\n".format(time.strftime('%Y-%m-%d__%H-%M-%S', time.localtime()), request.ip, newUUID))
             self.dfh.get_uuid_log().flush()
             self.dfh.get_current_UUIDs()[newUUID] = time.time()
-        return s_pb2.UUIDReply(UUID=newUUID)
+        return s_pb2.UUIDReply(uuid=newUUID)
 
     def getRemainingUUIDTime(self, request, context):  # TODO: his function will be called a lot more often, we should reduce what it does.
         curUUIDSet = set(list(self.dfh.get_current_UUIDs().keys()))
@@ -441,7 +441,7 @@ class SCope(s_pb2_grpc.MainServicer):
 
         if uid not in self.dfh.get_active_sessions().keys() and not sessionsLimitReached:
             self.dfh.reset_active_session_timeout(uid)
-        return s_pb2.RemainingUUIDTimeReply(UUID=uid, timeRemaining=timeRemaining, sessionsLimitReached=sessionsLimitReached)
+        return s_pb2.RemainingUUIDTimeReply(uuid=uid, time_remaining=timeRemaining, sessions_limit_reached=sessionsLimitReached)
 
     def translateLassoSelection(self, request, context):
         src_loom = self.lfh.get_loom(loom_file_path=request.srcLoomFilePath)
@@ -450,13 +450,13 @@ class SCope(s_pb2_grpc.MainServicer):
         src_fast_index = set(src_cell_ids)
         dest_mask = [x in src_fast_index for x in dest_loom.get_cell_ids()]
         dest_cell_indices = list(compress(range(len(dest_mask)), dest_mask))
-        return s_pb2.TranslateLassoSelectionReply(cellIndices=dest_cell_indices)
+        return s_pb2.TranslateLassoSelectionReply(cell_indices=dest_cell_indices)
 
     def getCellIDs(self, request, context):
         loom = self.lfh.get_loom(loom_file_path=request.loomFilePath)
         cell_ids = loom.get_cell_ids()
         slctd_cell_ids = [cell_ids[i] for i in request.cellIndices]
-        return s_pb2.CellIDsReply(cellIds=slctd_cell_ids)
+        return s_pb2.CellIDsReply(cell_ids=slctd_cell_ids)
 
     def deleteUserFile(self, request, context):
         basename = os.path.basename(request.filePath)
@@ -467,7 +467,7 @@ class SCope(s_pb2_grpc.MainServicer):
         else:
             success = False
 
-        return s_pb2.DeleteUserFileReply(deletedSuccessfully=success)
+        return s_pb2.DeleteUserFileReply(deleted_successfully=success)
     
     def downloadSubLoom(self, request, context):
         start_time = time.time()
@@ -514,10 +514,10 @@ class SCope(s_pb2_grpc.MainServicer):
                     sub_selection = np.concatenate((sub_selection, selection), axis=0)
                 # Send the progress
                 processed = len(sub_selection)/sum(cells)
-                yield s_pb2.DownloadSubLoomReply(loomFilePath=""
-                                               , loomFileSize=0
+                yield s_pb2.DownloadSubLoomReply(loom_file_path=""
+                                               , loom_file_size=0
                                                , progress=s_pb2.Progress(value=processed, status="Sub Loom Created!")
-                                               , isDone=False)
+                                               , is_done=False)
             print("Creating {0} sub .loom...".format(request.featureValue))
             lp.create(sub_loom_file_path, sub_matrix, row_attrs=loom_connection.ra, col_attrs=loom_connection.ca[sub_selection], file_attrs=sub_loom_file_attrs)
             with open(sub_loom_file_path, 'r') as fh:
@@ -526,10 +526,10 @@ class SCope(s_pb2_grpc.MainServicer):
             print("Debug: %s seconds elapsed ---" % (time.time() - start_time))
         else:
             print("This feature is currently not implemented.")
-        yield s_pb2.DownloadSubLoomReply(loomFilePath=sub_loom_file_path
-                                       , loomFileSize=loom_file_size
+        yield s_pb2.DownloadSubLoomReply(loom_file_path=sub_loom_file_path
+                                       , loom_file_size=loom_file_size
                                        , progress=s_pb2.Progress(value=1.0, status="Sub Loom Created!")
-                                       , isDone=True)
+                                       , is_done=True)
 
     # Gene set enrichment
     #

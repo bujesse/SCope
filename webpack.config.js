@@ -18,7 +18,7 @@ let config = {
     entry: './src/main.jsx',
     devServer: {
       host: '0.0.0.0',
-      port: 55850,
+      port: 8081,
       disableHostCheck: true
     },
     output: {

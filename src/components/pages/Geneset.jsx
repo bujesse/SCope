@@ -13,6 +13,10 @@ import Uploader from '../common/Uploader';
 import ReactGA from 'react-ga';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+const { MyGeneSetsRequest
+      , DeleteUserFileTimeRequest
+      , GeneSetEnrichmentRequest } = require('../../../bin/s_pb.js');
+
 class Geneset extends Component {
 
     constructor() {
@@ -206,23 +210,24 @@ class Geneset extends Component {
 
     getGeneSets() {
         const { match } = this.props;
-        let query = {
-            UUID: match.params.uuid
-        };
-        BackendAPI.getConnection().then((gbc) => {
-            if (DEBUG) console.log("getMyGeneSets", query);
-            gbc.services.scope.Main.getMyGeneSets(query, (error, response) => {
-                if (response !== null) {
-                    if (DEBUG) console.log("getMyGeneSets", response);
-                    this.setState({ genesets: response.myGeneSets, loading: false });
-                } else {
-                    this.setState({ loading: false });
-                    console.log("No geneset files detected");
-                }
-            });
-        }, () => {
-            BackendAPI.showError();	
-        });
+
+        const req = new MyGeneSetsRequest();
+        req.setUuid(match.params.uuid)
+
+        if (DEBUG) console.log('getMyGeneSets', req);
+        BackendAPI.getConnection().getMyGeneSets(req, {}, (err, response) => {
+            if(err != null) {
+                BackendAPI.showError();	
+            }
+            if (DEBUG) console.log('getMyGeneSets', response);
+            if (response !== null) {
+                if (DEBUG) console.log("getMyGeneSets", response);
+                this.setState({ genesets: response.getMyGeneSetsList(), loading: false });
+            } else {
+                this.setState({ loading: false });
+                console.log("No geneset files detected");
+            }
+        })
     }
 
     deleteGeneSets(geneSetFilePath, geneSetDisplayName) {
@@ -233,52 +238,54 @@ class Geneset extends Component {
 		});
 		let execute = confirm("Are you sure that you want to remove the file: " + geneSetDisplayName + " ?");
 		if (execute) {
-			let query = {
-				UUID: match.params.uuid,
-				filePath: geneSetFilePath,
-				fileType: 'GeneSet'
-			};
-			BackendAPI.getConnection().then((gbc) => {
-				if (DEBUG) console.log("deleteUserFile", query);
-				gbc.services.scope.Main.deleteUserFile(query, (error, response) => {
-					if ((response !== null) && (response.deletedSuccessfully)) {
-						if (DEBUG) console.log("deleteUserFile", response);
-						this.getGeneSets();
-					}
-				});
-			});
+            
+            const req = new DeleteUserFileTimeRequest();
+            req.setUuid(match.params.uuid);
+            req.setFilePath(geneSetFilePath)
+            req.setFileType('GeneSet')
+            if (DEBUG) console.log('deleteUserFile', req);
+            BackendAPI.getConnection().deleteUserFile(req, {}, (err, response) => {
+                if(err != null) {
+                    BackendAPI.showError();	
+                }
+                if (DEBUG) console.log('deleteUserFile', response);
+                if (response !== null) {
+                    this.getGeneSets();
+                }
+            })
 		}
 	}
     
     runGeneEnrichment() {
-        let query = {
-            loomFilePath: BackendAPI.getActiveLoom(), 
-            geneSetFilePath: this.state.selectedGeneset, 
-            method:"AUCell"
-        }
-        BackendAPI.getConnection().then((gbc) => {
-            this.setState({loading: true});
-            if (DEBUG) console.log('doGeneSetEnrichment', query);
-            var call = gbc.services.scope.Main.doGeneSetEnrichment(query);
-            call.on('data', (gse) => {
-                if (DEBUG) console.log('doGeneSetEnrichment data', gse);
-                if (gse.isDone) {
-                    this.setState({loading: false, colors: gse.cellValues.color});
-                } else {
-                    this.setState({loadingMessage: gse.progress.status});
-                }
+
+        const req = new GeneSetEnrichmentRequest();
+        req.setLoomFilePath(BackendAPI.getActiveLoom());
+        req.setGeneSetFilePath(this.state.selectedGeneset)
+        req.setMethod("AUCell")
+
+        if (DEBUG) console.log('doGeneSetEnrichment', req);
+        BackendAPI.getConnection().doGeneSetEnrichment(req)
+        call.on('data', (gse) => {
+            if (DEBUG) console.log('doGeneSetEnrichment data', gse);
+            if (gse.getIsDone()) {
+                this.setState({loading: false, colors: gse.getCellValuesList().getColorList()});
+            } else {
+                this.setState({loadingMessage: gse.getProgress().getStatus()});
+            }
+        });
+        call.on('end', () => {
+            if (DEBUG) console.log('doGeneSetEnrichment end');
+            ReactGA.event({
+                category: 'geneset',
+                action: 'enrichment finished',
+                nonInteraction: true
             });
-            call.on('end', () => {
-                if (DEBUG) console.log('doGeneSetEnrichment end');
-                ReactGA.event({
-                    category: 'geneset',
-                    action: 'enrichment finished',
-                    nonInteraction: true
-                });
-            });
-        }, () => {
-            BackendAPI.showError();	
-        })
+        });
+        call.on('error', function(err) {
+            console.log('doGeneSetEnrichment error: ' + err.message);
+            BackendAPI.showError();
+        });
+
         ReactGA.event({
             category: 'geneset',
             action: 'enrichment started'

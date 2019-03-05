@@ -14,7 +14,7 @@ import AnnotationDropContainer from '../common/AnnotationDropContainer'
 import ViewerDropContainer from '../common/ViewerDropContainer'
 import ReactGA from 'react-ga';
 
-
+const { CellMetaDataRequest } = require('../../../bin/s_pb.js');
 
 class Compare extends Component {
 	constructor(props) {
@@ -582,25 +582,26 @@ class Compare extends Component {
 		let settings = BackendAPI.getSettings();
 		let selectedAnnotations = this.getSelectedAnnotations();
 		const { selectedGenes, selectedRegulons, selectedClusters } = BackendAPI.getParsedFeatures();
-		let query = {
-			loomFilePath: this.state.multiLoom[0],
-			cellIndices: [],
-			hasLogTransform: settings.hasLogTransform,
-			hasCpmTransform: settings.hasCpmNormalization,
-			selectedGenes: selectedGenes,
-			selectedRegulons: selectedRegulons,
-			clusterings: [],
-			annotations: Object.keys(selectedAnnotations),
-		}
-		BackendAPI.getConnection().then((gbc) => {
-			if (DEBUG) console.log('getCellMetaData', query);
-			gbc.services.scope.Main.getCellMetaData(query, (err, response) => {
-				if (DEBUG) console.log('getCellMetaData', response);
+
+		const req = new CellMetaDataRequest();
+		req.setoomFilePath(this.state.multiLoom[0]);
+		req.setCellIndices([])
+		req.setHasLogTransform(settings.hasLogTransform)
+		req.setHasCpmTransform(settings.hasCpmNormalization)
+		req.setSelectedGenes(selectedGenes)
+		req.setSelectedRegulons(selectedRegulons)
+		req.setClusterings([])
+		req.setAnnotations(Object.keys(selectedAnnotations))
+		if (DEBUG) console.log('getCellMetaData', req);
+		BackendAPI.getConnection().getCellMetaData(req, {}, (err, response) => {
+			if(err != null) {
+				BackendAPI.showError();	
+			}
+			if (DEBUG) console.log('getCellMetaData', response);
+			if (response !== null) {
 				this.renderExpressionGraph(response);
-			});
-		}, () => {
-			BackendAPI.showError();	
-		});
+			}
+		})
 	}
 
 	renderExpressionGraph(data) {
@@ -612,14 +613,14 @@ class Compare extends Component {
 			let selections = 0;
 			let dataset = [];
 			selectedGenes.map((gene, gi) => {
-				data.annotations[ai].annotations.map((av, i) => {
-					dataset.push({'feature': selections, annotation: av, value: data.geneExpression[gi].features[i]});
+				data.getAnnotationsList()[ai].getAnnotationsList().map((av, i) => {
+					dataset.push({'feature': selections, annotation: av, value: data.getGeneExpressionList()[gi].getFeaturesList()[i]});
 				})
 				selections++;
 			})
 			selectedRegulons.map((regulon, ri) => {
-				data.annotations[ai].annotations.map((av, i) => {
-					dataset.push({'feature': selections, annotation: av, value: data.aucValues[ri].features[i]});
+				data.getAnnotationsList()[ai].getAnnotationsList().map((av, i) => {
+					dataset.push({'feature': selections, annotation: av, value: data.getAucValuesList()[ri].getFeaturesList()[i]});
 				})
 				selections++;
 			})

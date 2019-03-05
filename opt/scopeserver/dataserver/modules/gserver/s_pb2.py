@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='s.proto',
   package='scope',
   syntax='proto3',
-  serialized_pb=_b('\n\x07s.proto\x12\x05scope\"+\n\nErrorReply\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"\xfb\x01\n\x1a\x43\x65llColorByFeaturesRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x0f\n\x07\x66\x65\x61ture\x18\x02 \x03(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x03(\t\x12\x17\n\x0fhasLogTransform\x18\x04 \x01(\x08\x12\x17\n\x0fhasCpmTransform\x18\x05 \x01(\x08\x12\x11\n\tthreshold\x18\x06 \x03(\x02\x12\x18\n\x10scaleThresholded\x18\x07 \x01(\x08\x12%\n\nannotation\x18\x08 \x03(\x0b\x32\x11.scope.Annotation\x12\x0c\n\x04vmax\x18\t \x03(\x02\x12\r\n\x05logic\x18\n \x01(\t\"-\n\x0b\x43olorLegend\x12\x0e\n\x06values\x18\x01 \x03(\t\x12\x0e\n\x06\x63olors\x18\x02 \x03(\t\"\xdc\x01\n\x18\x43\x65llColorByFeaturesReply\x12\x1e\n\x16hasAddCompressionLayer\x18\x01 \x01(\x08\x12\x17\n\x0f\x63ompressedColor\x18\x02 \x01(\x0c\x12\r\n\x05\x63olor\x18\x03 \x03(\t\x12\x0c\n\x04vmax\x18\x04 \x03(\x02\x12\x0f\n\x07maxVmax\x18\x05 \x03(\x02\x12\x13\n\x0b\x63\x65llIndices\x18\x06 \x03(\x05\x12\"\n\x06legend\x18\x07 \x01(\x0b\x32\x12.scope.ColorLegend\x12 \n\x05\x65rror\x18\x08 \x01(\x0b\x32\x11.scope.ErrorReply\"\\\n\x1e\x43\x65llAUCValuesByFeaturesRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x0f\n\x07\x66\x65\x61ture\x18\x02 \x03(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x03(\t\"-\n\x1c\x43\x65llAUCValuesByFeaturesReply\x12\r\n\x05value\x18\x01 \x03(\x02\"5\n\x0e\x46\x65\x61tureRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\r\n\x05query\x18\x02 \x01(\t\"\xcd\x01\n\x13\x43\x65llMetaDataRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x13\n\x0b\x63\x65llIndices\x18\x02 \x03(\x05\x12\x15\n\rselectedGenes\x18\x03 \x03(\t\x12\x17\n\x0fhasLogTransform\x18\x04 \x01(\x08\x12\x17\n\x0fhasCpmTransform\x18\x05 \x01(\x08\x12\x18\n\x10selectedRegulons\x18\x06 \x03(\t\x12\x13\n\x0b\x63lusterings\x18\x07 \x03(\x05\x12\x13\n\x0b\x61nnotations\x18\x08 \x03(\t\"P\n\x0c\x46\x65\x61tureReply\x12\x0f\n\x07\x66\x65\x61ture\x18\x01 \x03(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x02 \x03(\t\x12\x1a\n\x12\x66\x65\x61tureDescription\x18\x03 \x03(\t\"w\n\x12\x43oordinatesRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x15\n\rcoordinatesID\x18\x02 \x01(\x05\x12%\n\nannotation\x18\x03 \x03(\x0b\x32\x11.scope.Annotation\x12\r\n\x05logic\x18\x04 \x01(\t\"=\n\x10\x43oordinatesReply\x12\t\n\x01x\x18\x01 \x03(\x02\x12\t\n\x01y\x18\x02 \x03(\x02\x12\x13\n\x0b\x63\x65llIndices\x18\x03 \x03(\x05\"*\n\nAnnotation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06values\x18\x02 \x03(\t\"\"\n\nCoordinate\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\"&\n\x04\x45\x64ge\x12\x0e\n\x06source\x18\x01 \x01(\t\x12\x0e\n\x06target\x18\x02 \x01(\t\"_\n\nTrajectory\x12\r\n\x05nodes\x18\x01 \x03(\t\x12\x1a\n\x05\x65\x64ges\x18\x02 \x03(\x0b\x32\x0b.scope.Edge\x12&\n\x0b\x63oordinates\x18\x03 \x03(\x0b\x32\x11.scope.Coordinate\"L\n\tEmbedding\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12%\n\ntrajectory\x18\x03 \x01(\x0b\x32\x11.scope.Trajectory\"J\n\x13\x43lusterMarkerMetric\x12\x10\n\x08\x61\x63\x63\x65ssor\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"4\n\x11\x43lusterAnnotation\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\"\x9b\x01\n\nClustering\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05group\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x38\n\x14\x63lusterMarkerMetrics\x18\x04 \x03(\x0b\x32\x1a.scope.ClusterMarkerMetric\x12*\n\x08\x63lusters\x18\x05 \x03(\x0b\x32\x18.scope.ClusterAnnotation\"\x84\x01\n\x0c\x43\x65llMetaData\x12&\n\x0b\x61nnotations\x18\x01 \x03(\x0b\x32\x11.scope.Annotation\x12$\n\nembeddings\x18\x02 \x03(\x0b\x32\x10.scope.Embedding\x12&\n\x0b\x63lusterings\x18\x03 \x03(\x0b\x32\x11.scope.Clustering\"/\n\x0c\x41UCThreshold\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x11\n\tthreshold\x18\x02 \x01(\x02\"r\n\x07Regulon\x12\r\n\x05genes\x18\x01 \x03(\t\x12+\n\x0e\x61utoThresholds\x18\x02 \x03(\x0b\x32\x13.scope.AUCThreshold\x12\x18\n\x10\x64\x65\x66\x61ultThreshold\x18\x03 \x01(\t\x12\x11\n\tmotifName\x18\x04 \x01(\t\"\x86\x01\n\x0c\x46ileMetaData\x12\x16\n\x0ehasRegulonsAUC\x18\x01 \x01(\x08\x12\x13\n\x0bhasGeneSets\x18\x02 \x01(\x08\x12\x16\n\x0ehasClusterings\x18\x03 \x01(\x08\x12\x1a\n\x12hasExtraEmbeddings\x18\x04 \x01(\x08\x12\x15\n\rhasGlobalMeta\x18\x05 \x01(\x08\"!\n\rFeatureValues\x12\x10\n\x08\x66\x65\x61tures\x18\x01 \x03(\x02\"&\n\x0f\x43\x65llAnnotations\x12\x13\n\x0b\x61nnotations\x18\x01 \x03(\t\" \n\x0c\x43\x65llClusters\x12\x10\n\x08\x63lusters\x18\x01 \x03(\x05\"\xc0\x01\n\x11\x43\x65llMetaDataReply\x12\'\n\nclusterIDs\x18\x01 \x03(\x0b\x32\x13.scope.CellClusters\x12,\n\x0egeneExpression\x18\x02 \x03(\x0b\x32\x14.scope.FeatureValues\x12\'\n\taucValues\x18\x03 \x03(\x0b\x32\x14.scope.FeatureValues\x12+\n\x0b\x61nnotations\x18\x04 \x03(\x0b\x32\x16.scope.CellAnnotations\"?\n\x16RegulonMetaDataRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x0f\n\x07regulon\x18\x02 \x01(\t\";\n\x14RegulonMetaDataReply\x12#\n\x0bregulonMeta\x18\x01 \x01(\x0b\x32\x0e.scope.Regulon\"S\n\x12MarkerGenesRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0c\x63lusteringID\x18\x02 \x01(\x05\x12\x11\n\tclusterID\x18\x03 \x01(\x05\"X\n\x11MarkerGenesMetric\x12\x10\n\x08\x61\x63\x63\x65ssor\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0e\n\x06values\x18\x04 \x03(\x02\"L\n\x10MarkerGenesReply\x12\r\n\x05genes\x18\x01 \x03(\t\x12)\n\x07metrics\x18\x02 \x03(\x0b\x32\x18.scope.MarkerGenesMetric\"\x1e\n\x0eMyLoomsRequest\x12\x0c\n\x04UUID\x18\x01 \x01(\t\"4\n\x0eLoomHeierarchy\x12\n\n\x02L1\x18\x01 \x01(\t\x12\n\n\x02L2\x18\x02 \x01(\t\x12\n\n\x02L3\x18\x03 \x01(\t\"\xce\x01\n\x06MyLoom\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x17\n\x0floomDisplayName\x18\x02 \x01(\t\x12\x10\n\x08loomSize\x18\x03 \x01(\x03\x12)\n\x0c\x63\x65llMetaData\x18\x04 \x01(\x0b\x32\x13.scope.CellMetaData\x12)\n\x0c\x66ileMetaData\x18\x05 \x01(\x0b\x32\x13.scope.FileMetaData\x12-\n\x0eloomHeierarchy\x18\x06 \x01(\x0b\x32\x15.scope.LoomHeierarchy\".\n\x0cMyLoomsReply\x12\x1e\n\x07myLooms\x18\x01 \x03(\x0b\x32\r.scope.MyLoom\"h\n\x1eTranslateLassoSelectionRequest\x12\x17\n\x0fsrcLoomFilePath\x18\x01 \x01(\t\x12\x18\n\x10\x64\x65stLoomFilePath\x18\x02 \x01(\t\x12\x13\n\x0b\x63\x65llIndices\x18\x03 \x03(\x05\"3\n\x1cTranslateLassoSelectionReply\x12\x13\n\x0b\x63\x65llIndices\x18\x01 \x03(\x05\";\n\x0e\x43\x65llIDsRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x13\n\x0b\x63\x65llIndices\x18\x02 \x03(\x05\"\x1f\n\x0c\x43\x65llIDsReply\x12\x0f\n\x07\x63\x65llIds\x18\x01 \x03(\t\"Y\n\x18GeneSetEnrichmentRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x17\n\x0fgeneSetFilePath\x18\x02 \x01(\t\x12\x0e\n\x06method\x18\x03 \x01(\t\")\n\x08Progress\x12\r\n\x05value\x18\x01 \x01(\x02\x12\x0e\n\x06status\x18\x02 \x01(\t\"\x80\x01\n\x16GeneSetEnrichmentReply\x12!\n\x08progress\x18\x01 \x01(\x0b\x32\x0f.scope.Progress\x12\x0e\n\x06isDone\x18\x02 \x01(\x08\x12\x33\n\ncellValues\x18\x03 \x01(\x0b\x32\x1f.scope.CellColorByFeaturesReply\"{\n\x0bVmaxRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x03(\t\x12\x0f\n\x07\x66\x65\x61ture\x18\x02 \x03(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x03(\t\x12\x17\n\x0fhasLogTransform\x18\x04 \x01(\x08\x12\x17\n\x0fhasCpmTransform\x18\x05 \x01(\x08\"*\n\tVmaxReply\x12\x0c\n\x04vmax\x18\x01 \x03(\x02\x12\x0f\n\x07maxVmax\x18\x02 \x03(\x02\"\x19\n\x0bUUIDRequest\x12\n\n\x02ip\x18\x01 \x01(\t\"\x19\n\tUUIDReply\x12\x0c\n\x04UUID\x18\x01 \x01(\t\"I\n\x18RemainingUUIDTimeRequest\x12\n\n\x02ip\x18\x01 \x01(\t\x12\x0c\n\x04UUID\x18\x02 \x01(\t\x12\x13\n\x0bmouseEvents\x18\x03 \x01(\x03\"[\n\x16RemainingUUIDTimeReply\x12\x0c\n\x04UUID\x18\x01 \x01(\t\x12\x15\n\rtimeRemaining\x18\x02 \x01(\x03\x12\x1c\n\x14sessionsLimitReached\x18\x03 \x01(\x08\"5\n\x13LoomUploadedRequest\x12\x0c\n\x04UUID\x18\x01 \x01(\t\x12\x10\n\x08\x66ilename\x18\x02 \x01(\t\"\x13\n\x11LoomUploadedReply\"@\n\tMyGeneSet\x12\x17\n\x0fgeneSetFilePath\x18\x01 \x01(\t\x12\x1a\n\x12geneSetDisplayName\x18\x02 \x01(\t\"!\n\x11MyGeneSetsRequest\x12\x0c\n\x04UUID\x18\x01 \x01(\t\"7\n\x0fMyGeneSetsReply\x12$\n\nmyGeneSets\x18\x01 \x03(\x0b\x32\x10.scope.MyGeneSet\"I\n\x15\x44\x65leteUserFileRequest\x12\x0c\n\x04UUID\x18\x01 \x01(\t\x12\x10\n\x08\x66ilePath\x18\x02 \x01(\t\x12\x10\n\x08\x66ileType\x18\x03 \x01(\t\"2\n\x13\x44\x65leteUserFileReply\x12\x1b\n\x13\x64\x65letedSuccessfully\x18\x01 \x01(\x08\"\x80\x01\n\x16\x44ownloadSubLoomRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x02 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureName\x18\x03 \x01(\t\x12\x14\n\x0c\x66\x65\x61tureValue\x18\x04 \x01(\t\x12\x10\n\x08operator\x18\x05 \x01(\t\"\x97\x01\n\x14\x44ownloadSubLoomReply\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0cloomFileSize\x18\x02 \x01(\x03\x12!\n\x08progress\x18\x03 \x01(\x0b\x32\x0f.scope.Progress\x12\x0e\n\x06isDone\x18\x04 \x01(\x08\x12 \n\x05\x65rror\x18\x05 \x01(\x0b\x32\x11.scope.ErrorReply2\xe8\n\n\x04Main\x12^\n\x16getCellColorByFeatures\x12!.scope.CellColorByFeaturesRequest\x1a\x1f.scope.CellColorByFeaturesReply\"\x00\x12j\n\x1agetCellAUCValuesByFeatures\x12%.scope.CellAUCValuesByFeaturesRequest\x1a#.scope.CellAUCValuesByFeaturesReply\"\x00\x12I\n\x0fgetCellMetaData\x12\x1a.scope.CellMetaDataRequest\x1a\x18.scope.CellMetaDataReply\"\x00\x12;\n\x0bgetFeatures\x12\x15.scope.FeatureRequest\x1a\x13.scope.FeatureReply\"\x00\x12\x46\n\x0egetCoordinates\x12\x19.scope.CoordinatesRequest\x1a\x17.scope.CoordinatesReply\"\x00\x12R\n\x12getRegulonMetaData\x12\x1d.scope.RegulonMetaDataRequest\x1a\x1b.scope.RegulonMetaDataReply\"\x00\x12\x46\n\x0egetMarkerGenes\x12\x19.scope.MarkerGenesRequest\x1a\x17.scope.MarkerGenesReply\"\x00\x12:\n\ngetMyLooms\x12\x15.scope.MyLoomsRequest\x1a\x13.scope.MyLoomsReply\"\x00\x12g\n\x17translateLassoSelection\x12%.scope.TranslateLassoSelectionRequest\x1a#.scope.TranslateLassoSelectionReply\"\x00\x12:\n\ngetCellIDs\x12\x15.scope.CellIDsRequest\x1a\x13.scope.CellIDsReply\"\x00\x12Y\n\x13\x64oGeneSetEnrichment\x12\x1f.scope.GeneSetEnrichmentRequest\x1a\x1d.scope.GeneSetEnrichmentReply\"\x00\x30\x01\x12\x31\n\x07getVmax\x12\x12.scope.VmaxRequest\x1a\x10.scope.VmaxReply\"\x00\x12\x31\n\x07getUUID\x12\x12.scope.UUIDRequest\x1a\x10.scope.UUIDReply\"\x00\x12X\n\x14getRemainingUUIDTime\x12\x1f.scope.RemainingUUIDTimeRequest\x1a\x1d.scope.RemainingUUIDTimeReply\"\x00\x12\x46\n\x0cloomUploaded\x12\x1a.scope.LoomUploadedRequest\x1a\x18.scope.LoomUploadedReply\"\x00\x12\x43\n\rgetMyGeneSets\x12\x18.scope.MyGeneSetsRequest\x1a\x16.scope.MyGeneSetsReply\"\x00\x12L\n\x0e\x64\x65leteUserFile\x12\x1c.scope.DeleteUserFileRequest\x1a\x1a.scope.DeleteUserFileReply\"\x00\x12Q\n\x0f\x64ownloadSubLoom\x12\x1d.scope.DownloadSubLoomRequest\x1a\x1b.scope.DownloadSubLoomReply\"\x00\x30\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x07s.proto\x12\x05scope\"+\n\nErrorReply\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t\"\x83\x02\n\x1a\x43\x65llColorByFeaturesRequest\x12\x16\n\x0eloom_file_path\x18\x01 \x01(\t\x12\x0f\n\x07\x66\x65\x61ture\x18\x02 \x03(\t\x12\x14\n\x0c\x66\x65\x61ture_type\x18\x03 \x03(\t\x12\x19\n\x11has_log_transform\x18\x04 \x01(\x08\x12\x19\n\x11has_cpm_transform\x18\x05 \x01(\x08\x12\x11\n\tthreshold\x18\x06 \x03(\x02\x12\x19\n\x11scale_thresholded\x18\x07 \x01(\x08\x12%\n\nannotation\x18\x08 \x03(\x0b\x32\x11.scope.Annotation\x12\x0c\n\x04vmax\x18\t \x03(\x02\x12\r\n\x05logic\x18\n \x01(\t\"-\n\x0b\x43olorLegend\x12\x0e\n\x06values\x18\x01 \x03(\t\x12\x0e\n\x06\x63olors\x18\x02 \x03(\t\"\xe2\x01\n\x18\x43\x65llColorByFeaturesReply\x12!\n\x19has_add_compression_layer\x18\x01 \x01(\x08\x12\x18\n\x10\x63ompressed_color\x18\x02 \x01(\x0c\x12\r\n\x05\x63olor\x18\x03 \x03(\t\x12\x0c\n\x04vmax\x18\x04 \x03(\x02\x12\x10\n\x08max_vmax\x18\x05 \x03(\x02\x12\x14\n\x0c\x63\x65ll_indices\x18\x06 \x03(\x05\x12\"\n\x06legend\x18\x07 \x01(\x0b\x32\x12.scope.ColorLegend\x12 \n\x05\x65rror\x18\x08 \x01(\x0b\x32\x11.scope.ErrorReply\"_\n\x1e\x43\x65llAUCValuesByFeaturesRequest\x12\x16\n\x0eloom_file_path\x18\x01 \x01(\t\x12\x0f\n\x07\x66\x65\x61ture\x18\x02 \x03(\t\x12\x14\n\x0c\x66\x65\x61ture_type\x18\x03 \x03(\t\"-\n\x1c\x43\x65llAUCValuesByFeaturesReply\x12\r\n\x05value\x18\x01 \x03(\x02\"7\n\x0e\x46\x65\x61tureRequest\x12\x16\n\x0eloom_file_path\x18\x01 \x01(\t\x12\r\n\x05query\x18\x02 \x01(\t\"\xd6\x01\n\x13\x43\x65llMetaDataRequest\x12\x16\n\x0eloom_file_path\x18\x01 \x01(\t\x12\x14\n\x0c\x63\x65ll_indices\x18\x02 \x03(\x05\x12\x16\n\x0eselected_genes\x18\x03 \x03(\t\x12\x19\n\x11has_log_transform\x18\x04 \x01(\x08\x12\x19\n\x11has_cpm_transform\x18\x05 \x01(\x08\x12\x19\n\x11selected_regulons\x18\x06 \x03(\t\x12\x13\n\x0b\x63lusterings\x18\x07 \x03(\x05\x12\x13\n\x0b\x61nnotations\x18\x08 \x03(\t\"R\n\x0c\x46\x65\x61tureReply\x12\x0f\n\x07\x66\x65\x61ture\x18\x01 \x03(\t\x12\x14\n\x0c\x66\x65\x61ture_type\x18\x02 \x03(\t\x12\x1b\n\x13\x66\x65\x61ture_description\x18\x03 \x03(\t\"z\n\x12\x43oordinatesRequest\x12\x16\n\x0eloom_file_path\x18\x01 \x01(\t\x12\x16\n\x0e\x63oordinates_id\x18\x02 \x01(\x05\x12%\n\nannotation\x18\x03 \x03(\x0b\x32\x11.scope.Annotation\x12\r\n\x05logic\x18\x04 \x01(\t\">\n\x10\x43oordinatesReply\x12\t\n\x01x\x18\x01 \x03(\x02\x12\t\n\x01y\x18\x02 \x03(\x02\x12\x14\n\x0c\x63\x65ll_indices\x18\x03 \x03(\x05\"*\n\nAnnotation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06values\x18\x02 \x03(\t\"\"\n\nCoordinate\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\"&\n\x04\x45\x64ge\x12\x0e\n\x06source\x18\x01 \x01(\t\x12\x0e\n\x06target\x18\x02 \x01(\t\"_\n\nTrajectory\x12\r\n\x05nodes\x18\x01 \x03(\t\x12\x1a\n\x05\x65\x64ges\x18\x02 \x03(\x0b\x32\x0b.scope.Edge\x12&\n\x0b\x63oordinates\x18\x03 \x03(\x0b\x32\x11.scope.Coordinate\"L\n\tEmbedding\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12%\n\ntrajectory\x18\x03 \x01(\x0b\x32\x11.scope.Trajectory\"J\n\x13\x43lusterMarkerMetric\x12\x10\n\x08\x61\x63\x63\x65ssor\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"4\n\x11\x43lusterAnnotation\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\"\x9d\x01\n\nClustering\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05group\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12:\n\x16\x63luster_marker_metrics\x18\x04 \x03(\x0b\x32\x1a.scope.ClusterMarkerMetric\x12*\n\x08\x63lusters\x18\x05 \x03(\x0b\x32\x18.scope.ClusterAnnotation\"\x84\x01\n\x0c\x43\x65llMetaData\x12&\n\x0b\x61nnotations\x18\x01 \x03(\x0b\x32\x11.scope.Annotation\x12$\n\nembeddings\x18\x02 \x03(\x0b\x32\x10.scope.Embedding\x12&\n\x0b\x63lusterings\x18\x03 \x03(\x0b\x32\x11.scope.Clustering\"/\n\x0c\x41UCThreshold\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x11\n\tthreshold\x18\x02 \x01(\x02\"u\n\x07Regulon\x12\r\n\x05genes\x18\x01 \x03(\t\x12,\n\x0f\x61uto_thresholds\x18\x02 \x03(\x0b\x32\x13.scope.AUCThreshold\x12\x19\n\x11\x64\x65\x66\x61ult_threshold\x18\x03 \x01(\t\x12\x12\n\nmotif_name\x18\x04 \x01(\t\"\x8f\x01\n\x0c\x46ileMetaData\x12\x18\n\x10has_regulons_auc\x18\x01 \x01(\x08\x12\x15\n\rhas_gene_sets\x18\x02 \x01(\x08\x12\x17\n\x0fhas_clusterings\x18\x03 \x01(\x08\x12\x1c\n\x14has_extra_embeddings\x18\x04 \x01(\x08\x12\x17\n\x0fhas_global_meta\x18\x05 \x01(\x08\"!\n\rFeatureValues\x12\x10\n\x08\x66\x65\x61tures\x18\x01 \x03(\x02\"&\n\x0f\x43\x65llAnnotations\x12\x13\n\x0b\x61nnotations\x18\x01 \x03(\t\" \n\x0c\x43\x65llClusters\x12\x10\n\x08\x63lusters\x18\x01 \x03(\x05\"\xc3\x01\n\x11\x43\x65llMetaDataReply\x12(\n\x0b\x63luster_ids\x18\x01 \x03(\x0b\x32\x13.scope.CellClusters\x12-\n\x0fgene_expression\x18\x02 \x03(\x0b\x32\x14.scope.FeatureValues\x12(\n\nauc_values\x18\x03 \x03(\x0b\x32\x14.scope.FeatureValues\x12+\n\x0b\x61nnotations\x18\x04 \x03(\x0b\x32\x16.scope.CellAnnotations\"A\n\x16RegulonMetaDataRequest\x12\x16\n\x0eloom_file_path\x18\x01 \x01(\t\x12\x0f\n\x07regulon\x18\x02 \x01(\t\"<\n\x14RegulonMetaDataReply\x12$\n\x0cregulon_meta\x18\x01 \x01(\x0b\x32\x0e.scope.Regulon\"W\n\x12MarkerGenesRequest\x12\x16\n\x0eloom_file_path\x18\x01 \x01(\t\x12\x15\n\rclustering_id\x18\x02 \x01(\x05\x12\x12\n\ncluster_id\x18\x03 \x01(\x05\"X\n\x11MarkerGenesMetric\x12\x10\n\x08\x61\x63\x63\x65ssor\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0e\n\x06values\x18\x04 \x03(\x02\"L\n\x10MarkerGenesReply\x12\r\n\x05genes\x18\x01 \x03(\t\x12)\n\x07metrics\x18\x02 \x03(\x0b\x32\x18.scope.MarkerGenesMetric\"\x1e\n\x0eMyLoomsRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\"4\n\x0eLoomHeierarchy\x12\n\n\x02l1\x18\x01 \x01(\t\x12\n\n\x02l2\x18\x02 \x01(\t\x12\n\n\x02l3\x18\x03 \x01(\t\"\xd7\x01\n\x06MyLoom\x12\x16\n\x0eloom_file_path\x18\x01 \x01(\t\x12\x19\n\x11loom_display_name\x18\x02 \x01(\t\x12\x11\n\tloom_size\x18\x03 \x01(\x03\x12+\n\x0e\x63\x65ll_meta_data\x18\x04 \x01(\x0b\x32\x13.scope.CellMetaData\x12+\n\x0e\x66ile_meta_data\x18\x05 \x01(\x0b\x32\x13.scope.FileMetaData\x12-\n\x0eloom_hierarchy\x18\x06 \x01(\x0b\x32\x15.scope.LoomHeierarchy\"/\n\x0cMyLoomsReply\x12\x1f\n\x08my_looms\x18\x01 \x03(\x0b\x32\r.scope.MyLoom\"o\n\x1eTranslateLassoSelectionRequest\x12\x1a\n\x12src_loom_file_path\x18\x01 \x01(\t\x12\x1b\n\x13\x64\x65st_loom_file_path\x18\x02 \x01(\t\x12\x14\n\x0c\x63\x65ll_indices\x18\x03 \x03(\x05\"4\n\x1cTranslateLassoSelectionReply\x12\x14\n\x0c\x63\x65ll_indices\x18\x01 \x03(\x05\">\n\x0e\x43\x65llIDsRequest\x12\x16\n\x0eloom_file_path\x18\x01 \x01(\t\x12\x14\n\x0c\x63\x65ll_indices\x18\x02 \x03(\x05\" \n\x0c\x43\x65llIDsReply\x12\x10\n\x08\x63\x65ll_ids\x18\x01 \x03(\t\"^\n\x18GeneSetEnrichmentRequest\x12\x16\n\x0eloom_file_path\x18\x01 \x01(\t\x12\x1a\n\x12gene_set_file_path\x18\x02 \x01(\t\x12\x0e\n\x06method\x18\x03 \x01(\t\")\n\x08Progress\x12\r\n\x05value\x18\x01 \x01(\x02\x12\x0e\n\x06status\x18\x02 \x01(\t\"\x82\x01\n\x16GeneSetEnrichmentReply\x12!\n\x08progress\x18\x01 \x01(\x0b\x32\x0f.scope.Progress\x12\x0f\n\x07is_done\x18\x02 \x01(\x08\x12\x34\n\x0b\x63\x65ll_values\x18\x03 \x01(\x0b\x32\x1f.scope.CellColorByFeaturesReply\"\x82\x01\n\x0bVmaxRequest\x12\x16\n\x0eloom_file_path\x18\x01 \x03(\t\x12\x0f\n\x07\x66\x65\x61ture\x18\x02 \x03(\t\x12\x14\n\x0c\x66\x65\x61ture_type\x18\x03 \x03(\t\x12\x19\n\x11has_log_transform\x18\x04 \x01(\x08\x12\x19\n\x11has_cpm_transform\x18\x05 \x01(\x08\"+\n\tVmaxReply\x12\x0c\n\x04vmax\x18\x01 \x03(\x02\x12\x10\n\x08max_vmax\x18\x02 \x03(\x02\"\x19\n\x0bUUIDRequest\x12\n\n\x02ip\x18\x01 \x01(\t\"\x19\n\tUUIDReply\x12\x0c\n\x04UUID\x18\x01 \x01(\t\"J\n\x18RemainingUUIDTimeRequest\x12\n\n\x02ip\x18\x01 \x01(\t\x12\x0c\n\x04uuid\x18\x02 \x01(\t\x12\x14\n\x0cmouse_events\x18\x03 \x01(\x03\"^\n\x16RemainingUUIDTimeReply\x12\x0c\n\x04UUID\x18\x01 \x01(\t\x12\x16\n\x0etime_remaining\x18\x02 \x01(\x03\x12\x1e\n\x16sessions_limit_Reached\x18\x03 \x01(\x08\"5\n\x13LoomUploadedRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x10\n\x08\x66ilename\x18\x02 \x01(\t\"\x13\n\x11LoomUploadedReply\"F\n\tMyGeneSet\x12\x1a\n\x12gene_set_file_path\x18\x01 \x01(\t\x12\x1d\n\x15gene_set_display_name\x18\x02 \x01(\t\"!\n\x11MyGeneSetsRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\"9\n\x0fMyGeneSetsReply\x12&\n\x0cmy_gene_sets\x18\x01 \x03(\x0b\x32\x10.scope.MyGeneSet\"K\n\x15\x44\x65leteUserFileRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x11\n\tfile_path\x18\x02 \x01(\t\x12\x11\n\tfile_type\x18\x03 \x01(\t\"3\n\x13\x44\x65leteUserFileReply\x12\x1c\n\x14\x64\x65leted_successfully\x18\x01 \x01(\x08\"\x85\x01\n\x16\x44ownloadSubLoomRequest\x12\x16\n\x0eloom_file_path\x18\x01 \x01(\t\x12\x14\n\x0c\x66\x65\x61ture_type\x18\x02 \x01(\t\x12\x14\n\x0c\x66\x65\x61ture_name\x18\x03 \x01(\t\x12\x15\n\rfeature_value\x18\x04 \x01(\t\x12\x10\n\x08operator\x18\x05 \x01(\t\"\x9c\x01\n\x14\x44ownloadSubLoomReply\x12\x16\n\x0eloom_file_path\x18\x01 \x01(\t\x12\x16\n\x0eloom_file_size\x18\x02 \x01(\x03\x12!\n\x08progress\x18\x03 \x01(\x0b\x32\x0f.scope.Progress\x12\x0f\n\x07is_done\x18\x04 \x01(\x08\x12 \n\x05\x65rror\x18\x05 \x01(\x0b\x32\x11.scope.ErrorReply2\xe8\n\n\x04Main\x12^\n\x16getCellColorByFeatures\x12!.scope.CellColorByFeaturesRequest\x1a\x1f.scope.CellColorByFeaturesReply\"\x00\x12j\n\x1agetCellAUCValuesByFeatures\x12%.scope.CellAUCValuesByFeaturesRequest\x1a#.scope.CellAUCValuesByFeaturesReply\"\x00\x12I\n\x0fgetCellMetaData\x12\x1a.scope.CellMetaDataRequest\x1a\x18.scope.CellMetaDataReply\"\x00\x12;\n\x0bgetFeatures\x12\x15.scope.FeatureRequest\x1a\x13.scope.FeatureReply\"\x00\x12\x46\n\x0egetCoordinates\x12\x19.scope.CoordinatesRequest\x1a\x17.scope.CoordinatesReply\"\x00\x12R\n\x12getRegulonMetaData\x12\x1d.scope.RegulonMetaDataRequest\x1a\x1b.scope.RegulonMetaDataReply\"\x00\x12\x46\n\x0egetMarkerGenes\x12\x19.scope.MarkerGenesRequest\x1a\x17.scope.MarkerGenesReply\"\x00\x12:\n\ngetMyLooms\x12\x15.scope.MyLoomsRequest\x1a\x13.scope.MyLoomsReply\"\x00\x12g\n\x17translateLassoSelection\x12%.scope.TranslateLassoSelectionRequest\x1a#.scope.TranslateLassoSelectionReply\"\x00\x12:\n\ngetCellIDs\x12\x15.scope.CellIDsRequest\x1a\x13.scope.CellIDsReply\"\x00\x12Y\n\x13\x64oGeneSetEnrichment\x12\x1f.scope.GeneSetEnrichmentRequest\x1a\x1d.scope.GeneSetEnrichmentReply\"\x00\x30\x01\x12\x31\n\x07getVmax\x12\x12.scope.VmaxRequest\x1a\x10.scope.VmaxReply\"\x00\x12\x31\n\x07getUUID\x12\x12.scope.UUIDRequest\x1a\x10.scope.UUIDReply\"\x00\x12X\n\x14getRemainingUUIDTime\x12\x1f.scope.RemainingUUIDTimeRequest\x1a\x1d.scope.RemainingUUIDTimeReply\"\x00\x12\x46\n\x0cloomUploaded\x12\x1a.scope.LoomUploadedRequest\x1a\x18.scope.LoomUploadedReply\"\x00\x12\x43\n\rgetMyGeneSets\x12\x18.scope.MyGeneSetsRequest\x1a\x16.scope.MyGeneSetsReply\"\x00\x12L\n\x0e\x64\x65leteUserFile\x12\x1c.scope.DeleteUserFileRequest\x1a\x1a.scope.DeleteUserFileReply\"\x00\x12Q\n\x0f\x64ownloadSubLoom\x12\x1d.scope.DownloadSubLoomRequest\x1a\x1b.scope.DownloadSubLoomReply\"\x00\x30\x01\x62\x06proto3')
 )
 
 
@@ -71,7 +71,7 @@ _CELLCOLORBYFEATURESREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='loomFilePath', full_name='scope.CellColorByFeaturesRequest.loomFilePath', index=0,
+      name='loom_file_path', full_name='scope.CellColorByFeaturesRequest.loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -85,21 +85,21 @@ _CELLCOLORBYFEATURESREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='featureType', full_name='scope.CellColorByFeaturesRequest.featureType', index=2,
+      name='feature_type', full_name='scope.CellColorByFeaturesRequest.feature_type', index=2,
       number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hasLogTransform', full_name='scope.CellColorByFeaturesRequest.hasLogTransform', index=3,
+      name='has_log_transform', full_name='scope.CellColorByFeaturesRequest.has_log_transform', index=3,
       number=4, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hasCpmTransform', full_name='scope.CellColorByFeaturesRequest.hasCpmTransform', index=4,
+      name='has_cpm_transform', full_name='scope.CellColorByFeaturesRequest.has_cpm_transform', index=4,
       number=5, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -113,7 +113,7 @@ _CELLCOLORBYFEATURESREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='scaleThresholded', full_name='scope.CellColorByFeaturesRequest.scaleThresholded', index=6,
+      name='scale_thresholded', full_name='scope.CellColorByFeaturesRequest.scale_thresholded', index=6,
       number=7, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -153,7 +153,7 @@ _CELLCOLORBYFEATURESREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=64,
-  serialized_end=315,
+  serialized_end=323,
 )
 
 
@@ -190,8 +190,8 @@ _COLORLEGEND = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=317,
-  serialized_end=362,
+  serialized_start=325,
+  serialized_end=370,
 )
 
 
@@ -203,14 +203,14 @@ _CELLCOLORBYFEATURESREPLY = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='hasAddCompressionLayer', full_name='scope.CellColorByFeaturesReply.hasAddCompressionLayer', index=0,
+      name='has_add_compression_layer', full_name='scope.CellColorByFeaturesReply.has_add_compression_layer', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='compressedColor', full_name='scope.CellColorByFeaturesReply.compressedColor', index=1,
+      name='compressed_color', full_name='scope.CellColorByFeaturesReply.compressed_color', index=1,
       number=2, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
@@ -231,14 +231,14 @@ _CELLCOLORBYFEATURESREPLY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='maxVmax', full_name='scope.CellColorByFeaturesReply.maxVmax', index=4,
+      name='max_vmax', full_name='scope.CellColorByFeaturesReply.max_vmax', index=4,
       number=5, type=2, cpp_type=6, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cellIndices', full_name='scope.CellColorByFeaturesReply.cellIndices', index=5,
+      name='cell_indices', full_name='scope.CellColorByFeaturesReply.cell_indices', index=5,
       number=6, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -270,8 +270,8 @@ _CELLCOLORBYFEATURESREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=365,
-  serialized_end=585,
+  serialized_start=373,
+  serialized_end=599,
 )
 
 
@@ -283,7 +283,7 @@ _CELLAUCVALUESBYFEATURESREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='loomFilePath', full_name='scope.CellAUCValuesByFeaturesRequest.loomFilePath', index=0,
+      name='loom_file_path', full_name='scope.CellAUCValuesByFeaturesRequest.loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -297,7 +297,7 @@ _CELLAUCVALUESBYFEATURESREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='featureType', full_name='scope.CellAUCValuesByFeaturesRequest.featureType', index=2,
+      name='feature_type', full_name='scope.CellAUCValuesByFeaturesRequest.feature_type', index=2,
       number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -315,8 +315,8 @@ _CELLAUCVALUESBYFEATURESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=587,
-  serialized_end=679,
+  serialized_start=601,
+  serialized_end=696,
 )
 
 
@@ -346,8 +346,8 @@ _CELLAUCVALUESBYFEATURESREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=681,
-  serialized_end=726,
+  serialized_start=698,
+  serialized_end=743,
 )
 
 
@@ -359,7 +359,7 @@ _FEATUREREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='loomFilePath', full_name='scope.FeatureRequest.loomFilePath', index=0,
+      name='loom_file_path', full_name='scope.FeatureRequest.loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -384,8 +384,8 @@ _FEATUREREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=728,
-  serialized_end=781,
+  serialized_start=745,
+  serialized_end=800,
 )
 
 
@@ -397,42 +397,42 @@ _CELLMETADATAREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='loomFilePath', full_name='scope.CellMetaDataRequest.loomFilePath', index=0,
+      name='loom_file_path', full_name='scope.CellMetaDataRequest.loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cellIndices', full_name='scope.CellMetaDataRequest.cellIndices', index=1,
+      name='cell_indices', full_name='scope.CellMetaDataRequest.cell_indices', index=1,
       number=2, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='selectedGenes', full_name='scope.CellMetaDataRequest.selectedGenes', index=2,
+      name='selected_genes', full_name='scope.CellMetaDataRequest.selected_genes', index=2,
       number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hasLogTransform', full_name='scope.CellMetaDataRequest.hasLogTransform', index=3,
+      name='has_log_transform', full_name='scope.CellMetaDataRequest.has_log_transform', index=3,
       number=4, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hasCpmTransform', full_name='scope.CellMetaDataRequest.hasCpmTransform', index=4,
+      name='has_cpm_transform', full_name='scope.CellMetaDataRequest.has_cpm_transform', index=4,
       number=5, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='selectedRegulons', full_name='scope.CellMetaDataRequest.selectedRegulons', index=5,
+      name='selected_regulons', full_name='scope.CellMetaDataRequest.selected_regulons', index=5,
       number=6, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -464,8 +464,8 @@ _CELLMETADATAREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=784,
-  serialized_end=989,
+  serialized_start=803,
+  serialized_end=1017,
 )
 
 
@@ -484,14 +484,14 @@ _FEATUREREPLY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='featureType', full_name='scope.FeatureReply.featureType', index=1,
+      name='feature_type', full_name='scope.FeatureReply.feature_type', index=1,
       number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='featureDescription', full_name='scope.FeatureReply.featureDescription', index=2,
+      name='feature_description', full_name='scope.FeatureReply.feature_description', index=2,
       number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -509,8 +509,8 @@ _FEATUREREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=991,
-  serialized_end=1071,
+  serialized_start=1019,
+  serialized_end=1101,
 )
 
 
@@ -522,14 +522,14 @@ _COORDINATESREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='loomFilePath', full_name='scope.CoordinatesRequest.loomFilePath', index=0,
+      name='loom_file_path', full_name='scope.CoordinatesRequest.loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='coordinatesID', full_name='scope.CoordinatesRequest.coordinatesID', index=1,
+      name='coordinates_id', full_name='scope.CoordinatesRequest.coordinates_id', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -561,8 +561,8 @@ _COORDINATESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1073,
-  serialized_end=1192,
+  serialized_start=1103,
+  serialized_end=1225,
 )
 
 
@@ -588,7 +588,7 @@ _COORDINATESREPLY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cellIndices', full_name='scope.CoordinatesReply.cellIndices', index=2,
+      name='cell_indices', full_name='scope.CoordinatesReply.cell_indices', index=2,
       number=3, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -606,8 +606,8 @@ _COORDINATESREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1194,
-  serialized_end=1255,
+  serialized_start=1227,
+  serialized_end=1289,
 )
 
 
@@ -644,8 +644,8 @@ _ANNOTATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1257,
-  serialized_end=1299,
+  serialized_start=1291,
+  serialized_end=1333,
 )
 
 
@@ -682,8 +682,8 @@ _COORDINATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1301,
-  serialized_end=1335,
+  serialized_start=1335,
+  serialized_end=1369,
 )
 
 
@@ -720,8 +720,8 @@ _EDGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1337,
-  serialized_end=1375,
+  serialized_start=1371,
+  serialized_end=1409,
 )
 
 
@@ -765,8 +765,8 @@ _TRAJECTORY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1377,
-  serialized_end=1472,
+  serialized_start=1411,
+  serialized_end=1506,
 )
 
 
@@ -810,8 +810,8 @@ _EMBEDDING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1474,
-  serialized_end=1550,
+  serialized_start=1508,
+  serialized_end=1584,
 )
 
 
@@ -855,8 +855,8 @@ _CLUSTERMARKERMETRIC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1552,
-  serialized_end=1626,
+  serialized_start=1586,
+  serialized_end=1660,
 )
 
 
@@ -893,8 +893,8 @@ _CLUSTERANNOTATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1628,
-  serialized_end=1680,
+  serialized_start=1662,
+  serialized_end=1714,
 )
 
 
@@ -927,7 +927,7 @@ _CLUSTERING = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='clusterMarkerMetrics', full_name='scope.Clustering.clusterMarkerMetrics', index=3,
+      name='cluster_marker_metrics', full_name='scope.Clustering.cluster_marker_metrics', index=3,
       number=4, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -952,8 +952,8 @@ _CLUSTERING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1683,
-  serialized_end=1838,
+  serialized_start=1717,
+  serialized_end=1874,
 )
 
 
@@ -997,8 +997,8 @@ _CELLMETADATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1841,
-  serialized_end=1973,
+  serialized_start=1877,
+  serialized_end=2009,
 )
 
 
@@ -1035,8 +1035,8 @@ _AUCTHRESHOLD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1975,
-  serialized_end=2022,
+  serialized_start=2011,
+  serialized_end=2058,
 )
 
 
@@ -1055,21 +1055,21 @@ _REGULON = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='autoThresholds', full_name='scope.Regulon.autoThresholds', index=1,
+      name='auto_thresholds', full_name='scope.Regulon.auto_thresholds', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='defaultThreshold', full_name='scope.Regulon.defaultThreshold', index=2,
+      name='default_threshold', full_name='scope.Regulon.default_threshold', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='motifName', full_name='scope.Regulon.motifName', index=3,
+      name='motif_name', full_name='scope.Regulon.motif_name', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1087,8 +1087,8 @@ _REGULON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2024,
-  serialized_end=2138,
+  serialized_start=2060,
+  serialized_end=2177,
 )
 
 
@@ -1100,35 +1100,35 @@ _FILEMETADATA = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='hasRegulonsAUC', full_name='scope.FileMetaData.hasRegulonsAUC', index=0,
+      name='has_regulons_auc', full_name='scope.FileMetaData.has_regulons_auc', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hasGeneSets', full_name='scope.FileMetaData.hasGeneSets', index=1,
+      name='has_gene_sets', full_name='scope.FileMetaData.has_gene_sets', index=1,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hasClusterings', full_name='scope.FileMetaData.hasClusterings', index=2,
+      name='has_clusterings', full_name='scope.FileMetaData.has_clusterings', index=2,
       number=3, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hasExtraEmbeddings', full_name='scope.FileMetaData.hasExtraEmbeddings', index=3,
+      name='has_extra_embeddings', full_name='scope.FileMetaData.has_extra_embeddings', index=3,
       number=4, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hasGlobalMeta', full_name='scope.FileMetaData.hasGlobalMeta', index=4,
+      name='has_global_meta', full_name='scope.FileMetaData.has_global_meta', index=4,
       number=5, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -1146,8 +1146,8 @@ _FILEMETADATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2141,
-  serialized_end=2275,
+  serialized_start=2180,
+  serialized_end=2323,
 )
 
 
@@ -1177,8 +1177,8 @@ _FEATUREVALUES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2277,
-  serialized_end=2310,
+  serialized_start=2325,
+  serialized_end=2358,
 )
 
 
@@ -1208,8 +1208,8 @@ _CELLANNOTATIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2312,
-  serialized_end=2350,
+  serialized_start=2360,
+  serialized_end=2398,
 )
 
 
@@ -1239,8 +1239,8 @@ _CELLCLUSTERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2352,
-  serialized_end=2384,
+  serialized_start=2400,
+  serialized_end=2432,
 )
 
 
@@ -1252,21 +1252,21 @@ _CELLMETADATAREPLY = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='clusterIDs', full_name='scope.CellMetaDataReply.clusterIDs', index=0,
+      name='cluster_ids', full_name='scope.CellMetaDataReply.cluster_ids', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='geneExpression', full_name='scope.CellMetaDataReply.geneExpression', index=1,
+      name='gene_expression', full_name='scope.CellMetaDataReply.gene_expression', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='aucValues', full_name='scope.CellMetaDataReply.aucValues', index=2,
+      name='auc_values', full_name='scope.CellMetaDataReply.auc_values', index=2,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1291,8 +1291,8 @@ _CELLMETADATAREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2387,
-  serialized_end=2579,
+  serialized_start=2435,
+  serialized_end=2630,
 )
 
 
@@ -1304,7 +1304,7 @@ _REGULONMETADATAREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='loomFilePath', full_name='scope.RegulonMetaDataRequest.loomFilePath', index=0,
+      name='loom_file_path', full_name='scope.RegulonMetaDataRequest.loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1329,8 +1329,8 @@ _REGULONMETADATAREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2581,
-  serialized_end=2644,
+  serialized_start=2632,
+  serialized_end=2697,
 )
 
 
@@ -1342,7 +1342,7 @@ _REGULONMETADATAREPLY = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='regulonMeta', full_name='scope.RegulonMetaDataReply.regulonMeta', index=0,
+      name='regulon_meta', full_name='scope.RegulonMetaDataReply.regulon_meta', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -1360,8 +1360,8 @@ _REGULONMETADATAREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2646,
-  serialized_end=2705,
+  serialized_start=2699,
+  serialized_end=2759,
 )
 
 
@@ -1373,21 +1373,21 @@ _MARKERGENESREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='loomFilePath', full_name='scope.MarkerGenesRequest.loomFilePath', index=0,
+      name='loom_file_path', full_name='scope.MarkerGenesRequest.loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='clusteringID', full_name='scope.MarkerGenesRequest.clusteringID', index=1,
+      name='clustering_id', full_name='scope.MarkerGenesRequest.clustering_id', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='clusterID', full_name='scope.MarkerGenesRequest.clusterID', index=2,
+      name='cluster_id', full_name='scope.MarkerGenesRequest.cluster_id', index=2,
       number=3, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -1405,8 +1405,8 @@ _MARKERGENESREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2707,
-  serialized_end=2790,
+  serialized_start=2761,
+  serialized_end=2848,
 )
 
 
@@ -1457,8 +1457,8 @@ _MARKERGENESMETRIC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2792,
-  serialized_end=2880,
+  serialized_start=2850,
+  serialized_end=2938,
 )
 
 
@@ -1495,8 +1495,8 @@ _MARKERGENESREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2882,
-  serialized_end=2958,
+  serialized_start=2940,
+  serialized_end=3016,
 )
 
 
@@ -1508,7 +1508,7 @@ _MYLOOMSREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='UUID', full_name='scope.MyLoomsRequest.UUID', index=0,
+      name='uuid', full_name='scope.MyLoomsRequest.uuid', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1526,8 +1526,8 @@ _MYLOOMSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2960,
-  serialized_end=2990,
+  serialized_start=3018,
+  serialized_end=3048,
 )
 
 
@@ -1539,21 +1539,21 @@ _LOOMHEIERARCHY = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='L1', full_name='scope.LoomHeierarchy.L1', index=0,
+      name='l1', full_name='scope.LoomHeierarchy.l1', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='L2', full_name='scope.LoomHeierarchy.L2', index=1,
+      name='l2', full_name='scope.LoomHeierarchy.l2', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='L3', full_name='scope.LoomHeierarchy.L3', index=2,
+      name='l3', full_name='scope.LoomHeierarchy.l3', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1571,8 +1571,8 @@ _LOOMHEIERARCHY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2992,
-  serialized_end=3044,
+  serialized_start=3050,
+  serialized_end=3102,
 )
 
 
@@ -1584,42 +1584,42 @@ _MYLOOM = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='loomFilePath', full_name='scope.MyLoom.loomFilePath', index=0,
+      name='loom_file_path', full_name='scope.MyLoom.loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='loomDisplayName', full_name='scope.MyLoom.loomDisplayName', index=1,
+      name='loom_display_name', full_name='scope.MyLoom.loom_display_name', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='loomSize', full_name='scope.MyLoom.loomSize', index=2,
+      name='loom_size', full_name='scope.MyLoom.loom_size', index=2,
       number=3, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cellMetaData', full_name='scope.MyLoom.cellMetaData', index=3,
+      name='cell_meta_data', full_name='scope.MyLoom.cell_meta_data', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='fileMetaData', full_name='scope.MyLoom.fileMetaData', index=4,
+      name='file_meta_data', full_name='scope.MyLoom.file_meta_data', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='loomHeierarchy', full_name='scope.MyLoom.loomHeierarchy', index=5,
+      name='loom_hierarchy', full_name='scope.MyLoom.loom_hierarchy', index=5,
       number=6, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -1637,8 +1637,8 @@ _MYLOOM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3047,
-  serialized_end=3253,
+  serialized_start=3105,
+  serialized_end=3320,
 )
 
 
@@ -1650,7 +1650,7 @@ _MYLOOMSREPLY = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='myLooms', full_name='scope.MyLoomsReply.myLooms', index=0,
+      name='my_looms', full_name='scope.MyLoomsReply.my_looms', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1668,8 +1668,8 @@ _MYLOOMSREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3255,
-  serialized_end=3301,
+  serialized_start=3322,
+  serialized_end=3369,
 )
 
 
@@ -1681,21 +1681,21 @@ _TRANSLATELASSOSELECTIONREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='srcLoomFilePath', full_name='scope.TranslateLassoSelectionRequest.srcLoomFilePath', index=0,
+      name='src_loom_file_path', full_name='scope.TranslateLassoSelectionRequest.src_loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='destLoomFilePath', full_name='scope.TranslateLassoSelectionRequest.destLoomFilePath', index=1,
+      name='dest_loom_file_path', full_name='scope.TranslateLassoSelectionRequest.dest_loom_file_path', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cellIndices', full_name='scope.TranslateLassoSelectionRequest.cellIndices', index=2,
+      name='cell_indices', full_name='scope.TranslateLassoSelectionRequest.cell_indices', index=2,
       number=3, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1713,8 +1713,8 @@ _TRANSLATELASSOSELECTIONREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3303,
-  serialized_end=3407,
+  serialized_start=3371,
+  serialized_end=3482,
 )
 
 
@@ -1726,7 +1726,7 @@ _TRANSLATELASSOSELECTIONREPLY = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='cellIndices', full_name='scope.TranslateLassoSelectionReply.cellIndices', index=0,
+      name='cell_indices', full_name='scope.TranslateLassoSelectionReply.cell_indices', index=0,
       number=1, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1744,8 +1744,8 @@ _TRANSLATELASSOSELECTIONREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3409,
-  serialized_end=3460,
+  serialized_start=3484,
+  serialized_end=3536,
 )
 
 
@@ -1757,14 +1757,14 @@ _CELLIDSREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='loomFilePath', full_name='scope.CellIDsRequest.loomFilePath', index=0,
+      name='loom_file_path', full_name='scope.CellIDsRequest.loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cellIndices', full_name='scope.CellIDsRequest.cellIndices', index=1,
+      name='cell_indices', full_name='scope.CellIDsRequest.cell_indices', index=1,
       number=2, type=5, cpp_type=1, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1782,8 +1782,8 @@ _CELLIDSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3462,
-  serialized_end=3521,
+  serialized_start=3538,
+  serialized_end=3600,
 )
 
 
@@ -1795,7 +1795,7 @@ _CELLIDSREPLY = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='cellIds', full_name='scope.CellIDsReply.cellIds', index=0,
+      name='cell_ids', full_name='scope.CellIDsReply.cell_ids', index=0,
       number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1813,8 +1813,8 @@ _CELLIDSREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3523,
-  serialized_end=3554,
+  serialized_start=3602,
+  serialized_end=3634,
 )
 
 
@@ -1826,14 +1826,14 @@ _GENESETENRICHMENTREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='loomFilePath', full_name='scope.GeneSetEnrichmentRequest.loomFilePath', index=0,
+      name='loom_file_path', full_name='scope.GeneSetEnrichmentRequest.loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='geneSetFilePath', full_name='scope.GeneSetEnrichmentRequest.geneSetFilePath', index=1,
+      name='gene_set_file_path', full_name='scope.GeneSetEnrichmentRequest.gene_set_file_path', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -1858,8 +1858,8 @@ _GENESETENRICHMENTREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3556,
-  serialized_end=3645,
+  serialized_start=3636,
+  serialized_end=3730,
 )
 
 
@@ -1896,8 +1896,8 @@ _PROGRESS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3647,
-  serialized_end=3688,
+  serialized_start=3732,
+  serialized_end=3773,
 )
 
 
@@ -1916,14 +1916,14 @@ _GENESETENRICHMENTREPLY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='isDone', full_name='scope.GeneSetEnrichmentReply.isDone', index=1,
+      name='is_done', full_name='scope.GeneSetEnrichmentReply.is_done', index=1,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='cellValues', full_name='scope.GeneSetEnrichmentReply.cellValues', index=2,
+      name='cell_values', full_name='scope.GeneSetEnrichmentReply.cell_values', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -1941,8 +1941,8 @@ _GENESETENRICHMENTREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3691,
-  serialized_end=3819,
+  serialized_start=3776,
+  serialized_end=3906,
 )
 
 
@@ -1954,7 +1954,7 @@ _VMAXREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='loomFilePath', full_name='scope.VmaxRequest.loomFilePath', index=0,
+      name='loom_file_path', full_name='scope.VmaxRequest.loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -1968,21 +1968,21 @@ _VMAXREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='featureType', full_name='scope.VmaxRequest.featureType', index=2,
+      name='feature_type', full_name='scope.VmaxRequest.feature_type', index=2,
       number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hasLogTransform', full_name='scope.VmaxRequest.hasLogTransform', index=3,
+      name='has_log_transform', full_name='scope.VmaxRequest.has_log_transform', index=3,
       number=4, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='hasCpmTransform', full_name='scope.VmaxRequest.hasCpmTransform', index=4,
+      name='has_cpm_transform', full_name='scope.VmaxRequest.has_cpm_transform', index=4,
       number=5, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -2000,8 +2000,8 @@ _VMAXREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3821,
-  serialized_end=3944,
+  serialized_start=3909,
+  serialized_end=4039,
 )
 
 
@@ -2020,7 +2020,7 @@ _VMAXREPLY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='maxVmax', full_name='scope.VmaxReply.maxVmax', index=1,
+      name='max_vmax', full_name='scope.VmaxReply.max_vmax', index=1,
       number=2, type=2, cpp_type=6, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -2038,8 +2038,8 @@ _VMAXREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3946,
-  serialized_end=3988,
+  serialized_start=4041,
+  serialized_end=4084,
 )
 
 
@@ -2069,8 +2069,8 @@ _UUIDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3990,
-  serialized_end=4015,
+  serialized_start=4086,
+  serialized_end=4111,
 )
 
 
@@ -2100,8 +2100,8 @@ _UUIDREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4017,
-  serialized_end=4042,
+  serialized_start=4113,
+  serialized_end=4138,
 )
 
 
@@ -2120,14 +2120,14 @@ _REMAININGUUIDTIMEREQUEST = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='UUID', full_name='scope.RemainingUUIDTimeRequest.UUID', index=1,
+      name='uuid', full_name='scope.RemainingUUIDTimeRequest.uuid', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='mouseEvents', full_name='scope.RemainingUUIDTimeRequest.mouseEvents', index=2,
+      name='mouse_events', full_name='scope.RemainingUUIDTimeRequest.mouse_events', index=2,
       number=3, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -2145,8 +2145,8 @@ _REMAININGUUIDTIMEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4044,
-  serialized_end=4117,
+  serialized_start=4140,
+  serialized_end=4214,
 )
 
 
@@ -2165,14 +2165,14 @@ _REMAININGUUIDTIMEREPLY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='timeRemaining', full_name='scope.RemainingUUIDTimeReply.timeRemaining', index=1,
+      name='time_remaining', full_name='scope.RemainingUUIDTimeReply.time_remaining', index=1,
       number=2, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='sessionsLimitReached', full_name='scope.RemainingUUIDTimeReply.sessionsLimitReached', index=2,
+      name='sessions_limit_Reached', full_name='scope.RemainingUUIDTimeReply.sessions_limit_Reached', index=2,
       number=3, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -2190,8 +2190,8 @@ _REMAININGUUIDTIMEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4119,
-  serialized_end=4210,
+  serialized_start=4216,
+  serialized_end=4310,
 )
 
 
@@ -2203,7 +2203,7 @@ _LOOMUPLOADEDREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='UUID', full_name='scope.LoomUploadedRequest.UUID', index=0,
+      name='uuid', full_name='scope.LoomUploadedRequest.uuid', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -2228,8 +2228,8 @@ _LOOMUPLOADEDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4212,
-  serialized_end=4265,
+  serialized_start=4312,
+  serialized_end=4365,
 )
 
 
@@ -2252,8 +2252,8 @@ _LOOMUPLOADEDREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4267,
-  serialized_end=4286,
+  serialized_start=4367,
+  serialized_end=4386,
 )
 
 
@@ -2265,14 +2265,14 @@ _MYGENESET = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='geneSetFilePath', full_name='scope.MyGeneSet.geneSetFilePath', index=0,
+      name='gene_set_file_path', full_name='scope.MyGeneSet.gene_set_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='geneSetDisplayName', full_name='scope.MyGeneSet.geneSetDisplayName', index=1,
+      name='gene_set_display_name', full_name='scope.MyGeneSet.gene_set_display_name', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -2290,8 +2290,8 @@ _MYGENESET = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4288,
-  serialized_end=4352,
+  serialized_start=4388,
+  serialized_end=4458,
 )
 
 
@@ -2303,7 +2303,7 @@ _MYGENESETSREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='UUID', full_name='scope.MyGeneSetsRequest.UUID', index=0,
+      name='uuid', full_name='scope.MyGeneSetsRequest.uuid', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -2321,8 +2321,8 @@ _MYGENESETSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4354,
-  serialized_end=4387,
+  serialized_start=4460,
+  serialized_end=4493,
 )
 
 
@@ -2334,7 +2334,7 @@ _MYGENESETSREPLY = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='myGeneSets', full_name='scope.MyGeneSetsReply.myGeneSets', index=0,
+      name='my_gene_sets', full_name='scope.MyGeneSetsReply.my_gene_sets', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -2352,8 +2352,8 @@ _MYGENESETSREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4389,
-  serialized_end=4444,
+  serialized_start=4495,
+  serialized_end=4552,
 )
 
 
@@ -2365,21 +2365,21 @@ _DELETEUSERFILEREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='UUID', full_name='scope.DeleteUserFileRequest.UUID', index=0,
+      name='uuid', full_name='scope.DeleteUserFileRequest.uuid', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='filePath', full_name='scope.DeleteUserFileRequest.filePath', index=1,
+      name='file_path', full_name='scope.DeleteUserFileRequest.file_path', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='fileType', full_name='scope.DeleteUserFileRequest.fileType', index=2,
+      name='file_type', full_name='scope.DeleteUserFileRequest.file_type', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -2397,8 +2397,8 @@ _DELETEUSERFILEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4446,
-  serialized_end=4519,
+  serialized_start=4554,
+  serialized_end=4629,
 )
 
 
@@ -2410,7 +2410,7 @@ _DELETEUSERFILEREPLY = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='deletedSuccessfully', full_name='scope.DeleteUserFileReply.deletedSuccessfully', index=0,
+      name='deleted_successfully', full_name='scope.DeleteUserFileReply.deleted_successfully', index=0,
       number=1, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -2428,8 +2428,8 @@ _DELETEUSERFILEREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4521,
-  serialized_end=4571,
+  serialized_start=4631,
+  serialized_end=4682,
 )
 
 
@@ -2441,28 +2441,28 @@ _DOWNLOADSUBLOOMREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='loomFilePath', full_name='scope.DownloadSubLoomRequest.loomFilePath', index=0,
+      name='loom_file_path', full_name='scope.DownloadSubLoomRequest.loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='featureType', full_name='scope.DownloadSubLoomRequest.featureType', index=1,
+      name='feature_type', full_name='scope.DownloadSubLoomRequest.feature_type', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='featureName', full_name='scope.DownloadSubLoomRequest.featureName', index=2,
+      name='feature_name', full_name='scope.DownloadSubLoomRequest.feature_name', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='featureValue', full_name='scope.DownloadSubLoomRequest.featureValue', index=3,
+      name='feature_value', full_name='scope.DownloadSubLoomRequest.feature_value', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -2487,8 +2487,8 @@ _DOWNLOADSUBLOOMREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4574,
-  serialized_end=4702,
+  serialized_start=4685,
+  serialized_end=4818,
 )
 
 
@@ -2500,14 +2500,14 @@ _DOWNLOADSUBLOOMREPLY = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='loomFilePath', full_name='scope.DownloadSubLoomReply.loomFilePath', index=0,
+      name='loom_file_path', full_name='scope.DownloadSubLoomReply.loom_file_path', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='loomFileSize', full_name='scope.DownloadSubLoomReply.loomFileSize', index=1,
+      name='loom_file_size', full_name='scope.DownloadSubLoomReply.loom_file_size', index=1,
       number=2, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -2521,7 +2521,7 @@ _DOWNLOADSUBLOOMREPLY = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='isDone', full_name='scope.DownloadSubLoomReply.isDone', index=3,
+      name='is_done', full_name='scope.DownloadSubLoomReply.is_done', index=3,
       number=4, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -2546,8 +2546,8 @@ _DOWNLOADSUBLOOMREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4705,
-  serialized_end=4856,
+  serialized_start=4821,
+  serialized_end=4977,
 )
 
 _CELLCOLORBYFEATURESREQUEST.fields_by_name['annotation'].message_type = _ANNOTATION
@@ -2557,25 +2557,25 @@ _COORDINATESREQUEST.fields_by_name['annotation'].message_type = _ANNOTATION
 _TRAJECTORY.fields_by_name['edges'].message_type = _EDGE
 _TRAJECTORY.fields_by_name['coordinates'].message_type = _COORDINATE
 _EMBEDDING.fields_by_name['trajectory'].message_type = _TRAJECTORY
-_CLUSTERING.fields_by_name['clusterMarkerMetrics'].message_type = _CLUSTERMARKERMETRIC
+_CLUSTERING.fields_by_name['cluster_marker_metrics'].message_type = _CLUSTERMARKERMETRIC
 _CLUSTERING.fields_by_name['clusters'].message_type = _CLUSTERANNOTATION
 _CELLMETADATA.fields_by_name['annotations'].message_type = _ANNOTATION
 _CELLMETADATA.fields_by_name['embeddings'].message_type = _EMBEDDING
 _CELLMETADATA.fields_by_name['clusterings'].message_type = _CLUSTERING
-_REGULON.fields_by_name['autoThresholds'].message_type = _AUCTHRESHOLD
-_CELLMETADATAREPLY.fields_by_name['clusterIDs'].message_type = _CELLCLUSTERS
-_CELLMETADATAREPLY.fields_by_name['geneExpression'].message_type = _FEATUREVALUES
-_CELLMETADATAREPLY.fields_by_name['aucValues'].message_type = _FEATUREVALUES
+_REGULON.fields_by_name['auto_thresholds'].message_type = _AUCTHRESHOLD
+_CELLMETADATAREPLY.fields_by_name['cluster_ids'].message_type = _CELLCLUSTERS
+_CELLMETADATAREPLY.fields_by_name['gene_expression'].message_type = _FEATUREVALUES
+_CELLMETADATAREPLY.fields_by_name['auc_values'].message_type = _FEATUREVALUES
 _CELLMETADATAREPLY.fields_by_name['annotations'].message_type = _CELLANNOTATIONS
-_REGULONMETADATAREPLY.fields_by_name['regulonMeta'].message_type = _REGULON
+_REGULONMETADATAREPLY.fields_by_name['regulon_meta'].message_type = _REGULON
 _MARKERGENESREPLY.fields_by_name['metrics'].message_type = _MARKERGENESMETRIC
-_MYLOOM.fields_by_name['cellMetaData'].message_type = _CELLMETADATA
-_MYLOOM.fields_by_name['fileMetaData'].message_type = _FILEMETADATA
-_MYLOOM.fields_by_name['loomHeierarchy'].message_type = _LOOMHEIERARCHY
-_MYLOOMSREPLY.fields_by_name['myLooms'].message_type = _MYLOOM
+_MYLOOM.fields_by_name['cell_meta_data'].message_type = _CELLMETADATA
+_MYLOOM.fields_by_name['file_meta_data'].message_type = _FILEMETADATA
+_MYLOOM.fields_by_name['loom_hierarchy'].message_type = _LOOMHEIERARCHY
+_MYLOOMSREPLY.fields_by_name['my_looms'].message_type = _MYLOOM
 _GENESETENRICHMENTREPLY.fields_by_name['progress'].message_type = _PROGRESS
-_GENESETENRICHMENTREPLY.fields_by_name['cellValues'].message_type = _CELLCOLORBYFEATURESREPLY
-_MYGENESETSREPLY.fields_by_name['myGeneSets'].message_type = _MYGENESET
+_GENESETENRICHMENTREPLY.fields_by_name['cell_values'].message_type = _CELLCOLORBYFEATURESREPLY
+_MYGENESETSREPLY.fields_by_name['my_gene_sets'].message_type = _MYGENESET
 _DOWNLOADSUBLOOMREPLY.fields_by_name['progress'].message_type = _PROGRESS
 _DOWNLOADSUBLOOMREPLY.fields_by_name['error'].message_type = _ERRORREPLY
 DESCRIPTOR.message_types_by_name['ErrorReply'] = _ERRORREPLY
@@ -3052,8 +3052,8 @@ _MAIN = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=4859,
-  serialized_end=6243,
+  serialized_start=4980,
+  serialized_end=6364,
   methods=[
   _descriptor.MethodDescriptor(
     name='getCellColorByFeatures',

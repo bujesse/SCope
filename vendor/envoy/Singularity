@@ -1,0 +1,8 @@
+Bootstrap: docker
+From: envoyproxy/envoy:latest
+
+%files
+    ./envoy.yaml /etc/envoy/envoy.yaml
+
+%runscript
+    /usr/local/bin/envoy -c /etc/envoy/envoy.yaml

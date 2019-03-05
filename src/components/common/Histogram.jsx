@@ -6,6 +6,8 @@ import Slider from 'rc-slider';
 import { BackendAPI } from './API'; 
 import ReactGA from 'react-ga';
 
+const { CellColorByFeaturesRequest } = require('../../../bin/s_pb.js');
+
 const Handle = Slider.Handle;
 
 export default class Histogram extends Component {
@@ -90,25 +92,27 @@ export default class Histogram extends Component {
 
 	getCellAUCValues(feature, loomFile) {
 		if (!feature || (feature.feature.length == 0)) return this.renderAUCGraph('', []);
-		let query = {
-			loomFilePath: loomFile,
-			featureType: feature.featureType,
-			feature: feature.feature
-		};
-		BackendAPI.getConnection().then((gbc) => {
-			if (DEBUG) console.log('getCellAUCValuesByFeatures', query);
-			gbc.services.scope.Main.getCellAUCValuesByFeatures(query, (err, response) => {
-				if (DEBUG) console.log('getCellAUCValuesByFeatures', response);
-				if(response !== null) {
-					this.renderAUCGraph(feature, response.value);
-					this.handleThresholdChange(this.props.feature.threshold);
-				} else {
-					this.renderAUCGraph('', [])
-				}
-			});
-		}, () => {
-			BackendAPI.showError();	
-		});
+
+		const req = new CellColorByFeaturesRequest();
+		req.setLoomFilePath(loomFile);
+		req.setFeatureTypeList(feature.featureType)
+		req.setFeatureList(feature.feature)
+
+		if (DEBUG) console.log('getCellAUCValuesByFeatures', req);
+				
+		BackendAPI.getConnection().getCellAUCValuesByFeatures(req, {}, (err, response) => {
+			if(err != null) {
+				BackendAPI.showError();	
+			}
+			if (DEBUG) console.log('getCellAUCValuesByFeatures', response);
+
+			if(response !== null) {
+				this.renderAUCGraph(feature, response.getValueList());
+				this.handleThresholdChange(this.props.feature.threshold);
+			} else {
+				this.renderAUCGraph('', [])
+			}
+		})
 	}
 
 	renderAUCGraph(feature, points) {

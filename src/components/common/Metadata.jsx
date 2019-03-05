@@ -3,6 +3,8 @@ import { Button, Icon, Table, Modal, Dimmer, Loader, Dropdown } from 'semantic-u
 import { BackendAPI } from '../common/API' 
 import ReactGA from 'react-ga';
 
+const { CellIDsRequest, CellMetaDataRequest } = require('../../../bin/s_pb.js');
+
 export default class Metadata extends Component { 
 
 	constructor(props) {
@@ -215,32 +217,40 @@ export default class Metadata extends Component {
 		let loomFilePath = BackendAPI.getActiveLoom();
 		let coordinates = BackendAPI.getActiveCoordinates();
 		const { selectedGenes, selectedRegulons, selectedClusters } = BackendAPI.getParsedFeatures();
-		let query = {
-			loomFilePath: loomFilePath,
-			cellIndices: selections[this.props.selectionId].points,
-			hasLogTransform: settings.hasLogTransform,
-			hasCpmTransform: settings.hasCpmNormalization,
-			selectedGenes: selectedGenes,
-			selectedRegulons: selectedRegulons,
-			clusterings: this.state.clustering != null ? [this.state.clustering] : [],
-			annotations: this.state.annotation != null ? this.state.annotation : []
-		}
-		let queryCells = {
-			loomFilePath: loomFilePath,
-			cellIndices: selections[this.props.selectionId].points,
-		}
-		BackendAPI.getConnection().then((gbc) => {
-			if (DEBUG) console.log('getCellIDs', queryCells);
-			gbc.services.scope.Main.getCellIDs(queryCells, (cellsErr, cellsResponse) => {
-				if (DEBUG) console.log('getCellIDs', cellsResponse);
-				if (DEBUG) console.log('getCellMetaData', query);
-				gbc.services.scope.Main.getCellMetaData(query, (err, response) => {
-					if (DEBUG) console.log('getCellMetaData', response);
-					this.setState({loading: false, metadata: response, selection: selections[this.state.selectionId], cellIDs: cellsResponse.cellIds});
-				});
-			});
-		}, () => {
-			BackendAPI.showError();	
-		});
+
+		const req2 = new CellMetaDataRequest();
+		req2.setLoomFilePath(selections[this.props.selectionId].points);
+		req2.setCellIndices(uuid)
+		req2.setHasLogTransform(settings.hasLogTransform)
+		req2.setHasCpmTransform(settings.hasCpmNormalization)
+		req2.setSelectedGenes(selectedGenes)
+		req2.setSelectedRegulons(selectedRegulons)
+		req2.setClusterings(this.state.clustering != null ? [this.state.clustering] : [])
+		req2.setAnnotations(this.state.annotation != null ? this.state.annotation : [])
+
+		const req = new CellIDsRequest();
+		req.setLoomFilePath(loomFilePath);
+		req.setCellIndices(selections[this.props.selectionId].points)
+
+		if (DEBUG) console.log('getCellIDs', req);
+				
+		BackendAPI.getConnection().getCellIDs(req, {}, (err, response) => {
+			if(err != null) {
+				BackendAPI.showError();	
+			}
+			if (DEBUG) console.log('getCellIDs', response);
+
+			if (response !== null) {
+				if (DEBUG) console.log('getCellMetaData', req2);
+						
+				BackendAPI.getConnection().getCellMetaData(req2, {}, (err, response2) => {
+					if (DEBUG) console.log('getCellMetaData', response2);
+
+					if (response !== null) {
+						this.setState({loading: false, metadata: response2, selection: selections[this.state.selectionId], cellIDs: response.getCellIdsList()});
+					}
+				})
+			}
+		})
 	}
 }

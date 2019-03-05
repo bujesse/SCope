@@ -44,8 +44,8 @@ class SCopeServer():
 
     def start_scope_server(self):
         self.start_data_server()
-        if self.dev_env and not self.app_mode:
-            self.start_bind_server()
+        # if self.dev_env and not self.app_mode:
+        #     self.start_bind_server()
 
     def wait(self):
         try:
