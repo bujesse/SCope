@@ -330,7 +330,7 @@ class SCope {
             if (process.argv[2] == 'electronTest') {
                 cp.execSync('npm rebuild');
             } else {
-                cp.execSync('cd resources/app && npm install node-pre-gyp && npm rebuild');
+                cp.execSync('cd resources/app && rm package-lock.json && rm opt/scopeserver/bindserver/package-lock.json && npm install node-pre-gyp && npm rebuild');
             }
             fs.writeFile('INSTALLED', '', function (err) {
                 console.log('Successfully installed!');
