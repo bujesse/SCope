@@ -59,4 +59,5 @@ deploy:
   skip_cleanup: true
   on:
     repo: aertslab/SCope
+    all_branches: true
   name: ${RELEASE_NAME}_v${VERSION}_CI
