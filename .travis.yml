@@ -53,8 +53,7 @@ install:
 
 deploy:
   provider: releases
-  api_key:
-    secure: jN77FZYSJ9NlVzJZJ0cbx5JgimMOs1XuYHwoA4xgK/yHjkaxmhzEgGqf6BFKRSQU6WmONeFMTSzHNscwzuf5DtzwWSNnp6Wx+Fpfvjd+gGAp6k34HJ+OqLSxSEVuox5XWTa5w6UOBj7mphIcAtQMBH2gyOfinsNGYOew2vVVrMhk//7fyAN7KNy4umCL3d6uXUWnDSWRvOsUYRQHBIEvQrC6rcqz2HaQgxLrc5y4RsssUvPJpNFxKduuoMbKxc8igSfAFfmFt1o9jnfmR2jrHtsl5MN0IUHMdjn7Iy3Z4NHvCvOI+a+/StOydYml60kvva6zAdvjjLdxyr8lqziixkBhA2Ifiwy+/n/CD8p4LUEfA//bn7i0I4lBrah1sXZbEMxQTOmakrqcKrcOHuXUCESLfFSkraZ+rBKuiBkluoNniai1SAccE5TbM2wqV1zD1ueGywWiqTrsCtjcH0no5ZD6dYjicbQMeAgQbZ65sVtpC2pKx/MYp1FqLo74IAcGDTW/3K9nq6Pc20+GYboUIuTB8uzGNokCvs2lmyBekOKcm/20uhaA0V4F5s1xH87UaFDOXE9FEzFMgJHFh2HY7nNyMeQJhcq4BMZHIjcRVGClVueTzlcVaRfT4J4X8caVBrv3vBeLBaZWCbi+Qa4rt3stLRfCm0tOOq//YdUNuB0=
+  api_key: $GITHUB_TOKEN
   file: "${DEPLOY_FILE}"
   skip_cleanup: true
   on:
