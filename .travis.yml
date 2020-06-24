@@ -2,9 +2,9 @@ language: python
 matrix:
   include:
   - os: linux
-    python: 3.6.5
+    python: 3.7.1
     env:
-    - PYTHON=3.6.5
+    - PYTHON=3.7.1
     - BUILD_NAME=package-linux-x64
     - DEPLOY_FILE="${TRAVIS_BUILD_DIR}/release/SCope-linux-x64.zip"
     - RELEASE_NAME="SCope_Linux_x64"
@@ -14,7 +14,7 @@ matrix:
     osx_image: xcode8
     language: generic
     env:
-    - PYTHON=3.6.5
+    - PYTHON=3.7.1
     - BUILD_NAME=package-macOS-x64
     - DEPLOY_FILE="${TRAVIS_BUILD_DIR}/release/SCope-macOS-x64.dmg"
     - RELEASE_NAME="SCope_macOS_x64"
@@ -26,6 +26,7 @@ before_install:
     export PATH="/Users/travis/.pyenv/shims:${PATH}"; pyenv-virtualenv venv; source
     venv/bin/activate; python --version; wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh
     | bash; source ~/.bashrc; fi
+  - rm package-lock.json opt/scopeserver/bindserver/package-lock.json
   - nvm install 10.3.0
   - nvm use 10.3.0
 install:
