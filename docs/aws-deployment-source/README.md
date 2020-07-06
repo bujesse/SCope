@@ -5,64 +5,74 @@
 1. Create an Amazon AWS account
 2. Connect to you Amazon AWS account, go to Instances (left column) and click **Launch instance**
 3. Select an **Amazon Linux 2** instance
-<br>
+   <br>
 
 ![Step 1](/tutorials/aws-deployment-source/images/scope_aws_deploy_step1.png)
+
 4. Select t2.micro instance type and click **Next: Configure Instance Details**
-<br>
+   <br>
 
 ![Step 2](/tutorials/aws-deployment-source/images/scope_aws_deploy_step2.png)
 <br>
 /!\ This is an EBS storage type i.e.: The local instance store volumes that are available to the instance. **The data in an instance store is not permanent** - it persists only during the lifetime of the instance.
+
 5. Configure instance details and/or click **Next: Add Storage**
-<br>
+   <br>
 
 ![Step 3](/tutorials/aws-deployment-source/images/scope_aws_deploy_step3.png)
+
 6. Type the amount of storage (GiB) you need for this instance and click **Next: Add Tags**
-<br>
+   <br>
 
 ![Step 4](/tutorials/aws-deployment-source/images/scope_aws_deploy_step4.png)
+
 7. Add SCope tag and/or any other tag and click **Next: Create Security Group**
-<br>
+   <br>
 
 ![Step 5](/tutorials/aws-deployment-source/images/scope_aws_deploy_step5.png)
+
 8. Create a security group to control the traffic (e.g.: HTTP inbound connections) of your instance and click **Review and Launch**
-<br>
+   <br>
 
 ![Step 6](/tutorials/aws-deployment-source/images/scope_aws_deploy_step6.png)
 
 Since, I already created a security group, I selected an existing one. For more details about authorizing only specific inbound HTTP (or other protocols) connections to your instance, please read: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/authorizing-access-to-an-instance.html
+
 9. Select **create a new key pair**. Type a name for your key pair. Download it and **store it in a secure and accessible location**. Click on **Launch instances**. You should now be able to see your newly created instance.
 
 ## Connect to AWS instance
 
 Update the permissions of your key pair file:
+
 ```
 chmod 400 [path-to-private-key]
 ```
 
-```[path-to-private-key]``` should be replaced by the local path to the private key (.pem) downloaded in previous step **Create AWS instance**.
+`[path-to-private-key]` should be replaced by the local path to the private key (.pem) downloaded in previous step **Create AWS instance**.
 
-- Without configuring SSH config file:
+-   Without configuring SSH config file:
     1. Open a new terminal and type to connect to your AWS instance:
+
 ```
 ssh -i [path-to-private-key] ec2-user@[public-dns-ipv4]
 ```
 
-```[public-dns-ipv4]``` should be replaced by the value shown in the Public DNS (IPv4) column of your Amazon WS instance.
+`[public-dns-ipv4]` should be replaced by the value shown in the Public DNS (IPv4) column of your Amazon WS instance.
 
 Alternatively, you can also configure your SSH config file:
 
-1. Update your ssh config file (```~/.ssh/config```) by adding the following lines:
+1. Update your ssh config file (`~/.ssh/config`) by adding the following lines:
+
 ```
 Host aws-scope [public-dns-ipv4]
   User ec2-user
   Hostname [public-dns-ipv4]
   Port 22
   IdentityFile [path-to-private-key]
-``` 
+```
 
 2. Open a new terminal and type to connect to your AWS instance:
+
 ```
 ssh aws-scope
 ```
@@ -72,6 +82,7 @@ You can more detailed explanation at https://docs.aws.amazon.com/AWSEC2/latest/U
 ## Install
 
 First and foremost check if your are on a Amazon Linux 2 instance
+
 ```
 cat /etc/system-release
 # Should start with "Amazon Linux 2"
@@ -80,6 +91,7 @@ cat /etc/system-release
 ### Install Apache Web Server
 
 1. Update softwares
+
 ```
 sudo yum update -y
 ```
@@ -94,6 +106,7 @@ sudo yum install -y httpd
 ```
 
 3. Allow the ec2-user account to manipulate files in `/var/www/html` and `/etc/http.d/conf.d`:
+
 ```
 sudo usermod -a -G apache ec2-user
 exit
@@ -109,6 +122,7 @@ find /var/www -type f -exec sudo chmod 0664 {} \;
 ```
 
 4. Start the HTTP Apache Server
+
 ```
 IS_ENABLED=$(sudo systemctl is-enabled httpd)
 if [ "${IS_ENABLED}" = "enabled" ]; then
@@ -129,64 +143,59 @@ sudo systemctl enable httpd
 ### Install SCope
 
 1. Install git
+
 ```
 sudo yum install git
 ```
 
 2. Install node.js
+
 ```
 curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
 sudo yum -y install nodejs
 ```
 
 3. Install development tools
+
 ```
 sudo yum groupinstall "Development tools"
 ```
 
 4. Install tmux
+
 ```
 sudo yum install tmux
 ```
 
 5. Install Miniconda
+
 ```
 wget --content-disposition http://bit.ly/miniconda3
 # Location: ~/.software/miniconda3
 bash Miniconda3-latest-[...].sh
 ```
 
-Don't forget to tell the installer to initialize Miniconda3 by running conda init. 
+Don't forget to tell the installer to initialize Miniconda3 by running conda init.
 Then reload Bashrc using `bash` command.
 
-6. Create conda environment and activate it
+6. Install poetry
+
+In your base or custom Python 3.\* environment from Miniconda, install poetry
+
 ```
-conda create -n scope python=3.6.2
-source activate scope # or conda activate scope if higher version of conda
+pip install poetry
 ```
 
 7. Install SCope
+
 ```
 git clone https://github.com/aertslab/SCope.git
 cd SCope
 npm install
 ```
 
-If the following error is raised when running `scope-server`:
-```
-pkg_resources.ContextualVersionConflict: (dask 1.0.0 (/home/ec2-user/.software/miniconda3/envs/scope/lib/python3.6/site-packages/dask-1.0.0-py3.6.egg), Requirement.parse('dask>=2'), {'distributed'})
-```
-please proceed by running the following lines:
+8. Edit apache/config.json file by updating the value of _publicHostAddress_
 
-```
-pip uninstall distributed
-pip uninstall pyscenic
-pip install distributed==1.21.6
-pip install pyscenic==0.9.5
-```
-
-
-8. Edit apache/config.json file by updating the value of *publicHostAddress*
 ```
 {
     [...],
@@ -194,7 +203,9 @@ pip install pyscenic==0.9.5
     [...]
 }
 ```
+
 With a secure protocol (e.g.: https):
+
 ```
 {
     [...],
@@ -206,10 +217,10 @@ With a secure protocol (e.g.: https):
 }
 ```
 
-
 9. Deploy SCope
 
 If you are deploying SCope on a **t2.micro** (1 GB memory) AWS instance, please consider to run:
+
 ```
 npm run scope-dev-aws
 # Restart Apache Web Server
@@ -217,6 +228,7 @@ sudo systemctl restart httpd
 ```
 
 Otherwise, please run:
+
 ```
 npm run scope-aws
 sudo systemctl restart httpd
