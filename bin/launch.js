@@ -261,15 +261,9 @@ class Launcher {
     }
 
     startSCopeServer() {
-        let scopeStartCmd = 'hypercorn opt/main:scope_api';
-        if (!this.scopeServerActivated) {
-            console.log('SCope Server installed but not activated');
-            scopeStartCmd =
-                'cd opt && poetry shell && cd .. &&' + scopeStartCmd;
-            console.log('Activating and starting SCope Server...');
-        } else {
-            console.log('Starting SCope Server...');
-        }
+        let scopeStartCmd = 'poetry run hypercorn main:scope_api --reload';
+        scopeStartCmd = 'cd opt && ' + scopeStartCmd;
+        console.log('Starting SCope Server...');
         if (isDaemon && !isWin) {
             scopeStartCmd =
                 'tmux new-session -d -s scope-server "' + scopeStartCmd + '"';
