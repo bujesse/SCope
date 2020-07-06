@@ -13,7 +13,7 @@ commandExists('poetry')
     })
     .catch(function () {
         console.error(
-            "The poetry program cannot be found. Installation has aborted. Please install it using 'pip install poetry' and then rerun the installation with 'npm install'.\n"
+            "The poetry program cannot be found. Installation has aborted.\nPlease install it using 'pip install poetry' and then rerun the installation with 'npm install'.\n"
         );
         process.exit(1);
     });
