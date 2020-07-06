@@ -111,20 +111,9 @@ class Launcher {
             exec('cd opt; poetry env list', (error, stdout, stderr) => {
                 if (error) return resolve(false);
                 if (stderr) return resolve(false);
-                if (!this.scopeServerActivated) {
-                    if (stdout.includes('scopeserver')) {
-                        throw new Error(
-                            "SCope Server is installed but not activated. Please activate your 'scope' poetry environment using either 'cd opt; poetry shell; cd ..;' command."
-                        );
-                    } else {
-                        throw new Error(
-                            "SCope Server is not installed. Please install SCope Server using 'npm install'."
-                        );
-                    }
-                } else {
-                    console.log('SCope Server is installed and activated!');
-                    resolve(true);
-                }
+                if (!stdout.includes('scopeserver'))
+                    console.log('SCope Server is not installed!');
+                resolve(true);
             });
         });
     }
