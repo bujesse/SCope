@@ -118,22 +118,8 @@ class Launcher {
         });
     }
 
-    checkSCopeServerCommandExists() {
-        console.log('- Checking SCope Server...');
-        return new Promise((resolve) => {
-            if (!utils._commandExists('scope-server')) {
-                resolve(false);
-            } else {
-                this.scopeServerActivated = true;
-                resolve(true);
-            }
-        });
-    }
-
     checkSCopeServer() {
-        return this.checkSCopeServerCommandExists().then(() =>
-            this.checkSCopePoetryEnvExists()
-        );
+        return this.checkSCopePoetryEnvExists();
     }
 
     checkPoetryExists() {
