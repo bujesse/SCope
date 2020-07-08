@@ -219,21 +219,27 @@ With a secure protocol (e.g.: https):
 }
 ```
 
+where `[public-dns-ipv4]` should match the following pattern `ec2-*.*.compute.amazonaws.com`
+
 9. Deploy SCope
 
-If you are deploying SCope on a **t2.micro** (1 GB memory) AWS instance, please consider to run:
+    1. Development mode
 
-```
-npm run scope-dev-aws
-# Restart Apache Web Server
-sudo systemctl restart httpd
-```
+    For now, please consider to run SCope (in development mode):
 
-Otherwise, please run:
+    ```
+    npm run scope-dev-aws
+    ```
 
-```
-npm run scope-aws
-sudo systemctl restart httpd
-```
+    Restart the Apache web server,
 
-A SCope instance should be running at http://```[public-dns-ipv4]``` or https://```[public-dns-ipv4]``` if secure protocol was used.
+    ```
+    sudo systemctl restart httpd
+    ```
+
+    A SCope instance should be running at http://`[public-dns-ipv4]` or https://`[public-dns-ipv4]` if secure protocol was used.
+
+
+    2. Production mode
+
+    We are experiencing some problems to run SCope in production mode on AWS servers.
