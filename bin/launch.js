@@ -269,8 +269,8 @@ class Launcher {
     init() {
         console.log('--------- running scope ----------');
         console.log('Starting SCope...');
-        return this.startSCopeServer()
-            .then(() => this.startSCopeClient())
+        return this.startSCopeClient()
+            .then(() => this.startSCopeServer())
             .then(() => this.showSCopeInstanceInformation());
     }
 
