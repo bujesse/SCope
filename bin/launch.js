@@ -14,8 +14,7 @@ const figlet = require('figlet');
 const isWin = process.platform === 'win32';
 const isAWS = process.argv.includes('--aws') || false;
 const isDaemon = process.argv.includes('--daemon') || isAWS;
-const isDev =
-    process.argv.includes('--dev') || !process.argv.includes('--prod');
+const isDev = process.argv.includes('--dev') || false;
 
 class Launcher {
     constructor() {
