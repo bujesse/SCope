@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
     package="scope",
     syntax="proto3",
     serialized_options=None,
-    serialized_pb=b'\n\x07s.proto\x12\x05scope"+\n\nErrorReply\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t"\x89\x02\n\x1a\x43\x65llColorByFeaturesRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x0f\n\x07\x66\x65\x61ture\x18\x02 \x03(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x03(\t\x12\x17\n\x0fhasLogTransform\x18\x04 \x01(\x08\x12\x17\n\x0fhasCpmTransform\x18\x05 \x01(\x08\x12\x11\n\tthreshold\x18\x06 \x03(\x02\x12\x18\n\x10scaleThresholded\x18\x07 \x01(\x08\x12%\n\nannotation\x18\x08 \x03(\x0b\x32\x11.scope.Annotation\x12\x0c\n\x04vmax\x18\t \x03(\x02\x12\x0c\n\x04vmin\x18\n \x03(\x02\x12\r\n\x05logic\x18\x0b \x01(\t"-\n\x0b\x43olorLegend\x12\x0e\n\x06values\x18\x01 \x03(\t\x12\x0e\n\x06\x63olors\x18\x02 \x03(\t"\xdc\x01\n\x18\x43\x65llColorByFeaturesReply\x12\x1e\n\x16hasAddCompressionLayer\x18\x01 \x01(\x08\x12\x17\n\x0f\x63ompressedColor\x18\x02 \x01(\x0c\x12\r\n\x05\x63olor\x18\x03 \x03(\t\x12\x0c\n\x04vmax\x18\x04 \x03(\x02\x12\x0f\n\x07maxVmax\x18\x05 \x03(\x02\x12\x13\n\x0b\x63\x65llIndices\x18\x06 \x03(\x05\x12"\n\x06legend\x18\x07 \x01(\x0b\x32\x12.scope.ColorLegend\x12 \n\x05\x65rror\x18\x08 \x01(\x0b\x32\x11.scope.ErrorReply"\\\n\x1e\x43\x65llAUCValuesByFeaturesRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x0f\n\x07\x66\x65\x61ture\x18\x02 \x03(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x03(\t"-\n\x1c\x43\x65llAUCValuesByFeaturesReply\x12\r\n\x05value\x18\x01 \x03(\x02"5\n\x0e\x46\x65\x61tureRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\r\n\x05query\x18\x02 \x01(\t"\xcd\x01\n\x13\x43\x65llMetaDataRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x13\n\x0b\x63\x65llIndices\x18\x02 \x03(\x05\x12\x15\n\rselectedGenes\x18\x03 \x03(\t\x12\x17\n\x0fhasLogTransform\x18\x04 \x01(\x08\x12\x17\n\x0fhasCpmTransform\x18\x05 \x01(\x08\x12\x18\n\x10selectedRegulons\x18\x06 \x03(\t\x12\x13\n\x0b\x63lusterings\x18\x07 \x03(\x05\x12\x13\n\x0b\x61nnotations\x18\x08 \x03(\t"P\n\x0c\x46\x65\x61tureReply\x12\x0f\n\x07\x66\x65\x61ture\x18\x01 \x03(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x02 \x03(\t\x12\x1a\n\x12\x66\x65\x61tureDescription\x18\x03 \x03(\t"w\n\x12\x43oordinatesRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x15\n\rcoordinatesID\x18\x02 \x01(\x05\x12%\n\nannotation\x18\x03 \x03(\x0b\x32\x11.scope.Annotation\x12\r\n\x05logic\x18\x04 \x01(\t"=\n\x10\x43oordinatesReply\x12\t\n\x01x\x18\x01 \x03(\x02\x12\t\n\x01y\x18\x02 \x03(\x02\x12\x13\n\x0b\x63\x65llIndices\x18\x03 \x03(\x05"*\n\nAnnotation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06values\x18\x02 \x03(\t""\n\nCoordinate\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02"&\n\x04\x45\x64ge\x12\x0e\n\x06source\x18\x01 \x01(\t\x12\x0e\n\x06target\x18\x02 \x01(\t"_\n\nTrajectory\x12\r\n\x05nodes\x18\x01 \x03(\t\x12\x1a\n\x05\x65\x64ges\x18\x02 \x03(\x0b\x32\x0b.scope.Edge\x12&\n\x0b\x63oordinates\x18\x03 \x03(\x0b\x32\x11.scope.Coordinate"L\n\tEmbedding\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12%\n\ntrajectory\x18\x03 \x01(\x0b\x32\x11.scope.Trajectory"J\n\x13\x43lusterMarkerMetric\x12\x10\n\x08\x61\x63\x63\x65ssor\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t"\xbf\x01\n\x0e\x43ollabAnnoData\x12\x14\n\x0c\x63urator_name\x18\x01 \x01(\t\x12\x12\n\ncurator_id\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x03\x12\x0e\n\x06obo_id\x18\x04 \x01(\t\x12\x0f\n\x07ols_iri\x18\x05 \x01(\t\x12\x18\n\x10\x61nnotation_label\x18\x06 \x01(\t\x12\x0f\n\x07markers\x18\x07 \x03(\t\x12\x13\n\x0bpublication\x18\x08 \x01(\t\x12\x0f\n\x07\x63omment\x18\t \x01(\t"K\n\x0f\x43ollabAnnoVoter\x12\x12\n\nvoter_name\x18\x01 \x01(\t\x12\x10\n\x08voter_id\x18\x02 \x01(\t\x12\x12\n\nvoter_hash\x18\x03 \x01(\x08"H\n\x0f\x43ollabAnnoVotes\x12\r\n\x05total\x18\x01 \x01(\x05\x12&\n\x06voters\x18\x02 \x03(\x0b\x32\x16.scope.CollabAnnoVoter"\xaa\x01\n\x12\x43\x65llTypeAnnotation\x12#\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x15.scope.CollabAnnoData\x12\x15\n\rvalidate_hash\x18\x02 \x01(\x08\x12)\n\tvotes_for\x18\x03 \x01(\x0b\x32\x16.scope.CollabAnnoVotes\x12-\n\rvotes_against\x18\x04 \x01(\x0b\x32\x16.scope.CollabAnnoVotes"m\n\x11\x43lusterAnnotation\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x37\n\x14\x63\x65ll_type_annotation\x18\x03 \x03(\x0b\x32\x19.scope.CellTypeAnnotation"\x9b\x01\n\nClustering\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05group\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x38\n\x14\x63lusterMarkerMetrics\x18\x04 \x03(\x0b\x32\x1a.scope.ClusterMarkerMetric\x12*\n\x08\x63lusters\x18\x05 \x03(\x0b\x32\x18.scope.ClusterAnnotation"\x84\x01\n\x0c\x43\x65llMetaData\x12&\n\x0b\x61nnotations\x18\x01 \x03(\x0b\x32\x11.scope.Annotation\x12$\n\nembeddings\x18\x02 \x03(\x0b\x32\x10.scope.Embedding\x12&\n\x0b\x63lusterings\x18\x03 \x03(\x0b\x32\x11.scope.Clustering"/\n\x0c\x41UCThreshold\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x11\n\tthreshold\x18\x02 \x01(\x02"Y\n\x12RegulonGenesMetric\x12\x10\n\x08\x61\x63\x63\x65ssor\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0e\n\x06values\x18\x04 \x03(\x02"\x9e\x01\n\x07Regulon\x12\r\n\x05genes\x18\x01 \x03(\t\x12+\n\x0e\x61utoThresholds\x18\x02 \x03(\x0b\x32\x13.scope.AUCThreshold\x12\x18\n\x10\x64\x65\x66\x61ultThreshold\x18\x03 \x01(\t\x12\x11\n\tmotifName\x18\x04 \x01(\t\x12*\n\x07metrics\x18\x05 \x03(\x0b\x32\x19.scope.RegulonGenesMetric"\x97\x01\n\x0c\x46ileMetaData\x12\x16\n\x0ehasRegulonsAUC\x18\x01 \x01(\x08\x12\x13\n\x0bhasGeneSets\x18\x02 \x01(\x08\x12\x16\n\x0ehasClusterings\x18\x03 \x01(\x08\x12\x1a\n\x12hasExtraEmbeddings\x18\x04 \x01(\x08\x12\x15\n\rhasGlobalMeta\x18\x05 \x01(\x08\x12\x0f\n\x07species\x18\x06 \x01(\t"!\n\rFeatureValues\x12\x10\n\x08\x66\x65\x61tures\x18\x01 \x03(\x02"&\n\x0f\x43\x65llAnnotations\x12\x13\n\x0b\x61nnotations\x18\x01 \x03(\t" \n\x0c\x43\x65llClusters\x12\x10\n\x08\x63lusters\x18\x01 \x03(\x05"\xc0\x01\n\x11\x43\x65llMetaDataReply\x12\'\n\nclusterIDs\x18\x01 \x03(\x0b\x32\x13.scope.CellClusters\x12,\n\x0egeneExpression\x18\x02 \x03(\x0b\x32\x14.scope.FeatureValues\x12\'\n\taucValues\x18\x03 \x03(\x0b\x32\x14.scope.FeatureValues\x12+\n\x0b\x61nnotations\x18\x04 \x03(\x0b\x32\x16.scope.CellAnnotations"?\n\x16RegulonMetaDataRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x0f\n\x07regulon\x18\x02 \x01(\t";\n\x14RegulonMetaDataReply\x12#\n\x0bregulonMeta\x18\x01 \x01(\x0b\x32\x0e.scope.Regulon"S\n\x12MarkerGenesRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0c\x63lusteringID\x18\x02 \x01(\x05\x12\x11\n\tclusterID\x18\x03 \x01(\x05"X\n\x11MarkerGenesMetric\x12\x10\n\x08\x61\x63\x63\x65ssor\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0e\n\x06values\x18\x04 \x03(\x02"L\n\x10MarkerGenesReply\x12\r\n\x05genes\x18\x01 \x03(\t\x12)\n\x07metrics\x18\x02 \x03(\x0b\x32\x18.scope.MarkerGenesMetric"0\n\x0eMyLoomsRequest\x12\x0c\n\x04UUID\x18\x01 \x01(\t\x12\x10\n\x08loomFile\x18\x02 \x01(\t"4\n\x0eLoomHeierarchy\x12\n\n\x02L1\x18\x01 \x01(\t\x12\n\n\x02L2\x18\x02 \x01(\t\x12\n\n\x02L3\x18\x03 \x01(\t"\xce\x01\n\x06MyLoom\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x17\n\x0floomDisplayName\x18\x02 \x01(\t\x12\x10\n\x08loomSize\x18\x03 \x01(\x03\x12)\n\x0c\x63\x65llMetaData\x18\x04 \x01(\x0b\x32\x13.scope.CellMetaData\x12)\n\x0c\x66ileMetaData\x18\x05 \x01(\x0b\x32\x13.scope.FileMetaData\x12-\n\x0eloomHeierarchy\x18\x06 \x01(\x0b\x32\x15.scope.LoomHeierarchy">\n\x0cMyLoomsReply\x12\x1e\n\x07myLooms\x18\x01 \x03(\x0b\x32\r.scope.MyLoom\x12\x0e\n\x06update\x18\x02 \x01(\x08"h\n\x1eTranslateLassoSelectionRequest\x12\x17\n\x0fsrcLoomFilePath\x18\x01 \x01(\t\x12\x18\n\x10\x64\x65stLoomFilePath\x18\x02 \x01(\t\x12\x13\n\x0b\x63\x65llIndices\x18\x03 \x03(\x05"3\n\x1cTranslateLassoSelectionReply\x12\x13\n\x0b\x63\x65llIndices\x18\x01 \x03(\x05";\n\x0e\x43\x65llIDsRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x13\n\x0b\x63\x65llIndices\x18\x02 \x03(\x05"\x1f\n\x0c\x43\x65llIDsReply\x12\x0f\n\x07\x63\x65llIds\x18\x01 \x03(\t"Y\n\x18GeneSetEnrichmentRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x17\n\x0fgeneSetFilePath\x18\x02 \x01(\t\x12\x0e\n\x06method\x18\x03 \x01(\t")\n\x08Progress\x12\r\n\x05value\x18\x01 \x01(\x02\x12\x0e\n\x06status\x18\x02 \x01(\t"\x80\x01\n\x16GeneSetEnrichmentReply\x12!\n\x08progress\x18\x01 \x01(\x0b\x32\x0f.scope.Progress\x12\x0e\n\x06isDone\x18\x02 \x01(\x08\x12\x33\n\ncellValues\x18\x03 \x01(\x0b\x32\x1f.scope.CellColorByFeaturesReply"{\n\x0bVmaxRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x03(\t\x12\x0f\n\x07\x66\x65\x61ture\x18\x02 \x03(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x03(\t\x12\x17\n\x0fhasLogTransform\x18\x04 \x01(\x08\x12\x17\n\x0fhasCpmTransform\x18\x05 \x01(\x08"*\n\tVmaxReply\x12\x0c\n\x04vmax\x18\x01 \x03(\x02\x12\x0f\n\x07maxVmax\x18\x02 \x03(\x02"\x19\n\x0bUUIDRequest\x12\n\n\x02ip\x18\x01 \x01(\t"\x19\n\tUUIDReply\x12\x0c\n\x04UUID\x18\x01 \x01(\t"I\n\x18RemainingUUIDTimeRequest\x12\n\n\x02ip\x18\x01 \x01(\t\x12\x0c\n\x04UUID\x18\x02 \x01(\t\x12\x13\n\x0bmouseEvents\x18\x03 \x01(\x03"p\n\x16RemainingUUIDTimeReply\x12\x0c\n\x04UUID\x18\x01 \x01(\t\x12\x15\n\rtimeRemaining\x18\x02 \x01(\x03\x12\x1c\n\x14sessionsLimitReached\x18\x03 \x01(\x08\x12\x13\n\x0bsessionMode\x18\x04 \x01(\t"5\n\x13LoomUploadedRequest\x12\x0c\n\x04UUID\x18\x01 \x01(\t\x12\x10\n\x08\x66ilename\x18\x02 \x01(\t"\x13\n\x11LoomUploadedReply"@\n\tMyGeneSet\x12\x17\n\x0fgeneSetFilePath\x18\x01 \x01(\t\x12\x1a\n\x12geneSetDisplayName\x18\x02 \x01(\t"!\n\x11MyGeneSetsRequest\x12\x0c\n\x04UUID\x18\x01 \x01(\t"7\n\x0fMyGeneSetsReply\x12$\n\nmyGeneSets\x18\x01 \x03(\x0b\x32\x10.scope.MyGeneSet"I\n\x15\x44\x65leteUserFileRequest\x12\x0c\n\x04UUID\x18\x01 \x01(\t\x12\x10\n\x08\x66ilePath\x18\x02 \x01(\t\x12\x10\n\x08\x66ileType\x18\x03 \x01(\t"2\n\x13\x44\x65leteUserFileReply\x12\x1b\n\x13\x64\x65letedSuccessfully\x18\x01 \x01(\x08"\x80\x01\n\x16\x44ownloadSubLoomRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x02 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureName\x18\x03 \x01(\t\x12\x14\n\x0c\x66\x65\x61tureValue\x18\x04 \x01(\t\x12\x10\n\x08operator\x18\x05 \x01(\t"\x97\x01\n\x14\x44ownloadSubLoomReply\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0cloomFileSize\x18\x02 \x01(\x03\x12!\n\x08progress\x18\x03 \x01(\x0b\x32\x0f.scope.Progress\x12\x0e\n\x06isDone\x18\x04 \x01(\x08\x12 \n\x05\x65rror\x18\x05 \x01(\x0b\x32\x11.scope.ErrorReply"n\n\x18SetAnnotationNameRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0c\x63lusteringID\x18\x02 \x01(\x03\x12\x11\n\tclusterID\x18\x03 \x01(\x03\x12\x13\n\x0bnewAnnoName\x18\x04 \x01(\t")\n\x16SetAnnotationNameReply\x12\x0f\n\x07success\x18\x01 \x01(\x08"z\n\x17SetLoomHierarchyRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x17\n\x0fnewHierarchy_L1\x18\x02 \x01(\t\x12\x17\n\x0fnewHierarchy_L2\x18\x03 \x01(\t\x12\x17\n\x0fnewHierarchy_L3\x18\x04 \x01(\t"(\n\x15SetLoomHierarchyReply\x12\x0f\n\x07success\x18\x01 \x01(\x08"$\n\x0fgetORCIDRequest\x12\x11\n\tauth_code\x18\x01 \x01(\t"Z\n\rgetORCIDReply\x12\x18\n\x10orcid_scope_uuid\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x10\n\x08orcid_id\x18\x03 \x01(\t\x12\x0f\n\x07success\x18\x04 \x01(\x08"\x17\n\x15getORCIDStatusRequest"%\n\x13getORCIDStatusReply\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08"I\n\x10orcidInfoMessage\x12\x11\n\torcidName\x18\x01 \x01(\t\x12\x0f\n\x07orcidID\x18\x02 \x01(\t\x12\x11\n\torcidUUID\x18\x03 \x01(\t"\xb3\x01\n\x1dsetColabAnnotationDataRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0c\x63lusteringID\x18\x02 \x01(\x05\x12\x11\n\tclusterID\x18\x03 \x01(\x05\x12*\n\torcidInfo\x18\x04 \x01(\x0b\x32\x17.scope.orcidInfoMessage\x12\'\n\x08\x61nnoData\x18\x05 \x01(\x0b\x32\x15.scope.CollabAnnoData"?\n\x1bsetColabAnnotationDataReply\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t"\xbe\x01\n\x15voteAnnotationRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0c\x63lusteringID\x18\x02 \x01(\x05\x12\x11\n\tclusterID\x18\x03 \x01(\x05\x12*\n\torcidInfo\x18\x04 \x01(\x0b\x32\x17.scope.orcidInfoMessage\x12\'\n\x08\x61nnoData\x18\x05 \x01(\x0b\x32\x15.scope.CollabAnnoData\x12\x11\n\tdirection\x18\x06 \x01(\t"7\n\x13voteAnnotationReply\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t"i\n\x15getNextClusterRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0c\x63lusteringID\x18\x02 \x01(\x05\x12\x11\n\tclusterID\x18\x03 \x01(\x05\x12\x11\n\tdirection\x18\x04 \x01(\t"M\n\x0eNewClusterInfo\x12\x0f\n\x07\x63\x65llIDs\x18\x01 \x03(\t\x12\x12\n\nclusterIDs\x18\x02 \x03(\t\x12\x16\n\x0e\x63lusteringName\x18\x03 \x01(\t"\x87\x01\n\x17\x41\x64\x64NewClusteringRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12*\n\torcidInfo\x18\x02 \x01(\x0b\x32\x17.scope.orcidInfoMessage\x12*\n\x0b\x63lusterInfo\x18\x03 \x01(\x0b\x32\x15.scope.NewClusterInfo"9\n\x15\x41\x64\x64NewClusteringReply\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t2\xec\x0f\n\x04Main\x12^\n\x16getCellColorByFeatures\x12!.scope.CellColorByFeaturesRequest\x1a\x1f.scope.CellColorByFeaturesReply"\x00\x12j\n\x1agetCellAUCValuesByFeatures\x12%.scope.CellAUCValuesByFeaturesRequest\x1a#.scope.CellAUCValuesByFeaturesReply"\x00\x12I\n\x0fgetCellMetaData\x12\x1a.scope.CellMetaDataRequest\x1a\x18.scope.CellMetaDataReply"\x00\x12;\n\x0bgetFeatures\x12\x15.scope.FeatureRequest\x1a\x13.scope.FeatureReply"\x00\x12\x46\n\x0egetCoordinates\x12\x19.scope.CoordinatesRequest\x1a\x17.scope.CoordinatesReply"\x00\x12R\n\x12getRegulonMetaData\x12\x1d.scope.RegulonMetaDataRequest\x1a\x1b.scope.RegulonMetaDataReply"\x00\x12\x46\n\x0egetMarkerGenes\x12\x19.scope.MarkerGenesRequest\x1a\x17.scope.MarkerGenesReply"\x00\x12:\n\ngetMyLooms\x12\x15.scope.MyLoomsRequest\x1a\x13.scope.MyLoomsReply"\x00\x12g\n\x17translateLassoSelection\x12%.scope.TranslateLassoSelectionRequest\x1a#.scope.TranslateLassoSelectionReply"\x00\x12:\n\ngetCellIDs\x12\x15.scope.CellIDsRequest\x1a\x13.scope.CellIDsReply"\x00\x12Y\n\x13\x64oGeneSetEnrichment\x12\x1f.scope.GeneSetEnrichmentRequest\x1a\x1d.scope.GeneSetEnrichmentReply"\x00\x30\x01\x12\x31\n\x07getVmax\x12\x12.scope.VmaxRequest\x1a\x10.scope.VmaxReply"\x00\x12\x31\n\x07getUUID\x12\x12.scope.UUIDRequest\x1a\x10.scope.UUIDReply"\x00\x12X\n\x14getRemainingUUIDTime\x12\x1f.scope.RemainingUUIDTimeRequest\x1a\x1d.scope.RemainingUUIDTimeReply"\x00\x12\x46\n\x0cloomUploaded\x12\x1a.scope.LoomUploadedRequest\x1a\x18.scope.LoomUploadedReply"\x00\x12\x43\n\rgetMyGeneSets\x12\x18.scope.MyGeneSetsRequest\x1a\x16.scope.MyGeneSetsReply"\x00\x12L\n\x0e\x64\x65leteUserFile\x12\x1c.scope.DeleteUserFileRequest\x1a\x1a.scope.DeleteUserFileReply"\x00\x12Q\n\x0f\x64ownloadSubLoom\x12\x1d.scope.DownloadSubLoomRequest\x1a\x1b.scope.DownloadSubLoomReply"\x00\x30\x01\x12U\n\x11setAnnotationName\x12\x1f.scope.SetAnnotationNameRequest\x1a\x1d.scope.SetAnnotationNameReply"\x00\x12R\n\x10setLoomHierarchy\x12\x1e.scope.SetLoomHierarchyRequest\x1a\x1c.scope.SetLoomHierarchyReply"\x00\x12:\n\x08getORCID\x12\x16.scope.getORCIDRequest\x1a\x14.scope.getORCIDReply"\x00\x12L\n\x0egetORCIDStatus\x12\x1c.scope.getORCIDStatusRequest\x1a\x1a.scope.getORCIDStatusReply"\x00\x12\x64\n\x16setColabAnnotationData\x12$.scope.setColabAnnotationDataRequest\x1a".scope.setColabAnnotationDataReply"\x00\x12L\n\x0evoteAnnotation\x12\x1c.scope.voteAnnotationRequest\x1a\x1a.scope.voteAnnotationReply"\x00\x12\x45\n\x0egetNextCluster\x12\x1c.scope.getNextClusterRequest\x1a\x13.scope.FeatureReply"\x00\x12R\n\x10\x61\x64\x64NewClustering\x12\x1e.scope.AddNewClusteringRequest\x1a\x1c.scope.AddNewClusteringReply"\x00\x62\x06proto3',
+    serialized_pb=b'\n\x07s.proto\x12\x05scope"+\n\nErrorReply\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\t"\x89\x02\n\x1a\x43\x65llColorByFeaturesRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x0f\n\x07\x66\x65\x61ture\x18\x02 \x03(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x03(\t\x12\x17\n\x0fhasLogTransform\x18\x04 \x01(\x08\x12\x17\n\x0fhasCpmTransform\x18\x05 \x01(\x08\x12\x11\n\tthreshold\x18\x06 \x03(\x02\x12\x18\n\x10scaleThresholded\x18\x07 \x01(\x08\x12%\n\nannotation\x18\x08 \x03(\x0b\x32\x11.scope.Annotation\x12\x0c\n\x04vmax\x18\t \x03(\x02\x12\x0c\n\x04vmin\x18\n \x03(\x02\x12\r\n\x05logic\x18\x0b \x01(\t"-\n\x0b\x43olorLegend\x12\x0e\n\x06values\x18\x01 \x03(\t\x12\x0e\n\x06\x63olors\x18\x02 \x03(\t"\xdc\x01\n\x18\x43\x65llColorByFeaturesReply\x12\x1e\n\x16hasAddCompressionLayer\x18\x01 \x01(\x08\x12\x17\n\x0f\x63ompressedColor\x18\x02 \x01(\x0c\x12\r\n\x05\x63olor\x18\x03 \x03(\t\x12\x0c\n\x04vmax\x18\x04 \x03(\x02\x12\x0f\n\x07maxVmax\x18\x05 \x03(\x02\x12\x13\n\x0b\x63\x65llIndices\x18\x06 \x03(\x05\x12"\n\x06legend\x18\x07 \x01(\x0b\x32\x12.scope.ColorLegend\x12 \n\x05\x65rror\x18\x08 \x01(\x0b\x32\x11.scope.ErrorReply"\\\n\x1e\x43\x65llAUCValuesByFeaturesRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x0f\n\x07\x66\x65\x61ture\x18\x02 \x03(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x03(\t"-\n\x1c\x43\x65llAUCValuesByFeaturesReply\x12\r\n\x05value\x18\x01 \x03(\x02"E\n\x0e\x46\x65\x61tureRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\r\n\x05query\x18\x02 \x01(\t\x12\x0e\n\x06\x66ilter\x18\x03 \x01(\t"\xcd\x01\n\x13\x43\x65llMetaDataRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x13\n\x0b\x63\x65llIndices\x18\x02 \x03(\x05\x12\x15\n\rselectedGenes\x18\x03 \x03(\t\x12\x17\n\x0fhasLogTransform\x18\x04 \x01(\x08\x12\x17\n\x0fhasCpmTransform\x18\x05 \x01(\x08\x12\x18\n\x10selectedRegulons\x18\x06 \x03(\t\x12\x13\n\x0b\x63lusterings\x18\x07 \x03(\x05\x12\x13\n\x0b\x61nnotations\x18\x08 \x03(\t"|\n\x0c\x46\x65\x61tureReply\x12-\n\x08\x66\x65\x61tures\x18\x01 \x03(\x0b\x32\x1b.scope.FeatureReply.Feature\x1a=\n\x07\x46\x65\x61ture\x12\x0f\n\x07\x66\x65\x61ture\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t"w\n\x12\x43oordinatesRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x15\n\rcoordinatesID\x18\x02 \x01(\x05\x12%\n\nannotation\x18\x03 \x03(\x0b\x32\x11.scope.Annotation\x12\r\n\x05logic\x18\x04 \x01(\t"=\n\x10\x43oordinatesReply\x12\t\n\x01x\x18\x01 \x03(\x02\x12\t\n\x01y\x18\x02 \x03(\x02\x12\x13\n\x0b\x63\x65llIndices\x18\x03 \x03(\x05"*\n\nAnnotation\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x06values\x18\x02 \x03(\t""\n\nCoordinate\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02"&\n\x04\x45\x64ge\x12\x0e\n\x06source\x18\x01 \x01(\t\x12\x0e\n\x06target\x18\x02 \x01(\t"_\n\nTrajectory\x12\r\n\x05nodes\x18\x01 \x03(\t\x12\x1a\n\x05\x65\x64ges\x18\x02 \x03(\x0b\x32\x0b.scope.Edge\x12&\n\x0b\x63oordinates\x18\x03 \x03(\x0b\x32\x11.scope.Coordinate"L\n\tEmbedding\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x0c\n\x04name\x18\x02 \x01(\t\x12%\n\ntrajectory\x18\x03 \x01(\x0b\x32\x11.scope.Trajectory"J\n\x13\x43lusterMarkerMetric\x12\x10\n\x08\x61\x63\x63\x65ssor\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t"\xbf\x01\n\x0e\x43ollabAnnoData\x12\x14\n\x0c\x63urator_name\x18\x01 \x01(\t\x12\x12\n\ncurator_id\x18\x02 \x01(\t\x12\x11\n\ttimestamp\x18\x03 \x01(\x03\x12\x0e\n\x06obo_id\x18\x04 \x01(\t\x12\x0f\n\x07ols_iri\x18\x05 \x01(\t\x12\x18\n\x10\x61nnotation_label\x18\x06 \x01(\t\x12\x0f\n\x07markers\x18\x07 \x03(\t\x12\x13\n\x0bpublication\x18\x08 \x01(\t\x12\x0f\n\x07\x63omment\x18\t \x01(\t"K\n\x0f\x43ollabAnnoVoter\x12\x12\n\nvoter_name\x18\x01 \x01(\t\x12\x10\n\x08voter_id\x18\x02 \x01(\t\x12\x12\n\nvoter_hash\x18\x03 \x01(\x08"H\n\x0f\x43ollabAnnoVotes\x12\r\n\x05total\x18\x01 \x01(\x05\x12&\n\x06voters\x18\x02 \x03(\x0b\x32\x16.scope.CollabAnnoVoter"\xaa\x01\n\x12\x43\x65llTypeAnnotation\x12#\n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x15.scope.CollabAnnoData\x12\x15\n\rvalidate_hash\x18\x02 \x01(\x08\x12)\n\tvotes_for\x18\x03 \x01(\x0b\x32\x16.scope.CollabAnnoVotes\x12-\n\rvotes_against\x18\x04 \x01(\x0b\x32\x16.scope.CollabAnnoVotes"m\n\x11\x43lusterAnnotation\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x37\n\x14\x63\x65ll_type_annotation\x18\x03 \x03(\x0b\x32\x19.scope.CellTypeAnnotation"\x9b\x01\n\nClustering\x12\n\n\x02id\x18\x01 \x01(\x05\x12\r\n\x05group\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x38\n\x14\x63lusterMarkerMetrics\x18\x04 \x03(\x0b\x32\x1a.scope.ClusterMarkerMetric\x12*\n\x08\x63lusters\x18\x05 \x03(\x0b\x32\x18.scope.ClusterAnnotation"\x84\x01\n\x0c\x43\x65llMetaData\x12&\n\x0b\x61nnotations\x18\x01 \x03(\x0b\x32\x11.scope.Annotation\x12$\n\nembeddings\x18\x02 \x03(\x0b\x32\x10.scope.Embedding\x12&\n\x0b\x63lusterings\x18\x03 \x03(\x0b\x32\x11.scope.Clustering"/\n\x0c\x41UCThreshold\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x11\n\tthreshold\x18\x02 \x01(\x02"Y\n\x12RegulonGenesMetric\x12\x10\n\x08\x61\x63\x63\x65ssor\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0e\n\x06values\x18\x04 \x03(\x02"\x9e\x01\n\x07Regulon\x12\r\n\x05genes\x18\x01 \x03(\t\x12+\n\x0e\x61utoThresholds\x18\x02 \x03(\x0b\x32\x13.scope.AUCThreshold\x12\x18\n\x10\x64\x65\x66\x61ultThreshold\x18\x03 \x01(\t\x12\x11\n\tmotifName\x18\x04 \x01(\t\x12*\n\x07metrics\x18\x05 \x03(\x0b\x32\x19.scope.RegulonGenesMetric"\x97\x01\n\x0c\x46ileMetaData\x12\x16\n\x0ehasRegulonsAUC\x18\x01 \x01(\x08\x12\x13\n\x0bhasGeneSets\x18\x02 \x01(\x08\x12\x16\n\x0ehasClusterings\x18\x03 \x01(\x08\x12\x1a\n\x12hasExtraEmbeddings\x18\x04 \x01(\x08\x12\x15\n\rhasGlobalMeta\x18\x05 \x01(\x08\x12\x0f\n\x07species\x18\x06 \x01(\t"!\n\rFeatureValues\x12\x10\n\x08\x66\x65\x61tures\x18\x01 \x03(\x02"&\n\x0f\x43\x65llAnnotations\x12\x13\n\x0b\x61nnotations\x18\x01 \x03(\t" \n\x0c\x43\x65llClusters\x12\x10\n\x08\x63lusters\x18\x01 \x03(\x05"\xc0\x01\n\x11\x43\x65llMetaDataReply\x12\'\n\nclusterIDs\x18\x01 \x03(\x0b\x32\x13.scope.CellClusters\x12,\n\x0egeneExpression\x18\x02 \x03(\x0b\x32\x14.scope.FeatureValues\x12\'\n\taucValues\x18\x03 \x03(\x0b\x32\x14.scope.FeatureValues\x12+\n\x0b\x61nnotations\x18\x04 \x03(\x0b\x32\x16.scope.CellAnnotations"?\n\x16RegulonMetaDataRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x0f\n\x07regulon\x18\x02 \x01(\t";\n\x14RegulonMetaDataReply\x12#\n\x0bregulonMeta\x18\x01 \x01(\x0b\x32\x0e.scope.Regulon"S\n\x12MarkerGenesRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0c\x63lusteringID\x18\x02 \x01(\x05\x12\x11\n\tclusterID\x18\x03 \x01(\x05"X\n\x11MarkerGenesMetric\x12\x10\n\x08\x61\x63\x63\x65ssor\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0e\n\x06values\x18\x04 \x03(\x02"L\n\x10MarkerGenesReply\x12\r\n\x05genes\x18\x01 \x03(\t\x12)\n\x07metrics\x18\x02 \x03(\x0b\x32\x18.scope.MarkerGenesMetric"0\n\x0eMyLoomsRequest\x12\x0c\n\x04UUID\x18\x01 \x01(\t\x12\x10\n\x08loomFile\x18\x02 \x01(\t"4\n\x0eLoomHeierarchy\x12\n\n\x02L1\x18\x01 \x01(\t\x12\n\n\x02L2\x18\x02 \x01(\t\x12\n\n\x02L3\x18\x03 \x01(\t"\xce\x01\n\x06MyLoom\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x17\n\x0floomDisplayName\x18\x02 \x01(\t\x12\x10\n\x08loomSize\x18\x03 \x01(\x03\x12)\n\x0c\x63\x65llMetaData\x18\x04 \x01(\x0b\x32\x13.scope.CellMetaData\x12)\n\x0c\x66ileMetaData\x18\x05 \x01(\x0b\x32\x13.scope.FileMetaData\x12-\n\x0eloomHeierarchy\x18\x06 \x01(\x0b\x32\x15.scope.LoomHeierarchy">\n\x0cMyLoomsReply\x12\x1e\n\x07myLooms\x18\x01 \x03(\x0b\x32\r.scope.MyLoom\x12\x0e\n\x06update\x18\x02 \x01(\x08"h\n\x1eTranslateLassoSelectionRequest\x12\x17\n\x0fsrcLoomFilePath\x18\x01 \x01(\t\x12\x18\n\x10\x64\x65stLoomFilePath\x18\x02 \x01(\t\x12\x13\n\x0b\x63\x65llIndices\x18\x03 \x03(\x05"3\n\x1cTranslateLassoSelectionReply\x12\x13\n\x0b\x63\x65llIndices\x18\x01 \x03(\x05";\n\x0e\x43\x65llIDsRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x13\n\x0b\x63\x65llIndices\x18\x02 \x03(\x05"\x1f\n\x0c\x43\x65llIDsReply\x12\x0f\n\x07\x63\x65llIds\x18\x01 \x03(\t"Y\n\x18GeneSetEnrichmentRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x17\n\x0fgeneSetFilePath\x18\x02 \x01(\t\x12\x0e\n\x06method\x18\x03 \x01(\t")\n\x08Progress\x12\r\n\x05value\x18\x01 \x01(\x02\x12\x0e\n\x06status\x18\x02 \x01(\t"\x80\x01\n\x16GeneSetEnrichmentReply\x12!\n\x08progress\x18\x01 \x01(\x0b\x32\x0f.scope.Progress\x12\x0e\n\x06isDone\x18\x02 \x01(\x08\x12\x33\n\ncellValues\x18\x03 \x01(\x0b\x32\x1f.scope.CellColorByFeaturesReply"{\n\x0bVmaxRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x03(\t\x12\x0f\n\x07\x66\x65\x61ture\x18\x02 \x03(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x03 \x03(\t\x12\x17\n\x0fhasLogTransform\x18\x04 \x01(\x08\x12\x17\n\x0fhasCpmTransform\x18\x05 \x01(\x08"*\n\tVmaxReply\x12\x0c\n\x04vmax\x18\x01 \x03(\x02\x12\x0f\n\x07maxVmax\x18\x02 \x03(\x02"\x19\n\x0bUUIDRequest\x12\n\n\x02ip\x18\x01 \x01(\t"\x19\n\tUUIDReply\x12\x0c\n\x04UUID\x18\x01 \x01(\t"I\n\x18RemainingUUIDTimeRequest\x12\n\n\x02ip\x18\x01 \x01(\t\x12\x0c\n\x04UUID\x18\x02 \x01(\t\x12\x13\n\x0bmouseEvents\x18\x03 \x01(\x03"p\n\x16RemainingUUIDTimeReply\x12\x0c\n\x04UUID\x18\x01 \x01(\t\x12\x15\n\rtimeRemaining\x18\x02 \x01(\x03\x12\x1c\n\x14sessionsLimitReached\x18\x03 \x01(\x08\x12\x13\n\x0bsessionMode\x18\x04 \x01(\t"5\n\x13LoomUploadedRequest\x12\x0c\n\x04UUID\x18\x01 \x01(\t\x12\x10\n\x08\x66ilename\x18\x02 \x01(\t"\x13\n\x11LoomUploadedReply"@\n\tMyGeneSet\x12\x17\n\x0fgeneSetFilePath\x18\x01 \x01(\t\x12\x1a\n\x12geneSetDisplayName\x18\x02 \x01(\t"!\n\x11MyGeneSetsRequest\x12\x0c\n\x04UUID\x18\x01 \x01(\t"7\n\x0fMyGeneSetsReply\x12$\n\nmyGeneSets\x18\x01 \x03(\x0b\x32\x10.scope.MyGeneSet"I\n\x15\x44\x65leteUserFileRequest\x12\x0c\n\x04UUID\x18\x01 \x01(\t\x12\x10\n\x08\x66ilePath\x18\x02 \x01(\t\x12\x10\n\x08\x66ileType\x18\x03 \x01(\t"2\n\x13\x44\x65leteUserFileReply\x12\x1b\n\x13\x64\x65letedSuccessfully\x18\x01 \x01(\x08"\x80\x01\n\x16\x44ownloadSubLoomRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureType\x18\x02 \x01(\t\x12\x13\n\x0b\x66\x65\x61tureName\x18\x03 \x01(\t\x12\x14\n\x0c\x66\x65\x61tureValue\x18\x04 \x01(\t\x12\x10\n\x08operator\x18\x05 \x01(\t"\x97\x01\n\x14\x44ownloadSubLoomReply\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0cloomFileSize\x18\x02 \x01(\x03\x12!\n\x08progress\x18\x03 \x01(\x0b\x32\x0f.scope.Progress\x12\x0e\n\x06isDone\x18\x04 \x01(\x08\x12 \n\x05\x65rror\x18\x05 \x01(\x0b\x32\x11.scope.ErrorReply"n\n\x18SetAnnotationNameRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0c\x63lusteringID\x18\x02 \x01(\x03\x12\x11\n\tclusterID\x18\x03 \x01(\x03\x12\x13\n\x0bnewAnnoName\x18\x04 \x01(\t")\n\x16SetAnnotationNameReply\x12\x0f\n\x07success\x18\x01 \x01(\x08"z\n\x17SetLoomHierarchyRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x17\n\x0fnewHierarchy_L1\x18\x02 \x01(\t\x12\x17\n\x0fnewHierarchy_L2\x18\x03 \x01(\t\x12\x17\n\x0fnewHierarchy_L3\x18\x04 \x01(\t"(\n\x15SetLoomHierarchyReply\x12\x0f\n\x07success\x18\x01 \x01(\x08"$\n\x0fgetORCIDRequest\x12\x11\n\tauth_code\x18\x01 \x01(\t"Z\n\rgetORCIDReply\x12\x18\n\x10orcid_scope_uuid\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x10\n\x08orcid_id\x18\x03 \x01(\t\x12\x0f\n\x07success\x18\x04 \x01(\x08"\x17\n\x15getORCIDStatusRequest"%\n\x13getORCIDStatusReply\x12\x0e\n\x06\x61\x63tive\x18\x01 \x01(\x08"I\n\x10orcidInfoMessage\x12\x11\n\torcidName\x18\x01 \x01(\t\x12\x0f\n\x07orcidID\x18\x02 \x01(\t\x12\x11\n\torcidUUID\x18\x03 \x01(\t"\xb3\x01\n\x1dsetColabAnnotationDataRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0c\x63lusteringID\x18\x02 \x01(\x05\x12\x11\n\tclusterID\x18\x03 \x01(\x05\x12*\n\torcidInfo\x18\x04 \x01(\x0b\x32\x17.scope.orcidInfoMessage\x12\'\n\x08\x61nnoData\x18\x05 \x01(\x0b\x32\x15.scope.CollabAnnoData"?\n\x1bsetColabAnnotationDataReply\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t"\xbe\x01\n\x15voteAnnotationRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0c\x63lusteringID\x18\x02 \x01(\x05\x12\x11\n\tclusterID\x18\x03 \x01(\x05\x12*\n\torcidInfo\x18\x04 \x01(\x0b\x32\x17.scope.orcidInfoMessage\x12\'\n\x08\x61nnoData\x18\x05 \x01(\x0b\x32\x15.scope.CollabAnnoData\x12\x11\n\tdirection\x18\x06 \x01(\t"7\n\x13voteAnnotationReply\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t"i\n\x15getNextClusterRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12\x14\n\x0c\x63lusteringID\x18\x02 \x01(\x05\x12\x11\n\tclusterID\x18\x03 \x01(\x05\x12\x11\n\tdirection\x18\x04 \x01(\t"M\n\x0eNewClusterInfo\x12\x0f\n\x07\x63\x65llIDs\x18\x01 \x03(\t\x12\x12\n\nclusterIDs\x18\x02 \x03(\t\x12\x16\n\x0e\x63lusteringName\x18\x03 \x01(\t"\x87\x01\n\x17\x41\x64\x64NewClusteringRequest\x12\x14\n\x0cloomFilePath\x18\x01 \x01(\t\x12*\n\torcidInfo\x18\x02 \x01(\x0b\x32\x17.scope.orcidInfoMessage\x12*\n\x0b\x63lusterInfo\x18\x03 \x01(\x0b\x32\x15.scope.NewClusterInfo"9\n\x15\x41\x64\x64NewClusteringReply\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t2\xec\x0f\n\x04Main\x12^\n\x16getCellColorByFeatures\x12!.scope.CellColorByFeaturesRequest\x1a\x1f.scope.CellColorByFeaturesReply"\x00\x12j\n\x1agetCellAUCValuesByFeatures\x12%.scope.CellAUCValuesByFeaturesRequest\x1a#.scope.CellAUCValuesByFeaturesReply"\x00\x12I\n\x0fgetCellMetaData\x12\x1a.scope.CellMetaDataRequest\x1a\x18.scope.CellMetaDataReply"\x00\x12;\n\x0bgetFeatures\x12\x15.scope.FeatureRequest\x1a\x13.scope.FeatureReply"\x00\x12\x46\n\x0egetCoordinates\x12\x19.scope.CoordinatesRequest\x1a\x17.scope.CoordinatesReply"\x00\x12R\n\x12getRegulonMetaData\x12\x1d.scope.RegulonMetaDataRequest\x1a\x1b.scope.RegulonMetaDataReply"\x00\x12\x46\n\x0egetMarkerGenes\x12\x19.scope.MarkerGenesRequest\x1a\x17.scope.MarkerGenesReply"\x00\x12:\n\ngetMyLooms\x12\x15.scope.MyLoomsRequest\x1a\x13.scope.MyLoomsReply"\x00\x12g\n\x17translateLassoSelection\x12%.scope.TranslateLassoSelectionRequest\x1a#.scope.TranslateLassoSelectionReply"\x00\x12:\n\ngetCellIDs\x12\x15.scope.CellIDsRequest\x1a\x13.scope.CellIDsReply"\x00\x12Y\n\x13\x64oGeneSetEnrichment\x12\x1f.scope.GeneSetEnrichmentRequest\x1a\x1d.scope.GeneSetEnrichmentReply"\x00\x30\x01\x12\x31\n\x07getVmax\x12\x12.scope.VmaxRequest\x1a\x10.scope.VmaxReply"\x00\x12\x31\n\x07getUUID\x12\x12.scope.UUIDRequest\x1a\x10.scope.UUIDReply"\x00\x12X\n\x14getRemainingUUIDTime\x12\x1f.scope.RemainingUUIDTimeRequest\x1a\x1d.scope.RemainingUUIDTimeReply"\x00\x12\x46\n\x0cloomUploaded\x12\x1a.scope.LoomUploadedRequest\x1a\x18.scope.LoomUploadedReply"\x00\x12\x43\n\rgetMyGeneSets\x12\x18.scope.MyGeneSetsRequest\x1a\x16.scope.MyGeneSetsReply"\x00\x12L\n\x0e\x64\x65leteUserFile\x12\x1c.scope.DeleteUserFileRequest\x1a\x1a.scope.DeleteUserFileReply"\x00\x12Q\n\x0f\x64ownloadSubLoom\x12\x1d.scope.DownloadSubLoomRequest\x1a\x1b.scope.DownloadSubLoomReply"\x00\x30\x01\x12U\n\x11setAnnotationName\x12\x1f.scope.SetAnnotationNameRequest\x1a\x1d.scope.SetAnnotationNameReply"\x00\x12R\n\x10setLoomHierarchy\x12\x1e.scope.SetLoomHierarchyRequest\x1a\x1c.scope.SetLoomHierarchyReply"\x00\x12:\n\x08getORCID\x12\x16.scope.getORCIDRequest\x1a\x14.scope.getORCIDReply"\x00\x12L\n\x0egetORCIDStatus\x12\x1c.scope.getORCIDStatusRequest\x1a\x1a.scope.getORCIDStatusReply"\x00\x12\x64\n\x16setColabAnnotationData\x12$.scope.setColabAnnotationDataRequest\x1a".scope.setColabAnnotationDataReply"\x00\x12L\n\x0evoteAnnotation\x12\x1c.scope.voteAnnotationRequest\x1a\x1a.scope.voteAnnotationReply"\x00\x12\x45\n\x0egetNextCluster\x12\x1c.scope.getNextClusterRequest\x1a\x13.scope.FeatureReply"\x00\x12R\n\x10\x61\x64\x64NewClustering\x12\x1e.scope.AddNewClusteringRequest\x1a\x1c.scope.AddNewClusteringReply"\x00\x62\x06proto3',
 )
 
 
@@ -678,6 +678,24 @@ _FEATUREREQUEST = _descriptor.Descriptor(
             serialized_options=None,
             file=DESCRIPTOR,
         ),
+        _descriptor.FieldDescriptor(
+            name="filter",
+            full_name="scope.FeatureRequest.filter",
+            index=2,
+            number=3,
+            type=9,
+            cpp_type=9,
+            label=1,
+            has_default_value=False,
+            default_value=b"".decode("utf-8"),
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -688,7 +706,7 @@ _FEATUREREQUEST = _descriptor.Descriptor(
     extension_ranges=[],
     oneofs=[],
     serialized_start=742,
-    serialized_end=795,
+    serialized_end=811,
 )
 
 
@@ -852,28 +870,28 @@ _CELLMETADATAREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=798,
-    serialized_end=1003,
+    serialized_start=814,
+    serialized_end=1019,
 )
 
 
-_FEATUREREPLY = _descriptor.Descriptor(
-    name="FeatureReply",
-    full_name="scope.FeatureReply",
+_FEATUREREPLY_FEATURE = _descriptor.Descriptor(
+    name="Feature",
+    full_name="scope.FeatureReply.Feature",
     filename=None,
     file=DESCRIPTOR,
     containing_type=None,
     fields=[
         _descriptor.FieldDescriptor(
             name="feature",
-            full_name="scope.FeatureReply.feature",
+            full_name="scope.FeatureReply.Feature.feature",
             index=0,
             number=1,
             type=9,
             cpp_type=9,
-            label=3,
+            label=1,
             has_default_value=False,
-            default_value=[],
+            default_value=b"".decode("utf-8"),
             message_type=None,
             enum_type=None,
             containing_type=None,
@@ -883,15 +901,15 @@ _FEATUREREPLY = _descriptor.Descriptor(
             file=DESCRIPTOR,
         ),
         _descriptor.FieldDescriptor(
-            name="featureType",
-            full_name="scope.FeatureReply.featureType",
+            name="type",
+            full_name="scope.FeatureReply.Feature.type",
             index=1,
             number=2,
             type=9,
             cpp_type=9,
-            label=3,
+            label=1,
             has_default_value=False,
-            default_value=[],
+            default_value=b"".decode("utf-8"),
             message_type=None,
             enum_type=None,
             containing_type=None,
@@ -901,15 +919,15 @@ _FEATUREREPLY = _descriptor.Descriptor(
             file=DESCRIPTOR,
         ),
         _descriptor.FieldDescriptor(
-            name="featureDescription",
-            full_name="scope.FeatureReply.featureDescription",
+            name="description",
+            full_name="scope.FeatureReply.Feature.description",
             index=2,
             number=3,
             type=9,
             cpp_type=9,
-            label=3,
+            label=1,
             has_default_value=False,
-            default_value=[],
+            default_value=b"".decode("utf-8"),
             message_type=None,
             enum_type=None,
             containing_type=None,
@@ -927,8 +945,46 @@ _FEATUREREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1005,
-    serialized_end=1085,
+    serialized_start=1084,
+    serialized_end=1145,
+)
+
+_FEATUREREPLY = _descriptor.Descriptor(
+    name="FeatureReply",
+    full_name="scope.FeatureReply",
+    filename=None,
+    file=DESCRIPTOR,
+    containing_type=None,
+    fields=[
+        _descriptor.FieldDescriptor(
+            name="features",
+            full_name="scope.FeatureReply.features",
+            index=0,
+            number=1,
+            type=11,
+            cpp_type=10,
+            label=3,
+            has_default_value=False,
+            default_value=[],
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+        ),
+    ],
+    extensions=[],
+    nested_types=[_FEATUREREPLY_FEATURE,],
+    enum_types=[],
+    serialized_options=None,
+    is_extendable=False,
+    syntax="proto3",
+    extension_ranges=[],
+    oneofs=[],
+    serialized_start=1021,
+    serialized_end=1145,
 )
 
 
@@ -1020,8 +1076,8 @@ _COORDINATESREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1087,
-    serialized_end=1206,
+    serialized_start=1147,
+    serialized_end=1266,
 )
 
 
@@ -1095,8 +1151,8 @@ _COORDINATESREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1208,
-    serialized_end=1269,
+    serialized_start=1268,
+    serialized_end=1329,
 )
 
 
@@ -1152,8 +1208,8 @@ _ANNOTATION = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1271,
-    serialized_end=1313,
+    serialized_start=1331,
+    serialized_end=1373,
 )
 
 
@@ -1209,8 +1265,8 @@ _COORDINATE = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1315,
-    serialized_end=1349,
+    serialized_start=1375,
+    serialized_end=1409,
 )
 
 
@@ -1266,8 +1322,8 @@ _EDGE = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1351,
-    serialized_end=1389,
+    serialized_start=1411,
+    serialized_end=1449,
 )
 
 
@@ -1341,8 +1397,8 @@ _TRAJECTORY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1391,
-    serialized_end=1486,
+    serialized_start=1451,
+    serialized_end=1546,
 )
 
 
@@ -1416,8 +1472,8 @@ _EMBEDDING = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1488,
-    serialized_end=1564,
+    serialized_start=1548,
+    serialized_end=1624,
 )
 
 
@@ -1491,8 +1547,8 @@ _CLUSTERMARKERMETRIC = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1566,
-    serialized_end=1640,
+    serialized_start=1626,
+    serialized_end=1700,
 )
 
 
@@ -1674,8 +1730,8 @@ _COLLABANNODATA = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1643,
-    serialized_end=1834,
+    serialized_start=1703,
+    serialized_end=1894,
 )
 
 
@@ -1749,8 +1805,8 @@ _COLLABANNOVOTER = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1836,
-    serialized_end=1911,
+    serialized_start=1896,
+    serialized_end=1971,
 )
 
 
@@ -1806,8 +1862,8 @@ _COLLABANNOVOTES = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1913,
-    serialized_end=1985,
+    serialized_start=1973,
+    serialized_end=2045,
 )
 
 
@@ -1899,8 +1955,8 @@ _CELLTYPEANNOTATION = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1988,
-    serialized_end=2158,
+    serialized_start=2048,
+    serialized_end=2218,
 )
 
 
@@ -1974,8 +2030,8 @@ _CLUSTERANNOTATION = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2160,
-    serialized_end=2269,
+    serialized_start=2220,
+    serialized_end=2329,
 )
 
 
@@ -2085,8 +2141,8 @@ _CLUSTERING = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2272,
-    serialized_end=2427,
+    serialized_start=2332,
+    serialized_end=2487,
 )
 
 
@@ -2160,8 +2216,8 @@ _CELLMETADATA = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2430,
-    serialized_end=2562,
+    serialized_start=2490,
+    serialized_end=2622,
 )
 
 
@@ -2217,8 +2273,8 @@ _AUCTHRESHOLD = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2564,
-    serialized_end=2611,
+    serialized_start=2624,
+    serialized_end=2671,
 )
 
 
@@ -2310,8 +2366,8 @@ _REGULONGENESMETRIC = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2613,
-    serialized_end=2702,
+    serialized_start=2673,
+    serialized_end=2762,
 )
 
 
@@ -2421,8 +2477,8 @@ _REGULON = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2705,
-    serialized_end=2863,
+    serialized_start=2765,
+    serialized_end=2923,
 )
 
 
@@ -2550,8 +2606,8 @@ _FILEMETADATA = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2866,
-    serialized_end=3017,
+    serialized_start=2926,
+    serialized_end=3077,
 )
 
 
@@ -2589,8 +2645,8 @@ _FEATUREVALUES = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3019,
-    serialized_end=3052,
+    serialized_start=3079,
+    serialized_end=3112,
 )
 
 
@@ -2628,8 +2684,8 @@ _CELLANNOTATIONS = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3054,
-    serialized_end=3092,
+    serialized_start=3114,
+    serialized_end=3152,
 )
 
 
@@ -2667,8 +2723,8 @@ _CELLCLUSTERS = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3094,
-    serialized_end=3126,
+    serialized_start=3154,
+    serialized_end=3186,
 )
 
 
@@ -2760,8 +2816,8 @@ _CELLMETADATAREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3129,
-    serialized_end=3321,
+    serialized_start=3189,
+    serialized_end=3381,
 )
 
 
@@ -2817,8 +2873,8 @@ _REGULONMETADATAREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3323,
-    serialized_end=3386,
+    serialized_start=3383,
+    serialized_end=3446,
 )
 
 
@@ -2856,8 +2912,8 @@ _REGULONMETADATAREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3388,
-    serialized_end=3447,
+    serialized_start=3448,
+    serialized_end=3507,
 )
 
 
@@ -2931,8 +2987,8 @@ _MARKERGENESREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3449,
-    serialized_end=3532,
+    serialized_start=3509,
+    serialized_end=3592,
 )
 
 
@@ -3024,8 +3080,8 @@ _MARKERGENESMETRIC = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3534,
-    serialized_end=3622,
+    serialized_start=3594,
+    serialized_end=3682,
 )
 
 
@@ -3081,8 +3137,8 @@ _MARKERGENESREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3624,
-    serialized_end=3700,
+    serialized_start=3684,
+    serialized_end=3760,
 )
 
 
@@ -3138,8 +3194,8 @@ _MYLOOMSREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3702,
-    serialized_end=3750,
+    serialized_start=3762,
+    serialized_end=3810,
 )
 
 
@@ -3213,8 +3269,8 @@ _LOOMHEIERARCHY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3752,
-    serialized_end=3804,
+    serialized_start=3812,
+    serialized_end=3864,
 )
 
 
@@ -3342,8 +3398,8 @@ _MYLOOM = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=3807,
-    serialized_end=4013,
+    serialized_start=3867,
+    serialized_end=4073,
 )
 
 
@@ -3399,8 +3455,8 @@ _MYLOOMSREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4015,
-    serialized_end=4077,
+    serialized_start=4075,
+    serialized_end=4137,
 )
 
 
@@ -3474,8 +3530,8 @@ _TRANSLATELASSOSELECTIONREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4079,
-    serialized_end=4183,
+    serialized_start=4139,
+    serialized_end=4243,
 )
 
 
@@ -3513,8 +3569,8 @@ _TRANSLATELASSOSELECTIONREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4185,
-    serialized_end=4236,
+    serialized_start=4245,
+    serialized_end=4296,
 )
 
 
@@ -3570,8 +3626,8 @@ _CELLIDSREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4238,
-    serialized_end=4297,
+    serialized_start=4298,
+    serialized_end=4357,
 )
 
 
@@ -3609,8 +3665,8 @@ _CELLIDSREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4299,
-    serialized_end=4330,
+    serialized_start=4359,
+    serialized_end=4390,
 )
 
 
@@ -3684,8 +3740,8 @@ _GENESETENRICHMENTREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4332,
-    serialized_end=4421,
+    serialized_start=4392,
+    serialized_end=4481,
 )
 
 
@@ -3741,8 +3797,8 @@ _PROGRESS = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4423,
-    serialized_end=4464,
+    serialized_start=4483,
+    serialized_end=4524,
 )
 
 
@@ -3816,8 +3872,8 @@ _GENESETENRICHMENTREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4467,
-    serialized_end=4595,
+    serialized_start=4527,
+    serialized_end=4655,
 )
 
 
@@ -3927,8 +3983,8 @@ _VMAXREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4597,
-    serialized_end=4720,
+    serialized_start=4657,
+    serialized_end=4780,
 )
 
 
@@ -3984,8 +4040,8 @@ _VMAXREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4722,
-    serialized_end=4764,
+    serialized_start=4782,
+    serialized_end=4824,
 )
 
 
@@ -4023,8 +4079,8 @@ _UUIDREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4766,
-    serialized_end=4791,
+    serialized_start=4826,
+    serialized_end=4851,
 )
 
 
@@ -4062,8 +4118,8 @@ _UUIDREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4793,
-    serialized_end=4818,
+    serialized_start=4853,
+    serialized_end=4878,
 )
 
 
@@ -4137,8 +4193,8 @@ _REMAININGUUIDTIMEREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4820,
-    serialized_end=4893,
+    serialized_start=4880,
+    serialized_end=4953,
 )
 
 
@@ -4230,8 +4286,8 @@ _REMAININGUUIDTIMEREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=4895,
-    serialized_end=5007,
+    serialized_start=4955,
+    serialized_end=5067,
 )
 
 
@@ -4287,8 +4343,8 @@ _LOOMUPLOADEDREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5009,
-    serialized_end=5062,
+    serialized_start=5069,
+    serialized_end=5122,
 )
 
 
@@ -4307,8 +4363,8 @@ _LOOMUPLOADEDREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5064,
-    serialized_end=5083,
+    serialized_start=5124,
+    serialized_end=5143,
 )
 
 
@@ -4364,8 +4420,8 @@ _MYGENESET = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5085,
-    serialized_end=5149,
+    serialized_start=5145,
+    serialized_end=5209,
 )
 
 
@@ -4403,8 +4459,8 @@ _MYGENESETSREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5151,
-    serialized_end=5184,
+    serialized_start=5211,
+    serialized_end=5244,
 )
 
 
@@ -4442,8 +4498,8 @@ _MYGENESETSREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5186,
-    serialized_end=5241,
+    serialized_start=5246,
+    serialized_end=5301,
 )
 
 
@@ -4517,8 +4573,8 @@ _DELETEUSERFILEREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5243,
-    serialized_end=5316,
+    serialized_start=5303,
+    serialized_end=5376,
 )
 
 
@@ -4556,8 +4612,8 @@ _DELETEUSERFILEREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5318,
-    serialized_end=5368,
+    serialized_start=5378,
+    serialized_end=5428,
 )
 
 
@@ -4667,8 +4723,8 @@ _DOWNLOADSUBLOOMREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5371,
-    serialized_end=5499,
+    serialized_start=5431,
+    serialized_end=5559,
 )
 
 
@@ -4778,8 +4834,8 @@ _DOWNLOADSUBLOOMREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5502,
-    serialized_end=5653,
+    serialized_start=5562,
+    serialized_end=5713,
 )
 
 
@@ -4871,8 +4927,8 @@ _SETANNOTATIONNAMEREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5655,
-    serialized_end=5765,
+    serialized_start=5715,
+    serialized_end=5825,
 )
 
 
@@ -4910,8 +4966,8 @@ _SETANNOTATIONNAMEREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5767,
-    serialized_end=5808,
+    serialized_start=5827,
+    serialized_end=5868,
 )
 
 
@@ -5003,8 +5059,8 @@ _SETLOOMHIERARCHYREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5810,
-    serialized_end=5932,
+    serialized_start=5870,
+    serialized_end=5992,
 )
 
 
@@ -5042,8 +5098,8 @@ _SETLOOMHIERARCHYREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5934,
-    serialized_end=5974,
+    serialized_start=5994,
+    serialized_end=6034,
 )
 
 
@@ -5081,8 +5137,8 @@ _GETORCIDREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=5976,
-    serialized_end=6012,
+    serialized_start=6036,
+    serialized_end=6072,
 )
 
 
@@ -5174,8 +5230,8 @@ _GETORCIDREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=6014,
-    serialized_end=6104,
+    serialized_start=6074,
+    serialized_end=6164,
 )
 
 
@@ -5194,8 +5250,8 @@ _GETORCIDSTATUSREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=6106,
-    serialized_end=6129,
+    serialized_start=6166,
+    serialized_end=6189,
 )
 
 
@@ -5233,8 +5289,8 @@ _GETORCIDSTATUSREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=6131,
-    serialized_end=6168,
+    serialized_start=6191,
+    serialized_end=6228,
 )
 
 
@@ -5308,8 +5364,8 @@ _ORCIDINFOMESSAGE = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=6170,
-    serialized_end=6243,
+    serialized_start=6230,
+    serialized_end=6303,
 )
 
 
@@ -5419,8 +5475,8 @@ _SETCOLABANNOTATIONDATAREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=6246,
-    serialized_end=6425,
+    serialized_start=6306,
+    serialized_end=6485,
 )
 
 
@@ -5476,8 +5532,8 @@ _SETCOLABANNOTATIONDATAREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=6427,
-    serialized_end=6490,
+    serialized_start=6487,
+    serialized_end=6550,
 )
 
 
@@ -5605,8 +5661,8 @@ _VOTEANNOTATIONREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=6493,
-    serialized_end=6683,
+    serialized_start=6553,
+    serialized_end=6743,
 )
 
 
@@ -5662,8 +5718,8 @@ _VOTEANNOTATIONREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=6685,
-    serialized_end=6740,
+    serialized_start=6745,
+    serialized_end=6800,
 )
 
 
@@ -5755,8 +5811,8 @@ _GETNEXTCLUSTERREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=6742,
-    serialized_end=6847,
+    serialized_start=6802,
+    serialized_end=6907,
 )
 
 
@@ -5830,8 +5886,8 @@ _NEWCLUSTERINFO = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=6849,
-    serialized_end=6926,
+    serialized_start=6909,
+    serialized_end=6986,
 )
 
 
@@ -5905,8 +5961,8 @@ _ADDNEWCLUSTERINGREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=6929,
-    serialized_end=7064,
+    serialized_start=6989,
+    serialized_end=7124,
 )
 
 
@@ -5962,13 +6018,15 @@ _ADDNEWCLUSTERINGREPLY = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=7066,
-    serialized_end=7123,
+    serialized_start=7126,
+    serialized_end=7183,
 )
 
 _CELLCOLORBYFEATURESREQUEST.fields_by_name["annotation"].message_type = _ANNOTATION
 _CELLCOLORBYFEATURESREPLY.fields_by_name["legend"].message_type = _COLORLEGEND
 _CELLCOLORBYFEATURESREPLY.fields_by_name["error"].message_type = _ERRORREPLY
+_FEATUREREPLY_FEATURE.containing_type = _FEATUREREPLY
+_FEATUREREPLY.fields_by_name["features"].message_type = _FEATUREREPLY_FEATURE
 _COORDINATESREQUEST.fields_by_name["annotation"].message_type = _ANNOTATION
 _TRAJECTORY.fields_by_name["edges"].message_type = _EDGE
 _TRAJECTORY.fields_by_name["coordinates"].message_type = _COORDINATE
@@ -6180,12 +6238,22 @@ FeatureReply = _reflection.GeneratedProtocolMessageType(
     "FeatureReply",
     (_message.Message,),
     {
+        "Feature": _reflection.GeneratedProtocolMessageType(
+            "Feature",
+            (_message.Message,),
+            {
+                "DESCRIPTOR": _FEATUREREPLY_FEATURE,
+                "__module__": "s_pb2"
+                # @@protoc_insertion_point(class_scope:scope.FeatureReply.Feature)
+            },
+        ),
         "DESCRIPTOR": _FEATUREREPLY,
         "__module__": "s_pb2"
         # @@protoc_insertion_point(class_scope:scope.FeatureReply)
     },
 )
 _sym_db.RegisterMessage(FeatureReply)
+_sym_db.RegisterMessage(FeatureReply.Feature)
 
 CoordinatesRequest = _reflection.GeneratedProtocolMessageType(
     "CoordinatesRequest",
@@ -6975,8 +7043,8 @@ _MAIN = _descriptor.ServiceDescriptor(
     file=DESCRIPTOR,
     index=0,
     serialized_options=None,
-    serialized_start=7126,
-    serialized_end=9154,
+    serialized_start=7186,
+    serialized_end=9214,
     methods=[
         _descriptor.MethodDescriptor(
             name="getCellColorByFeatures",

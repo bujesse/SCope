@@ -259,11 +259,13 @@ class FeatureRequest(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     loomFilePath = ...  # type: typing___Text
     query = ...  # type: typing___Text
+    filter = ...  # type: typing___Text
     def __init__(
         self,
         *,
         loomFilePath: typing___Optional[typing___Text] = None,
         query: typing___Optional[typing___Text] = None,
+        filter: typing___Optional[typing___Text] = None,
     ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -276,7 +278,10 @@ class FeatureRequest(google___protobuf___message___Message):
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def ClearField(
-        self, field_name: typing_extensions___Literal["loomFilePath", b"loomFilePath", "query", b"query"]
+        self,
+        field_name: typing_extensions___Literal[
+            "filter", b"filter", "loomFilePath", b"loomFilePath", "query", b"query"
+        ],
     ) -> None: ...
 
 global___FeatureRequest = FeatureRequest
@@ -341,17 +346,41 @@ global___CellMetaDataRequest = CellMetaDataRequest
 
 class FeatureReply(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-    feature = ...  # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
-    featureType = ...  # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
-    featureDescription = (
-        ...
-    )  # type: google___protobuf___internal___containers___RepeatedScalarFieldContainer[typing___Text]
-    def __init__(
+    class Feature(google___protobuf___message___Message):
+        DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+        feature = ...  # type: typing___Text
+        type = ...  # type: typing___Text
+        description = ...  # type: typing___Text
+        def __init__(
+            self,
+            *,
+            feature: typing___Optional[typing___Text] = None,
+            type: typing___Optional[typing___Text] = None,
+            description: typing___Optional[typing___Text] = None,
+        ) -> None: ...
+        if sys.version_info >= (3,):
+            @classmethod
+            def FromString(cls, s: builtin___bytes) -> FeatureReply.Feature: ...
+        else:
+            @classmethod
+            def FromString(
+                cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]
+            ) -> FeatureReply.Feature: ...
+        def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+        def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+        def ClearField(
+            self,
+            field_name: typing_extensions___Literal[
+                "description", b"description", "feature", b"feature", "type", b"type"
+            ],
+        ) -> None: ...
+    global___Feature = Feature
+    @property
+    def features(
         self,
-        *,
-        feature: typing___Optional[typing___Iterable[typing___Text]] = None,
-        featureType: typing___Optional[typing___Iterable[typing___Text]] = None,
-        featureDescription: typing___Optional[typing___Iterable[typing___Text]] = None,
+    ) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[global___FeatureReply.Feature]: ...
+    def __init__(
+        self, *, features: typing___Optional[typing___Iterable[global___FeatureReply.Feature]] = None,
     ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -363,12 +392,7 @@ class FeatureReply(google___protobuf___message___Message):
         ) -> FeatureReply: ...
     def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
     def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions___Literal[
-            "feature", b"feature", "featureDescription", b"featureDescription", "featureType", b"featureType"
-        ],
-    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal["features", b"features"]) -> None: ...
 
 global___FeatureReply = FeatureReply
 
