@@ -64,7 +64,7 @@ export default class Gene extends Component {
                             location={this.props.location}
                         />
                     </Grid.Column>
-                    <Grid.Column width={3}>
+                    <Grid.Column width={4}>
                         <ViewerSidebar
                             onActiveFeaturesChange={(features, id) => {
                                 this.setState({ activeFeatures: features });

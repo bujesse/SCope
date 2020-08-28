@@ -348,15 +348,43 @@ class FeatureReply(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
     class Feature(google___protobuf___message___Message):
         DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
-        feature = ...  # type: typing___Text
-        type = ...  # type: typing___Text
-        description = ...  # type: typing___Text
+        class Match(google___protobuf___message___Message):
+            DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+            title = ...  # type: typing___Text
+            description = ...  # type: typing___Text
+            def __init__(
+                self,
+                *,
+                title: typing___Optional[typing___Text] = None,
+                description: typing___Optional[typing___Text] = None,
+            ) -> None: ...
+            if sys.version_info >= (3,):
+                @classmethod
+                def FromString(cls, s: builtin___bytes) -> FeatureReply.Feature.Match: ...
+            else:
+                @classmethod
+                def FromString(
+                    cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]
+                ) -> FeatureReply.Feature.Match: ...
+            def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+            def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
+            def ClearField(
+                self, field_name: typing_extensions___Literal["description", b"description", "title", b"title"]
+            ) -> None: ...
+        global___Match = Match
+
+        category = ...  # type: typing___Text
+        @property
+        def results(
+            self,
+        ) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[
+            global___FeatureReply.Feature.Match
+        ]: ...
         def __init__(
             self,
             *,
-            feature: typing___Optional[typing___Text] = None,
-            type: typing___Optional[typing___Text] = None,
-            description: typing___Optional[typing___Text] = None,
+            category: typing___Optional[typing___Text] = None,
+            results: typing___Optional[typing___Iterable[global___FeatureReply.Feature.Match]] = None,
         ) -> None: ...
         if sys.version_info >= (3,):
             @classmethod
@@ -369,10 +397,7 @@ class FeatureReply(google___protobuf___message___Message):
         def MergeFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def CopyFrom(self, other_msg: google___protobuf___message___Message) -> None: ...
         def ClearField(
-            self,
-            field_name: typing_extensions___Literal[
-                "description", b"description", "feature", b"feature", "type", b"type"
-            ],
+            self, field_name: typing_extensions___Literal["category", b"category", "results", b"results"]
         ) -> None: ...
     global___Feature = Feature
     @property

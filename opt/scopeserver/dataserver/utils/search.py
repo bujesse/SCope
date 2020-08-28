@@ -3,6 +3,8 @@ import logging
 from typing import Dict, NamedTuple, Tuple, List, Optional, Type, Union
 from collections import OrderedDict
 from contextlib import suppress
+from itertools import groupby
+
 from scopeserver.dataserver.utils import data_file_handler
 from scopeserver.dataserver.utils.constant import Species
 
@@ -13,10 +15,14 @@ from scopeserver.dataserver.utils.search_space import SSKey, SearchSpaceDict
 logger = logging.getLogger(__name__)
 
 
-class SearchMatch(NamedTuple):
-    original_feature: str
-    resolved_feature: str
-    feature_type: str
+class Match(NamedTuple):
+    feature: str
+    description: str
+
+
+class CategorisedMatches(NamedTuple):
+    category: str
+    matches: List[Match]
 
 
 class MatchResult(NamedTuple):
@@ -81,11 +87,11 @@ def find_matches(search_term: str, search_space: SearchSpaceDict) -> List[MatchR
     the searchable element. Return the match, the matches category and relationship.
 
     Args:
-        search_term (str): Term the user typed
-        search_space (SearchSpace): Search space from loom object
+        search_term: Term the user typed
+        search_space: Search space from loom object
 
     Returns:
-        List[SearchMatch]: A sorted list of the matches to the users search term
+        A sorted list of the matches to the users search term
     """
 
     casefold_term = search_term.casefold()
@@ -112,17 +118,16 @@ def aggregate_matches(matches: List[MatchResult]) -> Dict[Tuple[str, str], List[
     match[2]: Relationship
 
     Args:
-        matches (List[SearchMatch]): The sorted matches from the search space
-        search_space (SearchSpace): The appropriate search space
+        matches: The sorted matches from the search space
 
     Returns:
-        Dict[Tuple[str, str], List[str]]: Search matches aggregated by feature and feature type
+        Search matches aggregated by feature and feature type
     """
 
     aggregated_matches: Dict[Tuple[str, str], List[str]] = OrderedDict()
     for match in matches:
         key = (match.result, match.search_space_match.element_type)
-        if key not in aggregated_matches.keys():
+        if key not in aggregated_matches:
             aggregated_matches[key] = [match.search_space_match.element]
         else:
             aggregated_matches[key].append(match.search_space_match.element)
@@ -142,11 +147,11 @@ def create_feature_description(
     being translated into the name of the cluster that it is a marker of.
 
     Args:
-        aggregated_matches (Dict[Tuple[str, str], List[str]]): Results aggregated by final term
-        features (Dict[Tuple[str, str], str]): A list of features corresponding to the aggregated matches
+        aggregated_matches: Results aggregated by final term
+        features: A list of features corresponding to the aggregated matches
 
     Returns:
-        Dict[Tuple[str, str], str]: The final descriptions to send to the user
+        The final descriptions to send to the user
     """
 
     descriptions: Dict[Tuple[str, str], str] = {}
@@ -189,12 +194,12 @@ def get_final_feature_and_type(
     Build the lists needed to correctly associate each match with its final category.
 
     Args:
-        loom (Loom): Loom object
-        aggregated_matches (Dict[Tuple[str, str], List[str]]): Aggregated matches from aggregate_matches
-        data_hash_secret (str): Secret used to hash annotations on clusters
+        loom: Loom object
+        aggregated_matches: Aggregated matches from aggregate_matches
+        data_hash_secret: Secret used to hash annotations on clusters
 
     Returns:
-        Tuple[Dict[Tuple[str, str], str], Dict[Tuple[str, str], str]]: Features and Feature types
+        Features and Feature types
     """
 
     features: Dict[Tuple[str, str], str] = {}
@@ -222,28 +227,47 @@ def get_final_feature_and_type(
     return features, feature_types
 
 
-def get_search_results(search_term: str, loom: Loom, data_hash_secret: str) -> Dict[str, List[str]]:
+def get_search_results(search_term: str, category: str, loom: Loom, data_hash_secret: str) -> List[CategorisedMatches]:
     """Take a user search term and a loom file and extract the results to display to the user
 
     Args:
-        search_term (str): Search term from the user
-        loom (Loom): Loom file to be searched
-        data_hash_secret (str): Secret used to hash annotations
-        data_file_handler (DataFileHandler): The data file handler object from the Gserver
+        search_term: Search term from the user
+        loom: Loom file to be searched
+        data_hash_secret: Secret used to hash annotations
+        data_file_handler: The data file handler object from the Gserver
 
     Returns:
-        Dict[str, List[str]]: A dict of the compiled results
+        A list of categorised (by feature type) results
     """
+
+    def category_key(result: Dict[str, str]) -> str:
+        return result["category"]
 
     matches = find_matches(search_term, loom.ss.search_space_dict)
     aggregated_matches = aggregate_matches(matches)
     features, feature_types = get_final_feature_and_type(loom, aggregated_matches, data_hash_secret)
     descriptions = create_feature_description(aggregated_matches, features)
 
-    final_res = {
-        "feature": [features[k] for k in aggregated_matches],
-        "featureType": [feature_types[k] for k in aggregated_matches],
-        "featureDescription": [descriptions[k] for k in aggregated_matches],
+    ftypes = groupby(sorted(feature_types.values()))
+
+    aggregated = sorted(
+        [
+            {"feature": features[key], "category": feature_types[key], "description": descriptions[key]}
+            for key in aggregated_matches
+        ],
+        key=category_key,
+    )
+
+    grouped: Dict[str, List[Match]] = {
+        key: [Match(feature=el["feature"], description=el["description"]) for el in group]
+        for key, group in groupby(aggregated, key=category_key)
     }
 
-    return final_res
+    if category == "all":
+        return [CategorisedMatches(category=key, matches=group) for key, group in grouped.items()]
+
+    elif category in grouped:
+        return [CategorisedMatches(category=category, matches=grouped[category])]
+
+    else:
+        return []
