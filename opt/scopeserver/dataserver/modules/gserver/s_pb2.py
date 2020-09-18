@@ -976,7 +976,9 @@ _FEATUREREPLY_FEATURE = _descriptor.Descriptor(
         ),
     ],
     extensions=[],
-    nested_types=[_FEATUREREPLY_FEATURE_MATCH,],
+    nested_types=[
+        _FEATUREREPLY_FEATURE_MATCH,
+    ],
     enum_types=[],
     serialized_options=None,
     is_extendable=False,
@@ -1014,7 +1016,9 @@ _FEATUREREPLY = _descriptor.Descriptor(
         ),
     ],
     extensions=[],
-    nested_types=[_FEATUREREPLY_FEATURE,],
+    nested_types=[
+        _FEATUREREPLY_FEATURE,
+    ],
     enum_types=[],
     serialized_options=None,
     is_extendable=False,

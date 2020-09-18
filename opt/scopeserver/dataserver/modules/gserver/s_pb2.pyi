@@ -405,7 +405,9 @@ class FeatureReply(google___protobuf___message___Message):
         self,
     ) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[global___FeatureReply.Feature]: ...
     def __init__(
-        self, *, features: typing___Optional[typing___Iterable[global___FeatureReply.Feature]] = None,
+        self,
+        *,
+        features: typing___Optional[typing___Iterable[global___FeatureReply.Feature]] = None,
     ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
