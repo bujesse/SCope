@@ -90,7 +90,7 @@ let config = {
         }),
         new webpack.DefinePlugin({
             BITLY: JSON.stringify({
-                baseURL: 'http://scope.aertslab.org',
+                baseURL: 'http://' + _config.publicHostAddress,
                 token: '8422dd882b60604d327939997448dd1b5c61f54e',
             }),
             BACKEND: JSON.stringify({
