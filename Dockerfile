@@ -35,6 +35,9 @@ RUN conda install -c conda-forge poetry
 # Get sources into container
 COPY . /app
 
+# poetry install is required to run the backend
+RUN cd /app/opt && poetry install
+
 # install the app
 RUN cd /app && npm install
 
@@ -43,9 +46,6 @@ COPY ${SCOPE_CONFIG:-config.json} /app/config.json
 
 # build assets
 RUN cd /app && SCOPE_CONFIG=./config.json SCOPE_PORT=${SCOPE_PORT} npm run build
-
-# poetry install is required to run the backend
-RUN cd /app/opt && poetry install
 
 # Frontend
 #EXPOSE 55850
