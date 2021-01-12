@@ -1,6 +1,6 @@
 {
     "debug": true,
-    "publicHostAddress": "127.0.0.1",
+    "publicHostAddress": "localhost",
     "localHostAddress": "127.0.0.1",
     "httpProtocol": "http",
     "wsProtocol": "ws",
@@ -8,7 +8,7 @@
     "pPort": 55851,
     "xPort": 55852,
     "gPort": 55853,
-    "reverseProxyOn": false,
+    "reverseProxyOn": true,
     "orcidAPIClientID": "",
     "orcidAPIClientSecret": "",
     "orcidAPIRedirectURI": "",
