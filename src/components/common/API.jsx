@@ -76,6 +76,8 @@ class API {
             hasLogTransform: true,
             hasCpmNormalization: false,
             dissociateViewers: true,
+            showLabels: true,
+            labelSize: 12,
         };
         this.settingsChangeListeners = [];
 
@@ -378,13 +380,16 @@ class API {
             let file = files[i];
             this.loomFiles[file.loomFilePath] = file;
         });
-        this.activeLoomChangeListeners.forEach((listener) => {
-            listener(
-                this.activeLooms[0],
-                this.loomFiles[this.activeLooms[0]],
-                this.activeCoordinates
-            );
-        });
+        // TODO: Hacky implementation. To be refactored/reviewed properly
+        if (!update) {
+            this.activeLoomChangeListeners.forEach((listener) => {
+                listener(
+                    this.activeLooms[0],
+                    this.loomFiles[this.activeLooms[0]],
+                    this.activeCoordinates
+                );
+            });
+        }
     }
 
     getActiveFeatures() {
@@ -521,7 +526,14 @@ class API {
         this.getConnection().then((gbc) => {
             if (DEBUG) console.log('getNextCluster', query);
             gbc.services.scope.Main.getNextCluster(query, (err, response) => {
-                callback(response);
+                // TODO: Hacky implementation. To be refactored/reviewed properly
+                BackendAPI.queryLoomFiles(
+                    this.uuid,
+                    () => {
+                        callback(response);
+                    },
+                    this.getActiveLoom()
+                );
             });
         });
     }

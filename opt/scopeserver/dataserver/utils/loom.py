@@ -9,7 +9,7 @@ import hashlib
 import functools
 from collections import Counter
 from pathlib import Path
-from typing import Tuple, Dict, Any, Union, List, Set
+from typing import Tuple, Dict, Any, Union, List, Set, Optional
 from loompy.loompy import LoomConnection
 from typing_extensions import TypedDict
 from google.protobuf.internal.containers import RepeatedScalarFieldContainer
@@ -18,6 +18,7 @@ from scopeserver.dataserver.utils import data_file_handler as dfh
 from scopeserver.dataserver.utils import search_space as ss
 from scopeserver.dataserver.modules.gserver import s_pb2
 from scopeserver.dataserver.utils import constant
+from scopeserver.dataserver.utils.annotation import Annotation
 
 import logging
 
@@ -713,7 +714,7 @@ class Loom:
             return "Unknown", {}
         return maxSpecies, mappings[maxSpecies]
 
-    def get_anno_cells(self, annotations, logic: str = "OR"):
+    def get_anno_cells(self, annotations: List[Annotation], logic: str = "OR"):
         loom = self.loom_connection
         cell_indices = []
         for anno in annotations:
@@ -781,7 +782,7 @@ class Loom:
         gene_symbol: str,
         log_transform: bool = True,
         cpm_normalise: bool = False,
-        annotation="",
+        annotation: Optional[List[Annotation]] = None,
         logic: str = "OR",
     ) -> Tuple[np.ndarray, list]:
         if gene_symbol not in set(self.get_genes()):
@@ -801,7 +802,7 @@ class Loom:
         if log_transform:
             logger.debug("Debug: log-transforming gene expression...")
             gene_expr = np.log2(gene_expr + 1)
-        if len(annotation) > 0:
+        if annotation is not None:
             cell_indices = self.get_anno_cells(annotations=annotation, logic=logic)
             gene_expr = gene_expr[cell_indices]
         else:
@@ -813,13 +814,22 @@ class Loom:
     ############
 
     def has_motif_and_track_regulons(self) -> bool:
-        return "MotifRegulons" in self.loom_connection.ra.keys() and "MotifRegulons" in self.loom_connection.ra.keys()
+        return self.has_motif_regulons() and self.has_track_regulons()
+
+    def has_legacy_regulons(self) -> bool:
+        return "Regulons" in self.loom_connection.ra.keys()
+
+    def has_motif_regulons(self) -> bool:
+        return "MotifRegulons" in self.loom_connection.ra.keys()
+
+    def has_track_regulons(self) -> bool:
+        return "TrackRegulons" in self.loom_connection.ra.keys()
 
     def get_regulon_genes(self, regulon: str) -> np.ndarray:
         try:
-            if "MotifRegulons" in self.loom_connection.ra.keys() and "motif" in regulon.lower():
+            if "MotifRegulons" in self.loom_connection.ra and "motif" in regulon.lower():
                 return self.get_genes()[self.loom_connection.ra.MotifRegulons[regulon] == 1]
-            elif "TrackRegulons" in self.loom_connection.ra.keys() and "track" in regulon.lower():
+            elif "TrackRegulons" in self.loom_connection.ra and "track" in regulon.lower():
                 return self.get_genes()[self.loom_connection.ra.TrackRegulons[regulon] == 1]
             else:
                 return self.get_genes()[self.loom_connection.ra.Regulons[regulon] == 1]
@@ -828,53 +838,54 @@ class Loom:
             return []
 
     def has_regulons_AUC(self) -> bool:
-        if self.has_motif_and_track_regulons():
-            return True
-        return "RegulonsAUC" in self.loom_connection.ca.keys()
+        return self.has_legacy_regulons() or self.has_motif_regulons() or self.has_track_regulons()
 
-    def get_regulons_AUC(self, regulon_type: str = None):
+    def get_regulons_AUC(self, regulon_type: str):
         loom = self.loom_connection
-        if "MotifRegulonsAUC" in self.loom_connection.ca.keys() and regulon_type == "motif":
+        if "MotifRegulonsAUC" in self.loom_connection.ca and regulon_type == "motif":
             regulon_names = loom.ca.MotifRegulonsAUC.dtype.names
             loom.ca.MotifRegulonsAUC.dtype.names = [regulon_name.replace(" ", "_") for regulon_name in regulon_names]
             return loom.ca.MotifRegulonsAUC
-        if "TrackRegulonsAUC" in self.loom_connection.ca.keys() and regulon_type == "track":
+        if "TrackRegulonsAUC" in self.loom_connection.ca and regulon_type == "track":
             regulon_names = loom.ca.TrackRegulonsAUC.dtype.names
             loom.ca.TrackRegulonsAUC.dtype.names = [regulon_name.replace(" ", "_") for regulon_name in regulon_names]
             return loom.ca.TrackRegulonsAUC
-        if "RegulonsAUC" in self.loom_connection.ca.keys():
+        if "RegulonsAUC" in self.loom_connection.ca and regulon_type == "legacy":
             regulon_names = loom.ca.RegulonsAUC.dtype.names
             loom.ca.RegulonsAUC.dtype.names = [regulon_name.replace(" ", "_") for regulon_name in regulon_names]
             return loom.ca.RegulonsAUC
-        regulon_names = loom.ca.RegulonsAUC.dtype.names
-        loom.ca.RegulonsAUC.dtype.names = [regulon_name.replace(" ", "_") for regulon_name in regulon_names]
-        return loom.ca.RegulonsAUC
+        raise IndexError(
+            f"AUC values were requested but not found.\n\tLoom: {self.file_path}\n\tRegulon type requested: {regulon_type}\n\tColumn attributes present: {self.loom_connection.ca.keys()}"
+        )
 
-    def get_auc_values(self, regulon: str, annotation="", logic: str = "OR") -> Tuple[np.ndarray, list]:
+    def get_auc_values(
+        self, regulon: str, annotation: Optional[List[Annotation]] = None, logic: str = "OR"
+    ) -> Tuple[np.ndarray, list]:
         logger.debug("Getting AUC values for {0} ...".format(regulon))
         cellIndices = list(range(self.get_nb_cells()))
         # Get the regulon type
-        regulon_type = None
-        if "motif" in regulon.lower():
+        if regulon in self.get_regulons_AUC(regulon_type="motif").dtype.names:
             regulon_type = "motif"
-        elif "track" in regulon.lower():
+        elif regulon in self.get_regulons_AUC(regulon_type="track").dtype.names:
             regulon_type = "track"
+        elif regulon in self.get_regulons_AUC(regulon_type="legacy").dtype.names:
+            regulon_type = "legacy"
         else:
-            regulon_type = None
+            return np.empty((0, 0)), cellIndices
 
         if regulon in self.get_regulons_AUC(regulon_type=regulon_type).dtype.names:
             vals = self.get_regulons_AUC(regulon_type=regulon_type)[regulon]
-            if len(annotation) > 0:
+            if annotation is not None:
                 cellIndices = self.get_anno_cells(annotations=annotation, logic=logic)
                 vals = vals[cellIndices]
             return vals, cellIndices
-        return [], cellIndices
+        return np.empty((0, 0)), cellIndices
 
     def get_regulon_target_gene_metric(self, regulon: str, metric_accessor: str):
         regulon_type = ""
-        if "motif" in regulon.lower():
+        if regulon in self.get_regulons_AUC(regulon_type="motif").dtype.names:
             regulon_type = "motif"
-        elif "track" in regulon.lower():
+        elif regulon in self.get_regulons_AUC(regulon_type="track").dtype.names:
             regulon_type = "track"
         loom_attribute = self.loom_connection.row_attrs[f"{regulon_type.capitalize()}Regulon{metric_accessor}"]
         if str(regulon) in loom_attribute.dtype.names:
@@ -891,7 +902,9 @@ class Loom:
     # Embeddings #
     ##############
 
-    def get_coordinates(self, coordinatesID: int = -1, annotation="", logic: str = "OR"):
+    def get_coordinates(
+        self, coordinatesID: int = -1, annotation: Optional[List[Annotation]] = None, logic: str = "OR"
+    ):
         loom = self.loom_connection
         if coordinatesID == -1:
             try:
@@ -916,7 +929,7 @@ class Loom:
         else:
             x = loom.ca.Embeddings_X[str(coordinatesID)]
             y = loom.ca.Embeddings_Y[str(coordinatesID)]
-        if len(annotation) > 0:
+        if annotation is not None:
             cellIndices = self.get_anno_cells(annotations=annotation, logic=logic)
             x = x[cellIndices]
             y = y[cellIndices]
@@ -948,7 +961,7 @@ class Loom:
         metric_name: str,
         log_transform: bool = True,
         cpm_normalise: bool = False,
-        annotation="",
+        annotation: Optional[List[Annotation]] = None,
         logic: str = "OR",
     ):
         if not self.has_ca_attr(name=metric_name):
@@ -961,7 +974,7 @@ class Loom:
         if log_transform:
             logger.debug("log-transforming gene expression...")
             metric_vals = np.log2(metric_vals + 1)
-        if len(annotation) > 0:
+        if annotation is not None:
             cell_indices = self.get_anno_cells(annotations=annotation, logic=logic)
             metric_vals = metric_vals[cell_indices]
         else:

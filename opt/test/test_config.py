@@ -2,6 +2,8 @@
 Tests for the scopeserver.config module
 """
 
+import os
+
 from json.decoder import JSONDecodeError
 from pathlib import Path, PureWindowsPath
 
